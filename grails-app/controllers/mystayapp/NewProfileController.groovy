@@ -3,8 +3,7 @@ package mystayapp
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
+//import groovy.sql.Sql;
 
 class NewProfileController {
 
@@ -24,9 +23,12 @@ class NewProfileController {
 
             redirect(controller:"locationDetails", action:"home")
     }
+
+    def dataSource
+
     
     def tellus()
-    { 
+    {
         if(request.getCookie("firstName")!=null && request.getCookie("lastName")!=null){
                 def fName = request.getCookie("firstName");
                 def lName = request.getCookie("lastName");
@@ -51,3 +53,10 @@ class NewProfileController {
     }
 
 }
+
+        ///======================================================
+        //Sql sql = new Sql(dataSource)
+        //sql.eachRow("select u.name,u.email,u.username from ofuser u where u.username='palash'", { row ->
+            //println "Found: " << row.name
+                //})
+        ///======================================================

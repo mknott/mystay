@@ -57,8 +57,6 @@
 	<!-- Header Include<?php include "../components/header-condensed.html" ?> -->
     
     <g:include controller="pageInclude" action="headerinclude" />
-
-
     <div id="main" role="main" data-role="content">
 <!--
     	<section id="breadcrumb" class="links">
@@ -71,7 +69,6 @@
     	<section class="content gradient clearfix">
 
 			<h1 class="modal-title">Create a profile</h1>
-
 			<p>
                           <g:if test="${flash.message}">
                                 <div class="message">${flash.message}</div>
@@ -80,14 +77,13 @@
     	</section> <!-- /.content -->
 
 		<section class="content gradient clearfix">
-                  
                         <g:form action="createProfile" >
                             <div align="center" style="padding: 0px 20px 0px 10px">
                              <label for="firstname" class="ui-input-text">* First Name</label>
-                             <input type="text" name="firstName" id="firstname" value="" placeholder="">
+                             <input type="text" name="firstName" id="firstname" value="" placeholder="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
 
                              <label for="lastName" class="ui-input-text">* Last Name</label>
-                             <input type="text" name="lastName" id="lastname" value="" placeholder="">
+                             <input type="text" name="lastName" id="lastname" value="" placeholder="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
 
                              <label for="emailAddress" class="ui-input-text">* Email Address</label>
                              <input type="email" name="emailAddress" id="email" value="" placeholder="">
@@ -134,10 +130,7 @@
                                <g:submitButton value="submit" name="create"/>
                             </div>
                            </g:form>
-
-			
 		</section>
-
     </div>
 
 	<!-- Footer Include <?php include "../components/footer.html" ?>-->

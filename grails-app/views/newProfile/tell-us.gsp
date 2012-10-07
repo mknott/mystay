@@ -55,7 +55,6 @@
 </head>
 
 <body>
-   
 
   <div id="container" data-role="page" data-template="chat">
 
@@ -99,10 +98,9 @@
                             <!--input name="checkout" id="checkout" type="date" data-role="datebox" data-options='{"mode": "calbox"}'-->
                             <input name="checkout" id="checkout" type="text">
                             
-                            <label for="isCrtUserProf">Check to Create a User Profile</label>
+                            <label for="isCrtUserProf">Click to Create a User Profile</label>
                             <input type="checkbox" name="isCrtUserProf" id="isCrtUserProf" value="1" placeholder="" data-theme="q">
 
-                            
                             <!--button>Register My Stay</button-->
                             <g:submitButton name="submitPage" value="Register My Stay" />
                     </div>

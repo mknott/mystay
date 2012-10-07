@@ -49,11 +49,16 @@
   <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
 
   <link rel="stylesheet" href="assets/css/main.css">
+
+
+
 </head>
 
 <body>
+
   <div id="homepage" data-template="homepage" data-role="page">
     <header data-role="header">
+
     </header>
     <div id="main" role="main" data-role="content">
 		<section class="hero">

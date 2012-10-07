@@ -9,18 +9,26 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Admin Home</title>
-   <script language="javascript" type="text/javascript">
-function chatWindow(usertochat){
-	var url = "/MyStayApp/adminMain/openPopup?chatWith="+usertochat;
-        //alert(url);
-        if (!window[usertochat] || window[usertochat].closed){
-		window[usertochat] = window.open(url,usertochat,'height=350,width=350');
-	}
-	window[usertochat].focus();
-	return false;
-}
+       
+  </head>
+  <body>
+    <h1>Admin Home</h1>
+    
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  <g:form>
+    <g:link controller="adminMain" action="adminLogout" class="modal">Logout</g:link>
+    <script language="javascript" type="text/javascript">
+      function chatWindow(usertochat){
+              var url = "/MyStayApp/adminMain/openPopup?chatWith="+usertochat;
+              //alert(url);
+              if (!window[usertochat] || window[usertochat].closed){
+                      window[usertochat] = window.open(url,usertochat,'height=350,width=350');
+              }
+              window[usertochat].focus();
+              return false;
+      }
 
-var xmlhttp=false;
+        var xmlhttp=false;
 
 	function checkUserList(){
 
@@ -65,9 +73,6 @@ var xmlhttp=false;
 
  window.setInterval("checkUserList()",10000);
 </script>
-    
-  </head>
-  <body>
-    <h1>Admin Home</h1>
+  </g:form>
   </body>
 </html>

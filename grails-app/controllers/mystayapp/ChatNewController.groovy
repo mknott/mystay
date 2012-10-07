@@ -9,10 +9,12 @@ import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 import com.chat.XmppMessageListener;
-
+import org.springframework.web.context.request.RequestContextHolder;
 class ChatNewController {
 
     def index() {
+        //new
+     def session = RequestContextHolder.currentRequestAttributes().getSession()
      session.invalidate()
      render(view: 'index')
     }

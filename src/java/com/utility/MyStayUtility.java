@@ -154,4 +154,24 @@ public class MyStayUtility {
 	}
 
 
+
+
+
+    public boolean clearMySession(HttpSession session){
+        XMPPConnection connection = (XMPPConnection)session.getAttribute(MyStayConstants.XMPP_CONN);
+        if(connection!=null){
+            //connection.removePacketListener(null);
+            connection.disconnect();
+            connection = null;
+        }
+
+        session.removeAttribute(MyStayConstants.XMPP_CONN);
+
+        session.removeAttribute(MyStayConstants.CHAT_OBJ);
+        session.removeAttribute(MyStayConstants.MSG_LIST);
+        session.removeAttribute(MyStayConstants.ACTIVE_USERS);
+        session.removeAttribute(MyStayConstants.MY_MESSAGE_LIST);
+
+        return true;
+    }
 }

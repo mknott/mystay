@@ -51,9 +51,7 @@
 </head>
 
 <body>
-
   <div id="container" data-role="page" data-template="chat">
-
   	<!-- Header Include -->
       <g:include controller="pageInclude" action="headerinclude" />
 
@@ -79,17 +77,15 @@
     	</section> <!-- /.content -->
 
 		<section class="content gradient clearfix">
-
 			<h2>Start a new chat</h2>
-
                           <g:form url="[action:'index',controller:'chatExisting']" method="post">
 				<div align="center">
 					<select name="chat_topic" data-theme="q"  data-shadow="false">
 						<option value="">Select a topic</option>
-						<option value="topic1">Room Service</option>
-						<option value="topic2">Order Food</option>
-						<option value="topic3">Order Drinks</option>
-					</select>
+						<option value="admin">Room Service</option>
+						<option value="helpadmin">Help Desk</option>
+						<option value="foodadmin">Food Service</option>
+                                        </select>
 					<textarea name="chat_input" placeholder="Chat with Room Service"></textarea>
 					<button>start chat</button>
 				</div>
