@@ -14,6 +14,9 @@ import org.json.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import groovy.sql.Sql;
 import org.jivesoftware.smack.AccountManager;
+import com.utility.*;
+import org.jivesoftware.smack.packet.Message;
+
 
 class ChatExistingController {
 
@@ -21,138 +24,173 @@ class ChatExistingController {
     def dataSource
 
     def index() {
-
+      XMPPConnection connection= null;
+      Chat chat=null;
+      Sql db = new Sql(dataSource)
       def session = RequestContextHolder.currentRequestAttributes().getSession()
       println session.id;
-      def firstmsg = params.chat_input;
-      def msgto = params.chat_topic + MyStayConstants.CHAT_DOMAIN;
-      println msgto
-      println firstmsg
+      JSONArray msgLst=null;
+      String firstmsg = params.chat_input;
+      String chatTopic = params.chat_topic;
+      String msgto = "";
+      boolean isAnonymus = false;
+        //println chatTopic
+      def firstName = request.getCookie(MyStayConstants.FIRST_NAME);
+      def lastName = request.getCookie(MyStayConstants.LAST_NAME);
+      def roomNumber = request.getCookie(MyStayConstants.ROOM_NUMBER);
+      def visitId = request.getCookie(MyStayConstants.VISIT_ID);
+      def username = request.getCookie(MyStayConstants.USER_ID);
+      
+      
+      boolean isUserOnline = false;
+      int numberOfActiveUser = 0;
 
-      XMPPConnection connection = new XMPPConnection(config);
+      // XMPP server Login - Start =============================================
+      connection = new XMPPConnection(config);
       connection.connect();
-
-      def firstName = request.getCookie("firstName");
-      def lastName = request.getCookie("lastName");
-      def roomNo = request.getCookie("roomNo");
-
-      def userProfileInstance = UserProfile.find("from UserProfile as b where b.firstName=?",firstName);
+      
+      def userProfileInstance =null;
+      if(firstName != null){
+         userProfileInstance = UserProfile.find("from UserProfile as b where b.firstName=?",firstName);
+       }
+      
 
       if(userProfileInstance!=null)
       {
-        def username = userProfileInstance.emailAddress;
+        username = userProfileInstance.emailAddress;
         def password = userProfileInstance.password;
         connection.login(username,password);
-      }
-      else{
-          AccountManager accmanager = connection.getAccountManager();
-          def username = "rm"+roomNo+"_"+lastName;
-          println username;
-          def password = lastName;
-          def temp_name = "";
-                    
-          Sql db = new Sql(dataSource)
-          //def result = db.rows("SELECT username FROM ofuser");
-          db.eachRow("select * from ofuser where username='"+username+"'",{ row ->
+        
+      } else{
 
-                temp_name=row.username;
-           })
-           println "username" + temp_name;
+            if(firstName == null || firstName.trim().equals("")){
+                connection.loginAnonymously();
+                //println "Anonymous ID: " + connection.getUser(); bbab86bf@
+                String anonUserName = connection.getUser();
+                session.setAttribute(MyStayConstants.USER_ID, anonUserName.substring(0,anonUserName.indexOf('@')));
+                isAnonymus = true;
+            }else{
+              AccountManager accmanager = connection.getAccountManager();
+              println username;
+              def password = lastName;
+              def temp_name = "";
+              //Sql db = new Sql(dataSource)
+              //def result = db.rows("SELECT username FROM ofuser");
+              db.eachRow("select * from ofuser where username='"+username+"'",{ row ->
+                    temp_name=row.username;
+               })
+               println "username: " + temp_name;
 
-            if(temp_name.equalsIgnoreCase(""))
-            {
-                try{
-                    accmanager.createAccount(username,password);
-                }catch(Exception e){
-                    println "User Already Exists.."
+                if(temp_name.equalsIgnoreCase(""))
+                {
+                    try{
+                        accmanager.createAccount(username,password);
+                    }catch(Exception e){
+                        println "User Already Exists.."
+                    }
                 }
-               
+              connection.login(username,password);
             }
-          
-          connection.login(username,password);
 
       }
-
-      Chat chat = connection.getChatManager().createChat(msgto, new XmppMessageListener(session));
-      chat.sendMessage(firstmsg);
-
-      JSONArray msgLst =null;
-      try{
-
-        msgLst = (JSONArray)session.getAttribute(MyStayConstants.MY_MESSAGE_LIST);
-        if(msgLst == null){
-           msgLst = new JSONArray();
-        }
-        msgLst.put("<b>Me :</b>"+firstmsg);
-
-      }catch(Exception e){
-          println "Error is: " + e.getMessage();
-      }
-      session.setAttribute(MyStayConstants.MY_MESSAGE_LIST,msgLst);
-
       session.setAttribute(MyStayConstants.XMPP_CONN,connection);
-      session.setAttribute(MyStayConstants.CHAT_OBJ,chat);
-
-      render(view: 'index')
-
-    }
-
-    def index_old() {
-
-      def session = RequestContextHolder.currentRequestAttributes().getSession()
-      println session.id;
-      def firstmsg = params.chat_input;
-      def msgto = params.chat_topic + MyStayConstants.CHAT_DOMAIN;
-      println msgto
-      println firstmsg
-
-      XMPPConnection connection = new XMPPConnection(config);
-      connection.connect();
-      connection.loginAnonymously();
-
-      Chat chat = connection.getChatManager().createChat(msgto, new XmppMessageListener(session));
-      chat.sendMessage(firstmsg);
-
-      JSONArray msgLst =null;
-      try{
-
+      // XMPP server Login - End ===============================================
+    try{
         msgLst = (JSONArray)session.getAttribute(MyStayConstants.MY_MESSAGE_LIST);
         if(msgLst == null){
            msgLst = new JSONArray();
         }
-        msgLst.put("<b>Me :</b>"+firstmsg);
+
+        msgLst.put("<b>"+MyStayConstants.MY_SELF+" :</b>"+firstmsg);
+
+        session.setAttribute(MyStayConstants.MY_MESSAGE_LIST,msgLst);
 
       }catch(Exception e){
           println "Error is: " + e.getMessage();
       }
-      session.setAttribute(MyStayConstants.MY_MESSAGE_LIST,msgLst);
+      //AutoReply ===============Start
+      if(isAutoReplyExists(firstmsg)){
+        Chat autoreplychat = connection.getChatManager().createChat(MyStayConstants.AUTO_RLY_USR + MyStayConstants.CHAT_DOMAIN, new XmppMessageListener(session));
+        autoreplychat.sendMessage(firstmsg);
+        def adminuserlist = AdminUser.findAll { servicetype == chatTopic }
+        for(AdminUser auser: adminuserlist) {
+                  db.eachRow("select username from ofpresence where username='"+auser.userName+"'",{ row ->
+                            isUserOnline = true;
+                       })
+                  if(isUserOnline){
+                      isUserOnline = false;
+                      continue;
+                  }
+
+                  msgto= auser.userName;
+                  println msgto
+            }
+
+      }else{
+          //AutoReply ===============End
+          def adminuserlist = AdminUser.findAll { servicetype == chatTopic }
+          for(AdminUser auser: adminuserlist) {
+                  db.eachRow("select username from ofpresence where username='"+auser.userName+"'",{ row ->
+                            isUserOnline = true;
+                       })
+
+                  if(isUserOnline){
+                      isUserOnline = false;
+                      continue;
+                  }
+
+                  msgto= auser.userName;
+                  println msgto
+
+                 chat = connection.getChatManager().createChat(msgto + MyStayConstants.CHAT_DOMAIN, new XmppMessageListener(session));
+                 chat.sendMessage(firstmsg);
+
+                 numberOfActiveUser ++ ;
+                }
+      }
+
+        if(isAnonymus==false){
+            ///Save Visit Id Again - Start
+            def visitData = Visit.get(visitId);
+            visitData.chatType = chatTopic;
+            visitData.save(flush: true)
+            ///Save Visit Id Again - End
+        }
       
-      session.setAttribute(MyStayConstants.XMPP_CONN,connection);
-      session.setAttribute(MyStayConstants.CHAT_OBJ,chat);
 
-      //flash.message = message(code: params.chat_input)
+        println "Last AdminUser: " + msgto;
 
-      render(view: 'index')
-
+        render(view: 'index',model:[chatwith:msgto])
     }
+
+
 
     def loagMessagesFromSession(){
       //new
       def session = RequestContextHolder.currentRequestAttributes().getSession()
       JSONArray msgLst = (JSONArray)session.getAttribute(MyStayConstants.MY_MESSAGE_LIST);
-
       //println "loagMessagesFromSession: msgLst : " + msgLst;
       render(msgLst);
     }
 
     def sendMessages(){
-       String msgs = params.chat_input;
-        // chat_input
-        //new
+       String userId = request.getCookie(MyStayConstants.USER_ID);
+       String msgs = params.chat_input.trim();
+       String msgTo = params.chatwith + MyStayConstants.CHAT_DOMAIN;
+       
+       //new
        def session = RequestContextHolder.currentRequestAttributes().getSession()
        XMPPConnection connection =  session.getAttribute(MyStayConstants.XMPP_CONN);
-       Chat chat =  session.getAttribute(MyStayConstants.CHAT_OBJ);
+
+         if(isAutoReplyExists(msgs)){
+           msgTo = MyStayConstants.AUTO_RLY_USR + MyStayConstants.CHAT_DOMAIN;
+         }
+
+       println msgTo
+
+       Chat chat = connection.getChatManager().createChat(msgTo, new XmppMessageListener(session));
        chat.sendMessage(msgs);
+        
 
           JSONArray msgLst =null;
           try{
@@ -161,15 +199,15 @@ class ChatExistingController {
             if(msgLst == null){
                msgLst = new JSONArray();
             }
-            msgLst.put("<b>Me :</b>"+msgs);
+            msgLst.put("<b>"+MyStayConstants.MY_SELF+" :</b>"+msgs);
 
           }catch(Exception e){
               println "Error is: " + e.getMessage();
           }
        session.setAttribute(MyStayConstants.MY_MESSAGE_LIST,msgLst);
 
-       println "sendMessages: msgLst : " + msgLst;
-       
+       println "sendMessages: msgLst : " + msgLst;        
+
        render('success')
     }
 
@@ -184,5 +222,61 @@ class ChatExistingController {
    }
 
 
+    def chatExistingIndex(){
 
+        String convid = params.conv_id;
+        String msgto = params.frmUsr;
+        String toUser = params.toUsr;
+
+        Sql db = new Sql(dataSource)
+        JSONArray msgLst = new JSONArray();
+        //println convid
+       // println msgto
+        String compareWith = msgto;
+
+        db.eachRow("select ofmsg.fromjid,ofmsg.tojid,ofmsg.body from ofmessagearchive ofmsg "+
+                    "where ofmsg.conversationid='"+convid+"' order by ofmsg.sentdate",{ row ->
+                        String frmUser = row.fromjid.substring(0,row.fromjid.indexOf('@'));
+                        
+
+                       if(MyStayConstants.MY_SELF.equals(compareWith)){
+                          compareWith = toUser;
+                        }
+                        println "1."+frmUser
+                        println "2."+compareWith
+                        //println "3."+toUser
+                        
+                            if(frmUser.equals(compareWith)){
+                                msgLst.put("<b>"+msgto+" :</b>"+row.body);
+                               }else{
+                                msgLst.put("<b>"+MyStayConstants.MY_SELF+" :</b>"+row.body);
+                               }
+                       
+
+              })
+          
+        session.setAttribute(MyStayConstants.MY_MESSAGE_LIST,msgLst);
+
+        
+        if(MyStayConstants.MY_SELF.equals(msgto)){
+            render(view: 'index',model:[chatwith:toUser])
+        }else{
+           render(view: 'index',model:[chatwith:msgto])
+        }
+       
+    }
+
+     private boolean isAutoReplyExists(String msgBody){
+         boolean isExists=false;
+         def autoMsgLst = AutoReply.list();
+
+                for(AutoReply autoMsg: autoMsgLst) {
+                    if(msgBody.equalsIgnoreCase(autoMsg.question))
+                        {
+                            isExists=true;
+                            break;
+                        }
+                    }
+          return isExists;
+     }
 }

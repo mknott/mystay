@@ -12,14 +12,15 @@ package mystayapp
 class MyDetails {
     String firstName
     String lastName
-    String emailAddress
-    String mobileNo
-    String rewardsProgram
-    String confirmationNo
-    String roomNo
-    String checkin
-    String checkout
-    String myChats
-	
+    //String emailAddress
+    //String mobileNumber
+    String confirmationId
+    String roomNumber
+    String checkInDate
+    String checkOutDate
+    String hotelName
+    String propertyId
+    String myChats = "0"
+    //String rewardsProgramId
 }
 

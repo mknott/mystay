@@ -51,7 +51,6 @@
   <link rel="stylesheet" href="assets/css/main.css">
 
 
-
 </head>
 
 <body>
@@ -61,115 +60,116 @@
 
     </header>
     <div id="main" role="main" data-role="content">
-		<section class="hero">
-			<div class="mainlogo">
-				<img src="assets/img/logo_standard.png">
-			</div>
-			<div id="myScroll" class="imagecarousel clearfix">
-				<section>
-					<div class="carousel">
-						<div id="wrapper" class="wrapper">
-							<div id="scroller" class="scroller">
-								<ul class="scrollItems hidden">
-									<li class="current">
-										<img src="assets/img/myStay_iPhone_mobileweb_homepage_02.jpg" alt="" />
-										<div class="content">
-                                                                                       <g:link  class="bubble" controller="locationDetails" action="index">
-											
-												<div class="bubble-icon">
-													<img src="assets/img/icon_mobile.png">
-												</div>
-												<div class="bubble-title">relax@</div>
-												<div class="bubble-content">Order a drink while you’re relaxing by the pool</div>
-											
-                                                                                        </g:link>
-										</div>
-									</li>
-									<li>
-										<img src="assets/img/myStay_iPhone_mobileweb_homepage_03_02.jpg" alt="" />
-										<div class="content">
-											<g:link  class="bubble" controller="locationDetails" action="index">
-												<div class="bubble-icon">
-													<img src="assets/img/icon_service.png">
-												</div>
-												<div class="bubble-title">quick@</div>
-												<div class="bubble-content">Order a quick bite to eat before my next meeting</div>
-											</g:link>
-										</div>
-									</li>
-									<li>
-										<img src="assets/img/myStay_iPhone_mobileweb_homepage_05_02.jpg" alt="" />
-										<div class="content">
-											<g:link  class="bubble" controller="locationDetails" action="index">
-												<div class="bubble-icon">
-													<img src="assets/img/icon_relax.png">
-												</div>
-												<div class="bubble-title">unwind@</div>
-												<div class="bubble-content">Schedule a spa appointment from the comfort of your room</div>
-											</g:link>
-										</div>
-									</li>
-									<li>
-										<img src="assets/img/myStay_iPhone_mobileweb_homepage_06_02.jpg" alt="" />
-										<div class="content">
-											<g:link  class="bubble" controller="locationDetails" action="index">
-												<div class="bubble-icon">
-													<img src="assets/img/icon_dine.png">
-												</div>
-												<div class="bubble-title">dine@</div>
-												<div class="bubble-content">Make dinner reservations while you are on the slopes</div>
-											</g:link>
-										</div>
-									</li>
-								</ul>
-							</div>
-							<div class="prev ir" onclick="myScroll.scrollToPage('prev', 0);return false;"><a href="#">prev</a></div>
-							<div class="next ir" onclick="myScroll.scrollToPage('next', 0);return false;"><a href="#">next</a></div>
-							<div class="carouselNav hidden">
-								<ul class="indicator"></ul>
-							</div>
-						</div>
-					</div>
-				</section>
-			</div>
-		</section>
+        <section class="hero">
+          <div class="mainlogo">
+              <img src="assets/img/logo_standard.png">
+          </div>
+          <div id="myScroll" class="imagecarousel clearfix">
+              <section>
+                  <div class="carousel">
+                      <div id="wrapper" class="wrapper">
+                          <div id="scroller" class="scroller">
+                              <ul class="scrollItems hidden">
+                                  <li class="current">
+                                      <img src="assets/img/myStay_iPhone_mobileweb_homepage_02.jpg" alt="" />
+                                      <div class="content">
+                                          <g:link  class="bubble" controller="locationDetails" action="index">
 
-		<section class="content gradient">
-			<p>Take full advantage of all the services during your stay right from your wireless device.</p>
-			<g:form url="[action:'tellus',controller:'newProfile']" method="post">
-				<div align="center">
-					<table border="0" width="100%" >
-                                          <tr>
-                                            <td>
-                                              
-                                              <select name="younearby" id="younearby" data-theme="q" data-shadow="false">
-                                                  <option value="">Select</option>
-                                                  <option value="MyStay Beach Resort">MyStay Beach Resort</option>
-                                              </select>
-                                            </td>
-                                            <td valign="middle">
-                                              <img src="assets/img/searchlocation.jpg" height="50px" width="50px">
-                                            </td>
-                                          </tr>
-                                        </table>
-                                        <input type='submit' id="submit" value='start mystay'/>
-				</div>
-			</g:form>
-		</section>
+                                            <div class="bubble-icon">
+                                               <img src="assets/img/icon_mobile.png">
+                                            </div>
+                                            <div class="bubble-title">relax@</div>
+                                            <div class="bubble-content">Order a drink while you’re relaxing by the pool</div>
+
+                                          </g:link>
+                                      </div>
+                                  </li>
+                                  <li>
+                                      <img src="assets/img/myStay_iPhone_mobileweb_homepage_03_02.jpg" alt="" />
+                                      <div class="content">
+                                          <g:link  class="bubble" controller="locationDetails" action="index">
+                                            <div class="bubble-icon">
+                                               <img src="assets/img/icon_service.png">
+                                            </div>
+                                            <div class="bubble-title">quick@</div>
+                                            <div class="bubble-content">Order a quick bite to eat before my next meeting</div>
+                                          </g:link>
+                                      </div>
+                                  </li>
+                                  <li>
+                                      <img src="assets/img/myStay_iPhone_mobileweb_homepage_05_02.jpg" alt="" />
+                                      <div class="content">
+                                          <g:link  class="bubble" controller="locationDetails" action="index">
+                                            <div class="bubble-icon">
+                                               <img src="assets/img/icon_relax.png">
+                                            </div>
+                                            <div class="bubble-title">unwind@</div>
+                                            <div class="bubble-content">Schedule a spa appointment from the comfort of your room</div>
+                                          </g:link>
+                                      </div>
+                                  </li>
+                                  <li>
+                                      <img src="assets/img/myStay_iPhone_mobileweb_homepage_06_02.jpg" alt="" />
+                                      <div class="content">
+                                          <g:link  class="bubble" controller="locationDetails" action="index">
+                                            <div class="bubble-icon">
+                                               <img src="assets/img/icon_dine.png">
+                                            </div>
+                                            <div class="bubble-title">dine@</div>
+                                            <div class="bubble-content">Make dinner reservations while you are on the slopes</div>
+                                          </g:link>
+                                      </div>
+                                  </li>
+                              </ul>
+                          </div>
+                          <div class="prev ir" onclick="myScroll.scrollToPage('prev', 0);return false;"><a href="#">prev</a></div>
+                          <div class="next ir" onclick="myScroll.scrollToPage('next', 0);return false;"><a href="#">next</a></div>
+                          <div class="carouselNav hidden">
+                              <ul class="indicator"></ul>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+          </div>
+        </section>
+
+        <section class="content gradient">
+          <p>Take full advantage of all the services during your stay right from your wireless device.</p>
+          <g:form url="[action:'tellus',controller:'newProfile']" method="post">
+                  <div align="center">
+
+<div class="ui-select">
+<div class="ui-btn ui-btn-corner-all ui-fullsize ui-btn-block ui-btn-icon-right ui-btn-up-q" data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-d" data-iconpos="right" data-theme="q" data-inline="false" data-mini="false">
+<!--<span class="ui-btn-inner ui-btn-corner-all">-->
+<span class="ui-btn-text">Select from participating properties</span>
+<span class="ui-icon ui-icon-arrow-d ui-icon-shadow"> </span>
+</span>
+<select id="younearby" data-inline="false" data-shadow="false" data-theme="q" name="younearby">
+<!--<option value="">Select your location</option>-->
+<option value="MyStay Beach Resort">MyStay Beach Resort</option>
+<option value="MyStay Conference Resort">MyStay Conference Resort</option>
+</select>
+</div>
+</div>
+
+              <input type='submit' id="submit" value='start mystay'/>
+            </div>
+          </g:form>
+        </section>
     </div>
 
     <footer>
-		<section class="social">
-			share this @ <img src="assets/img/fpo_social.png" width="98">
-		</section>
-		<section class="links centered clearfix">
-			<ul>
-				<li>&copy; CueMobile</li>
-				<li><g:link controller="locationDetails" action="index">Privacy Policy</g:link></li>
-				<li><g:link controller="locationDetails" action="index">Trademark</g:link></li>
-				<li><g:link controller="locationDetails" action="index">Terms</g:link></li>
-			</ul>
-		</section>
+        <section class="social">
+          share this @ <img src="assets/img/fpo_social.png" width="98">
+        </section>
+        <section class="links centered clearfix">
+            <ul>
+              <li>&copy; CueMobile</li>
+              <li><g:link controller="locationDetails" action="index">Privacy Policy</g:link></li>
+              <li><g:link controller="locationDetails" action="index">Trademark</g:link></li>
+              <li><g:link controller="locationDetails" action="index">Terms</g:link></li>
+            </ul>
+        </section>
     </footer>
   </div> <!--! end of #container -->
 

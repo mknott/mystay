@@ -3,20 +3,18 @@
 
           <p>
                   <b>Guest:</b> ${myDetails.firstName} ${myDetails.lastName}<br>
-                  <b>Email:</b> ${myDetails.emailAddress}<br>
-                  <b>Phone:</b> ${myDetails.mobileNo}<br>
-                  <b>Rewards Program:</b> ${myDetails.rewardsProgram}<br>
           </p>
           <p>
-                  <b>Confirmation Number:</b> ${myDetails.confirmationNo}<br>
+                  <b>Hotel Name:</b> <g:cookie name="hotelName" /><br>
+                  <b>Room Number:</b> ${myDetails.roomNumber}<br>
+                  <b>Check-in:</b> ${myDetails.checkInDate}<br>
+                  <b>Check-out:</b> ${myDetails.checkOutDate}<br>
           </p>
           <p>
                   <b>Additional Reservation Details</b><br>
-                  <b>Room #:</b> ${myDetails.roomNo}<br>
+                  <b>Confirmation Number:</b> ${myDetails.confirmationId}<br>
           </p>
           <p>
-                  <b>Checkin:</b> ${myDetails.checkin}<br>
-                  <b>Checkout:</b> ${myDetails.checkout}<br>
           </p>
           <p>
                   <b>MyStay Chats:</b> ${myDetails.myChats}

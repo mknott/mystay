@@ -4,6 +4,7 @@
  */
 package com.utility;
 
+import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.PacketListener;
@@ -13,6 +14,7 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Packet;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.jivesoftware.smack.Chat;
 
 /**
  *
@@ -22,14 +24,13 @@ public class MyStayUtility {
 
     public boolean isChatServerLoginSucc(final String userName, String password,
             final HttpSession session) throws XMPPException {
-
+                 
 		boolean isSuccess = false;
 		try{
-		XMPPConnection connection = null;
-
+		
 		ConnectionConfiguration config = new ConnectionConfiguration(MyStayConstants.CHAT_SERVER, MyStayConstants.CHAT_PORT, MyStayConstants.CHAT_SERVICE);
 
-		connection = new XMPPConnection(config);
+		final XMPPConnection connection = new XMPPConnection(config);
 
 		connection.connect();
 
@@ -85,10 +86,10 @@ public class MyStayUtility {
 							chatlst = new JSONArray();
 						}
 
-                                                chatlst.put(userfrom+" :" + ((Message)packet).getBody());
-
+                                                String msgFrmUser = ((Message)packet).getBody();
+                                                chatlst.put(userfrom+" :" + msgFrmUser);
+                                                
                                                 userfrmchat.put(userfrom, chatlst);
-
                                                 //msgLst.put(userfrmchat);
 						//System.out.println("JSONArray chatlst 2: "  + chatlst);
                                                 session.setAttribute(MyStayConstants.MSG_LIST,msgLst);
@@ -174,4 +175,25 @@ public class MyStayUtility {
 
         return true;
     }
+
+    private void sendAutoReply( String toUser, String msg, XMPPConnection connection)
+    {
+     
+    try{
+       //XMPPConnection connection =  (XMPPConnection)session.getAttribute(MyStayConstants.XMPP_CONN);
+       Chat chat = connection.getChatManager().createChat(toUser, null);
+     
+       chat.sendMessage(msg);
+       
+       }catch(Exception ex)
+       {
+           System.out.println( ex.toString() );
+       }
+
+
+    }
+
+    
+
+
 }

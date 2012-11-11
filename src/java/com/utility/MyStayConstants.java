@@ -5,44 +5,73 @@
 
 package com.utility;
 
+import java.util.HashMap;
+
 /**
  *
  * @author palashb
  */
 public class MyStayConstants {
 
-public static String USER_ID="USER_ID";
+public static HashMap<String, String> autoReplyMsgLst = new HashMap();
 
-public static String PASSWORD="PASSWORD";
+static{
+    autoReplyMsgLst.put("hi", "Hello!");
+    System.out.println("autoReplyMsgLst is iniialized.");
+}
 
-public static String MSG_LIST="MSG_LIST";
+public static final String AUTO_RLY_USR="autoreply";
 
-public static String MSG="MSG";
+public static final String FIRST_NAME="firstName";
+public static final String LAST_NAME="lastName";
+public static final String ROOM_NUMBER="roomNumber";
+public static final String CHECKINDATE="checkInDate";
+public static final String CHECKOUTDATE="checkOutDate";
+public static final String CONFIRMATION_ID="confirmationId";
+public static final String HOTEL_NAME="hotelName";
+public static final String EMAIL_ADDRESS="emailAddress";
+public static final String MOBILE_NUMBER="mobileNumber";
+public static final String VISIT_ID="visitId";
+public static final String PROPERTY_ID="propertyId";
+public static final String MY_CHATS="myChats";
+public static final String REWARDS_PROGRAM_ID="rewardsProgramId;";
+        
+public static final String USER_ID="USER_ID";
 
-public static String XMPP_CONN="XMPP_CONN";
+public static final String PASSWORD="PASSWORD";
 
-public static String CHAT_OBJ="CHAT_OBJ";
+public static final String MSG_LIST="MSG_LIST";
 
-public static String REQ_MSG="REQ_MSG";
+public static final String MSG="MSG";
 
-public static String USERNAME="USERNAME";
+public static final String XMPP_CONN="XMPP_CONN";
 
-public static String LOGIN_ERROR_MSG="LOGIN_ERROR_MSG";
+public static final String CHAT_OBJ="CHAT_OBJ";
 
-public static String  MY_SELF = "Me";
+public static final String REQ_MSG="REQ_MSG";
 
-public static String  CHAT_WITH = "chatWith";
+public static final String USERNAME="USERNAME";
 
-public static String  ACTIVE_USERS = "ACTIVE_USERS";
+public static final String LOGIN_ERROR_MSG="LOGIN_ERROR_MSG";
+
+public static final String MY_SELF = "Me";
+
+public static final String CHAT_WITH = "chatWith";
+
+public static final String ACTIVE_USERS = "ACTIVE_USERS";
 //Single User Configuration
-public static String  MY_MESSAGE_LIST = "MY_MESSAGE_LIST";
+public static final String MY_MESSAGE_LIST = "MY_MESSAGE_LIST";
 
 
 //Chat Server Configuration
-public static String  CHAT_DOMAIN = "@ec2amaz-ke6dhdn";
-public static String  CHAT_SERVICE = "conference";
-public static int  CHAT_PORT = 5222;
-public static String  CHAT_SERVER = "ec2amaz-ke6dhdn";
-public static String  LCHAT_DOMAIN = "@ec2-23-20-70-227.compute-1.amazonaws.com";
-public static String  LCHAT_SERVER = "ec2-23-20-70-227.compute-1.amazonaws.com";
+//public static final String  CHAT_DOMAIN = "@palash-vaio";
+public static final String CHAT_DOMAIN = "@WWHQ282K";
+
+public static final String CHAT_SERVICE = "conference";
+public static final int CHAT_PORT = 5222;
+
+public static final String  CHAT_SERVER = "WWHQ282K";
+//public static final String  CHAT_SERVER = "palash-vaio";
+//public static String CHAT_SERVER = "ec2-50-17-28-118.compute-1.amazonaws.com";
+
 }

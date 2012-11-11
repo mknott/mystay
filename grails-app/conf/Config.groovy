@@ -1,4 +1,13 @@
-// locations to search for config files that get merged into the main config
+chat {
+        serviceName = "conference"
+        //host = "ec2amaz-rnsepa2"
+        host = "WWHQ282K"
+        //host = "palash-vaio"
+        port = 5222
+        username = "autoreply"
+        password = "autoreply"
+    }
+// // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
 // grails.config.locations = [ "classpath:${appName}-config.properties",

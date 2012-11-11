@@ -13,61 +13,118 @@ class AdminMainController {
      def dataSource
 
     def getChatDetails(){
-        //http://localhost:8080/MyStayApp/adminMain/getChatDetails?username=rm442_da&adminUname=admin
-        def uname = params.username;
-        def adminUname = params.adminUname;
+        //http://localhost:8080/MyStayApp/adminMain/getChatDetails?username=rm111_bbb_13&conversationId=11
+        String uname = params.username;
+        //def adminUname = params.adminUname;
+        String conversationId = params.conversationId;
 
-        JSONObject userdetails = new JSONObject();
-            userdetails.put("userId",uname);
-            userdetails.put("emailId","subhadeep@gmail.com");
-            userdetails.put("roomNo","201");
-            userdetails.put("confirmationID","4678123");
-            userdetails.put("checkIn","Tues, Apr 3,2012");
-            userdetails.put("checkOut","Sun, Apr 8,2012");
-            userdetails.put("chatType","RoomSvc");
-            userdetails.put("conversationId","1");
         JSONArray chatmsgarr = new JSONArray();
-
-        Sql sql = new Sql(dataSource);
+        JSONObject userdetails = new JSONObject();
         
-        //the id should be used to retrieve name from the same table.
-        sql.eachRow("select mdg.fromjid , mdg.tojid , mdg.sentdate, mdg.body from ofmessagearchive mdg where mdg.fromjid like ('"+uname+"@%') or mdg.fromjid like ('"+adminUname+"@%') and mdg.tojid like ('"+uname+"@%') or mdg.tojid like ('"+adminUname+"@%')", { row ->
-                JSONObject chatmsg = new JSONObject();
-                    chatmsg.put("fromUser",row.fromjid);
-                    chatmsg.put("toUser",row.tojid);
-                    chatmsg.put("sentDate",new Date(row.sentdate));
-                    chatmsg.put("msgBody",row.body);
-                    
-                chatmsgarr.put(chatmsg);
+      try{
+        def visitData = Visit.find("from Visit v where v.userId = ?",uname);
 
-            })
+        if(visitData==null){
+            userdetails("msg",uname + " Does not found.")
+        }else{
+            userdetails.put("userId",uname);
+            userdetails.put("confirmationID",visitData.confirmationId);
+            userdetails.put("checkInDate",visitData.checkInDate);
+            userdetails.put("checkOutDate",visitData.checkOutDate);
+            userdetails.put("chatType",visitData.chatType);
+            userdetails.put("roomNumber",visitData.roomNumber);
 
+            userdetails.put("emailId","");
+            userdetails.put("conversationId",conversationId);
+            
+            Sql sql = new Sql(dataSource);
+            //the id should be used to retrieve name from the same table.
+            /*sql.eachRow("select mdg.fromjid , mdg.tojid , mdg.sentdate, mdg.body"+
+                " from ofmessagearchive mdg where mdg.fromjid like ('"+uname+"@%')"+
+                " or mdg.fromjid like ('"+adminUname+"@%') and mdg.tojid like ('"+uname+"@%')"+
+                " or mdg.tojid like ('"+adminUname+"@%')", { row ->*/
+                
+            sql.eachRow("select mdg.fromjid , mdg.tojid , mdg.sentdate, mdg.body"+
+                " from ofmessagearchive mdg where mdg.conversationid='"+conversationId+"'", { row ->
+
+                    JSONObject chatmsg = new JSONObject();
+                        chatmsg.put("fromUser",row.fromjid);
+                        chatmsg.put("toUser",row.tojid);
+                        chatmsg.put("sentDate",new Date(row.sentdate));
+                        chatmsg.put("msgBody",row.body);
+
+                    chatmsgarr.put(chatmsg);
+
+                })
+         }
+            
+        }catch(Exception ex){
+            userdetails.put("msg",ex.getMessage())
+        }
         userdetails.put("chatmsg",chatmsgarr)
-
         render(userdetails)
     }
+    
 
-    def getAllUserList(){
+  def getAllUserList(){
     //http://localhost:8080/MyStayApp/adminMain/getAllUserList
     JSONArray activeusers = new JSONArray();
-    Sql sql = new Sql(dataSource)
-    sql.eachRow("select username from ofuser ofu where ofu.username not in (select username from ofpresence ofp)", { row ->
-            JSONObject activeuser = new JSONObject();
-                activeuser.put("userId",row.username);
-                activeuser.put("chatType","RoomSvc");
-                activeuser.put("pendingMsg","3");
-                activeuser.put("roomNo","201");
-                activeuser.put("lastName","Vail");
-                activeuser.put("imgLocation","../assets/img/restaurant.png");
-                activeuser.put("conversationId","1");
+    try{            
+        Sql sql = new Sql(dataSource)
+        sql.eachRow("select ofu.username from ofuser ofu where ofu.username"+
+            " not in (select ofp.username from ofpresence ofp)", { row ->
+            def userName = row.username;
+            def visitData = Visit.find("from Visit as v where v.userId='"+userName+"'")
 
-            activeusers.put(activeuser);
-            })
+            if(visitData != null){
+                
+              JSONObject activeuser = new JSONObject();
+                activeuser.put("userId",userName);
+                activeuser.put("chatType",visitData.chatType);
+                activeuser.put("roomNumber",visitData.roomNumber);
+                activeuser.put("lastName",visitData.lastName);
 
-    render(activeusers);
+                def chatProperties = ChatProperties.find("from ChatProperties as cp where cp.chatType='"+visitData.chatType+"'")
+                activeuser.put("imgLocation",chatProperties.chatIcon);
+
+                //GroovyRowResult
+                Object chatfirstrow = sql.firstRow("select mdg.conversationid, mdg.fromjid , mdg.tojid , mdg.sentdate, mdg.body"+
+                                                   " from ofmessagearchive mdg where mdg.fromjid like ('"+userName+"@%') or"+
+                                                   " mdg.tojid like ('"+userName+"@%') order by mdg.conversationid desc");
+                //println "Last Message:" + chatfirstrow.body
+                if(chatfirstrow.fromjid.indexOf(userName+"@") >= 0){
+                    activeuser.put("pendingMsg","true");
+                    int count = 0;
+                    boolean flag = true;
+                    sql.eachRow("select mdg.fromjid"+
+                                " from ofmessagearchive mdg where mdg.fromjid like ('"+userName+"@%') or"+
+                                " mdg.tojid like ('"+userName+"@%') order by mdg.sentdate desc", {chatrow ->                                
+                        if(chatrow.fromjid.indexOf(userName+"@")>=0 && flag){
+                             count++;
+                        }else{
+                           flag = false;
+                        }
+                    })
+                    activeuser.put("pendingMsgCount",count);
+                }else{
+                    activeuser.put("pendingMsg","false");
+                }
+
+                activeuser.put("conversationId",chatfirstrow.conversationid);
+
+                activeusers.put(activeuser);
+            }
+        })
+
+         if(activeusers.length()==0){
+             activeusers.put("Data Not Found");
+         }
+
+      }catch(Exception ex){
+        activeusers.put(ex.getMessage());
+      }
+      render(activeusers);
     }
-
-
 
     def index() {
         //new

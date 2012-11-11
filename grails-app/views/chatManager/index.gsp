@@ -1,4 +1,4 @@
-
+<!--Chat Manager Index -->
 <!doctype html> <!-- Conditional comment for mobile ie7 blogs.msdn.com/b/iemobile/ -->
 <!--[if IEMobile 7 ]>    <html class="no-js iem7" lang="en"> <![endif]-->
 <!--[if (gt IEMobile 7)|!(IEMobile)]><!-->
@@ -55,17 +55,10 @@
 
 	<div id="unique_9467239359459" data-role="page" data-template="chat">
 	
-		<!-- Header Include -->
-		<header data-role="header" data-position="fixed" class="condensed">
-	<section class="links clearfix">
-		<ul>
-			<li><span href="modal-mydetails.html" class="modal">my Details</span></li>
-			<li><span href="modal-needhelp.html" class="modal">need Support</span></li>
-			<li><span href="modal-login.html" class="modal">login</span></li>
-		</ul>
-	</section>
-</header>	
-		<div id="main" role="main" data-role="content">
+	<!-- Header Include -->
+      <g:include controller="pageInclude" action="headerinclude" />
+
+      <div id="main" role="main" data-role="content">
 <!--	
       <section id="breadcrumb" class="links">
 	<ul>
@@ -88,7 +81,8 @@
 
                       <section class="chat content gradient clearfix">
 		<!-- COMPONENT: Single Chat Session -->
-				<a href="chat-individual.php">
+                 <g:each in="${msglist}" var="item">
+                      <g:link class="tile" controller="chatExisting" action="chatExistingIndex" params="[conv_id:item.convID, frmUsr:item.fromUser,toUsr:item.toUser]">
 					<div class="container">
 						<ul>
 							<li class="clearfix">
@@ -100,71 +94,21 @@
 									<img src="../assets/img/fpo_100x100.gif" class="scalable">
 								</div>
 								<div class="username">
-									@customer_name2
+									${item.fromUser}
 								</div>
 								<div class="timestamp">
-									Monday at 7:32am in room
+									${item.sentDate} in room
 								</div>
 								<div class="message">
-									Belgian Waffles blandit tempus porttitor. Nulla vitae elit libero
-									retra augue... 
+									${item.msgBody}
 								</div>
 							</li>
 						</ul>
 					</div>
-				</a>
-				<!-- /Single Chat Session -->
+			</g:link>
+                      <!-- /Single Chat Session -->
+                </g:each>
 				
-				<a href="chat-individual.php">
-					<div class="container">
-						<ul>
-							<li class="clearfix">
-								<!-- Badge div should be left out if no new messages -->
-								<div class="badge orange">
-									5
-								</div>
-								<div class="avatar">
-									<img src="../assets/img/fpo_100x100.gif" class="scalable">
-								</div>
-								<div class="username">
-									@customer_name2
-								</div>
-								<div class="timestamp">
-									Monday at 7:32am in room
-								</div>
-								<div class="message">
-									Belgian Waffles blandit tempus porttitor. Nulla vitae elit libero
-									retra augue... 
-								</div>
-							</li>
-						</ul>
-					</div>
-				</a>
-				
-				<a href="chat-individual.php">
-					<div class="container">
-						<ul>
-							<li class="clearfix">
-								<div class="badge orange">
-									5
-								</div>
-								<div class="avatar">
-									<img src="../assets/img/fpo_100x100.gif" class="scalable">
-								</div>
-								<div class="username">
-									@customer_name3
-								</div>
-								<div class="timestamp">
-									Monday at 7:32am in room
-								</div>
-								<div class="message">
-									Belgian Waffles blandit tempus porttitor. Nulla vitae elit libero
-									retra augue... 
-								</div>
-							</li>
-						</ul>
-					</div>
-				</a>
 				
 			</section>
 

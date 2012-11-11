@@ -7,4 +7,6 @@ class AdminUser {
     String servicetype
     /*static constraints = {
     }*/
+    static belongsTo = [property:Property ]
+    
 }

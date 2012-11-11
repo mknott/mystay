@@ -1,3 +1,4 @@
+<!--Chat New Index -->
 <!doctype html>
 <!-- Conditional comment for mobile ie7 blogs.msdn.com/b/iemobile/ -->
 <!--[if IEMobile 7 ]>    <html class="no-js iem7" lang="en"> <![endif]-->
@@ -48,12 +49,15 @@
   <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
 
   <link rel="stylesheet" href="../assets/css/main.css">
+
+ 
+
 </head>
 
 <body>
   <div id="container" data-role="page" data-template="chat">
-  	<!-- Header Include -->
-      <g:include controller="pageInclude" action="headerinclude" />
+    <!-- Header Include -->
+    <g:include controller="pageInclude" action="headerinclude" />
 
     <div id="main" role="main" data-role="content">
 <!--
@@ -80,22 +84,45 @@
 			<h2>Start a new chat</h2>
                           <g:form url="[action:'index',controller:'chatExisting']" method="post">
 				<div align="center">
-					<select name="chat_topic" data-theme="q"  data-shadow="false">
+					<select name="chat_topic" id="chat_topic" data-theme="q"  data-shadow="false">
 						<option value="">Select a topic</option>
-						<option value="admin">Room Service</option>
-						<option value="helpadmin">Help Desk</option>
-						<option value="foodadmin">Food Service</option>
+						<option value="RoomSvc">Room Service</option>
+						<option value="HelpDsk">Help Desk</option>
+						<option value="FoodSvc">Food Service</option>
                                         </select>
-					<textarea name="chat_input" placeholder="Chat with Room Service"></textarea>
+					<textarea name="chat_input" placeholder="Chat with Room Service" id="chat_input"></textarea>
 					<button>start chat</button>
 				</div>
+                            <script>
+                                var keys = new Array();
+                                keys[0] = "RoomSvc";
+                                keys[1] = "HelpDsk";
+                                keys[2] = "FoodSvc";
+
+                                var values = new Array();
+                                values[0] = "Room Service, I need yor help";
+                                values[1] = "I need Help";
+                                values[2] = "I want Food now";
+
+                                var topicSelectBox=document.getElementById("chat_topic");
+                                topicSelectBox.onchange = function (){
+                                    //alert(topicSelectBox.value)
+                                    var selectedOption = topicSelectBox.value;
+                                    for(var i=0;i<keys.length;i++){
+                                      if(keys[i]==selectedOption){
+                                        document.getElementById("chat_input").value = values[i];
+                                        break;
+                                      }
+                                    }
+                                }
+                            </script>
 			</g:form>
 		</section>
 
     </div>
 
-	<!-- Footer Include -->
-     <g:include controller="pageInclude" action="footerinclude" />
+    <!-- Footer Include -->
+    <g:include controller="pageInclude" action="footerinclude" />
 
   </div> <!--! end of #container -->
 
@@ -126,3 +153,4 @@
 
 </body>
 </html>
+

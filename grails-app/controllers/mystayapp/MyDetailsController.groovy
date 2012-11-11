@@ -3,6 +3,7 @@ package mystayapp
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.utility.*;
 
 class MyDetailsController {
 
@@ -11,19 +12,27 @@ class MyDetailsController {
         System.out.println("IN MyDetailsController..");
         
         //def email = request.getCookie("email");
-        def firstName = request.getCookie("firstName");
-        def lastName = request.getCookie("lastName");
-        def checkin = request.getCookie("checkin");
-        def checkout = request.getCookie("checkout");
-        def roomNo = request.getCookie("roomNo");
+        def firstName = request.getCookie(MyStayConstants.FIRST_NAME);
+        def lastName = request.getCookie(MyStayConstants.LAST_NAME);
+        def checkInDate = request.getCookie(MyStayConstants.CHECKINDATE);
+        def checkOutDate = request.getCookie(MyStayConstants.CHECKOUTDATE);
+        def roomNumber = request.getCookie(MyStayConstants.ROOM_NUMBER);
+        def hotelName = request.getCookie(MyStayConstants.HOTEL_NAME);
+        def confirmationId = request.getCookie(MyStayConstants.CONFIRMATION_ID);
+        def myChats = request.getCookie(MyStayConstants.MY_CHATS);
+ 
+        println("hotelName from MyDetails" + hotelName)
         
-        def myDetails = new MyDetails();             
+        def myDetails = new Visit();             
         
         myDetails.firstName = firstName;
         myDetails.lastName = lastName;
-        myDetails.roomNo = roomNo;
-        myDetails.checkin = checkin;
-        myDetails.checkout = checkout;
+        myDetails.roomNumber = roomNumber;
+        myDetails.checkInDate = checkInDate;
+        myDetails.checkOutDate = checkOutDate;
+        myDetails.hotelName = hotelName;
+        myDetails.confirmationId = confirmationId;
+        myDetails.myChats = myChats;
         
         render(view: 'mydetails', model: [myDetails: myDetails])
     }

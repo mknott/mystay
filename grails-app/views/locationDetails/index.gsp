@@ -1,3 +1,4 @@
+<!--Location Details Index -->
 <!doctype html>
 <!-- Conditional comment for mobile ie7 blogs.msdn.com/b/iemobile/ -->
 <!--[if IEMobile 7 ]>    <html class="no-js iem7" lang="en"> <![endif]-->
@@ -76,51 +77,21 @@
     	</section>
 
     	<section class="content gradient clearfix">
-    		<h1 class="pagetitle center">Mystay Beach Resort</h1>
+          <h1 class="pagetitle center"><g:cookie name="hotelName"/></h1>
+            <section class="grid4 clearfix">
+                    <!-- Tile Template -->
+                <g:each in="${menuItemLst}" var="item">
+                  <g:link class="tile" controller="${item.controller}" action="${item.action}" 
+                          params="[chat_input:item.message, chat_topic:item.name]">
+                          <img class="scalable" src="${item.imageSrc}">
+                          <div class="caption">${item.caption}</div>
+                  	  <div class="badge orange">1</div>
 
-    		<section class="grid4 clearfix">
-    			<!-- Tile Template -->
+                  </g:link>
 
-                        <g:link class="tile" controller="roomService" action="index">
-    				<img class="scalable" src="../assets/img/fpo_roomservice.png">
-    				<div class="caption">Room Service@</div>
-    				<div class="badge orange">1</div>
-    			</g:link>
-    			<!-- /Tile Template -->
-    			<a class="tile">
-    				<img class="scalable" src="../assets/img/concierge.png">
-    				<div class="caption">Concierge@</div>
-    				<div class="badge orange">99</div>
-    			</a>
-    			<a class="tile">
-    				<img class="scalable" src="../assets/img/conference_1.png">
-    				<div class="caption">Conference@</div>
-    				<div class="badge orange">12</div>
-    			</a>
-    			<a class="tile">
-    				<img class="scalable" src="../assets/img/courier.png">
-    				<div class="caption">Courier Service@</div>
-    			</a>
-    			<a class="tile">
-    				<img class="scalable" src="../assets/img/special_assistance.png">
-    				<div class="caption">Special Assistance@</div>
-    			</a>
-    			<a class="tile">
-    				<img class="scalable" src="../assets/img/laundry_service.png">
-    				<div class="caption">Laundry Service@</div>
-    			</a>
-    			<a class="tile">
-    				<img class="scalable" src="../assets/img/restaurant.png">
-    				<div class="caption">Restaurant Service@</div>
-    			</a>
-    			<a class="tile">
-    				<img class="scalable" src="../assets/img/wifi_service.png">
-    				<div class="caption">Wireless Service@</div>
-    			</a>
-    		</section>
-
+                  </g:each> 
+            </section>
     	</section>
-
     </div>
 
 	<!-- Footer Include -->

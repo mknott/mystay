@@ -51,64 +51,75 @@
   <script src="../assets/js/jquery-mobile-datebox.js"></script>
 
   <link rel="stylesheet" href="../assets/css/main.css">
-  
 </head>
 
 <body>
-
   <div id="container" data-role="page" data-template="chat">
 
 	<!-- Header Include<?php include "../components/header-condensed.html" ?> -->
     
     <g:include controller="pageInclude" action="headerinclude" />
     <div class="modal_content">
-            <g:if test="${flash.message}">
-			<div class="message">${flash.message}</div>
-            </g:if>
+      <g:if test="${flash.message}">
+        <div class="message">${flash.message}</div>
+      </g:if>
 
-            <div class="modal-title">Tell Us About Your Stay</div>
-            <g:form url="[action:'index',controller:'locationDetails']" method="post">
-                    <div align="center" style="padding: 0px 20px 0px 10px">
-                            <br/>
-                            <label for="firstName">First Name</label>
-                            <g:if test="${guestInstance}">
-                                <g:textField name="firstName" value="${guestInstance.firstName}" />
-                            </g:if>
-                            <g:else>
-                                  <g:textField name="firstName" value="" />
-                            </g:else>
-                            
-                            <label for="lastName">Last Name</label>
-                            <g:if test="${guestInstance}">
-                              <g:textField name="lastName" value="${guestInstance.lastName}" />
-                            </g:if>
-                            <g:else>
-                                 <g:textField name="lastName" value="" />
-                            </g:else>
-                                       
-                            <label for="roomNo">Room Number</label>
-                            <input type="text" name="roomNo" id="roomNo" value="" placeholder="">
-                            
-                            <label for="checkin">Check-In Date</label>
-                            <!--input name="checkin" id="checkin" type="date" data-role="datebox" data-options='{"mode": "calbox"}'-->
-                            
-                            <input name="checkin" id="checkin" type="text">
-                            
-                            <label for="checkin">Check-Out Date</label>
-                            <!--input name="checkout" id="checkout" type="date" data-role="datebox" data-options='{"mode": "calbox"}'-->
-                            <input name="checkout" id="checkout" type="text">
-                            
-                            <label for="isCrtUserProf">Click to Create a User Profile</label>
-                            <input type="checkbox" name="isCrtUserProf" id="isCrtUserProf" value="1" placeholder="" data-theme="q">
+      <div class="modal-title">Tell Us About Your Stay</div>
+                               
+      <g:form url="[action:'index',controller:'newProfile']" method="post">
+        <div align="center" style="padding: 0px 20px 0px 10px">
+         <!-- Hello <g:cookie name="visitId" /> and ${visit.hotelName}-->
+          <label for="hotelNameDisplay">Hotel Name</label>
+          <g:if test="${visit.hotelName}">
+              <g:textField name="hotelNameDisplay" value="${visit.hotelName}" disabled="true"/>
+          </g:if>
+          <g:else>
+                <g:textField name="hotelNameDisplay" value="" disabled="true"/>
+          </g:else>
+          <input type="hidden" name="hotelName" id="hotelName" value="${visit.hotelName}" />
 
-                            <!--button>Register My Stay</button-->
-                            <g:submitButton name="submitPage" value="Register My Stay" />
-                    </div>
-            </g:form>            
+          <label for="firstName">First Name</label>
+          <g:if test="${visit.firstName}">
+              <g:textField name="firstName" value="${visit.firstName}" />
+          </g:if>
+          <g:else>
+                <g:textField name="firstName" value="" />
+          </g:else>
+
+          <label for="lastName">Last Name</label>
+          <g:if test="${visit.lastName}">
+            <g:textField name="lastName" value="${visit.lastName}" />
+          </g:if>
+          <g:else>
+                <g:textField name="lastName" value="" />
+          </g:else>
+
+          <label for="roomNumber">Room Number</label>
+          <input type="text" name="roomNumber" id="roomNumber" value="${visit.roomNumber}" placeholder="">
+
+          <label for="checkInDate">Check-In Date</label>
+          <input name="checkInDate" id="checkInDate" type="date" data-role="datebox" data-options='{"mode": "calbox"}' value="${visit.checkInDate}">
+                 <!--<input name="checkInDate" id="checkInDate" type="text" value="${visit.checkInDate}">-->
+
+          <label for="checkOutDate">Check-Out Date</label>
+          <input name="checkOutDate" id="checkOutDate" type="date" data-role="datebox" data-options='{"mode": "calbox"}' value="${visit.checkOutDate}">
+          <!--<input name="checkOutDate" id="checkOutDate" type="text" value="${visit.checkOutDate}">-->
+
+          <label for="confirmationId">Reservation Confirmation</label>
+          <input type="text" name="confirmationId" id="confirmationId" value="" placeholder="">
+
+          <label for="isCrtUserProf">Click to Create a User Profile</label>
+          <input type="checkbox" name="isCrtUserProf" id="isCrtUserProf" value="1" placeholder="" data-theme="q">
+
+          <input type="hidden" name="chatType" id="chatType" value="${params.chatType}" />
+          <input type="hidden" name="userId" id="userId" value="${params.userId}" />
+          <input type="hidden" name="propertyId" id="propertyId" value="${property.id}" />
+          <!--button>Register My Stay</button-->
+          <g:submitButton name="submitPage" value="Register My Stay" />
+        </div>
+      </g:form>
+      <g:link url="[action:'home',controller:'locationDetails']" class="cta-blue modal-close">Don't want to register?  Sign in as guest </g:link>
     </div>
-                            <p>
-                            Don't want to register? <g:link  url="[action:'index',controller:'locationDetails']" class="cta-blue modal-close">Sign in as guest </g:link>
-                            </p>
   <!-- Footer Include <?php include "../components/footer.html" ?>-->
     <g:include controller="pageInclude" action="footerinclude" />
 
@@ -140,9 +151,6 @@
     g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
     s.parentNode.insertBefore(g,s)}(document,"script"));
   </script>
-  
-
-        
 
 
 </body>

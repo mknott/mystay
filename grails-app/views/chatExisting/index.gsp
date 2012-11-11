@@ -1,3 +1,4 @@
+<!--Chat Existing Index -->
 <!doctype html>
 <!-- Conditional comment for mobile ie7 blogs.msdn.com/b/iemobile/ -->
 <!--[if IEMobile 7 ]>    <html class="no-js iem7" lang="en"> <![endif]-->
@@ -102,7 +103,7 @@
 							<div align="center">
 
 								<textarea id="chat_input" name="chat_input" placeholder="Write a reply..."></textarea>
-
+                                                                <INPUT type="hidden" id="chatwith" name="chatwwith" value="${chatwith}"/>
                                                                 <INPUT type="button" id="replytochat" value="reply to chat" onclick="javascript:sendMsgs();"/>
 
 							</div>
@@ -110,8 +111,9 @@
         var messageDisplayed = 0;
         function sendMsgs() {
                                 //alert("I m in Send message");
-                                var sendXmlhttp=false;
+                                 var sendXmlhttp=false;
                                  var chat_input = document.getElementById("chat_input").value;
+                                 var chat_with = document.getElementById("chatwith").value;
                                  //alert(chat_input);
                                  var table = document.getElementById('chattable');
                                  var rowCount = table.rows.length;
@@ -136,7 +138,7 @@
                                        }
                                     }
                                  }
-                                 sendXmlhttp.open("GET",'/MyStayApp/chatExisting/sendMessages?chat_input='+chat_input , true);
+                                 sendXmlhttp.open("GET",'/MyStayApp/chatExisting/sendMessages?chat_input='+chat_input+"&chatwith="+chat_with , true);
                                  sendXmlhttp.send(null);
                                  document.getElementById("chat_input").value="";
                                  messageDisplayed = messageDisplayed + 1;

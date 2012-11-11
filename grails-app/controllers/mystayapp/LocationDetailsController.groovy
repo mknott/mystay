@@ -3,78 +3,61 @@ package mystayapp
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.utility.*;
 
 class LocationDetailsController {
 
-
-
      def index() {
-         
-        def visitData = new Visit(params);
-        //System.out.println("reached here 1");
-        int time = 0;
-        System.out.println(visitData.checkin+"     "+visitData.checkout + "    "+visitData.isCrtUserProf);
-        if(visitData.isCrtUserProf==null)
-        {
-            visitData.isCrtUserProf = 'N';
-        }
-        else
-        {
-            visitData.isCrtUserProf = 'Y';
-        }
-        if(visitData!=null)
-        {
-            time = 1 * 60 * 60 * 24;
-                  
-            def firstN = new Cookie("firstName", visitData.firstName);
-            firstN.maxAge = time;
-            firstN.setPath("/");
-            response.addCookie(firstN);
-            
-            def lastN = new Cookie("lastName", visitData.lastName);
-            lastN.maxAge = time;
-            lastN.setPath("/");
-            response.addCookie(lastN);
-            
-            def roomN = new Cookie("roomNo", visitData.roomNo);
-            roomN.maxAge = time;
-            roomN.setPath("/");
-            response.addCookie(roomN);
-            
-            def checkN = new Cookie("checkin", visitData.checkin);
-            checkN.maxAge = time;
-            checkN.setPath("/");
-            response.addCookie(checkN);
-            
-            def checkOT = new Cookie("checkout", visitData.checkout);
-            checkOT.maxAge = time;
-            checkOT.setPath("/");
-            response.addCookie(checkOT);
-            
-            visitData.save(flush: true)
-        }
+        System.out.println("reached here loc"+params);
+        
+        println("visitId cookie: "+request.getCookie(MyStayConstants.VISIT_ID))        
+        println("propertyId cookie: "+request.getCookie(MyStayConstants.PROPERTY_ID))
 
-        println "params.isCrtUserProf : " + params.isCrtUserProf
-
-        if( params.isCrtUserProf)
-        {
-            redirect(controller:"newProfile", action:"index")
-             
+        //if cookies are set and match previous id and hotel, then update visit
+        if (!params.propertyId && !request.getCookie(MyStayConstants.PROPERTY_ID)) 
+        { 
+            println("all new loc "+params.visitId+" - "+params.propertyId)
+            redirect(controller:"selectLocation")
         }
-        else
-        {            
-            if(request.getCookie("firstName")!=null){
-                redirect(controller:"roomService", action:"index")
-            }else{
-
-                render(view: 'index')
+            
+        //check for new visit
+        //visit cookie set but doesn't match, then create new visit 
+        if (!request.getCookie(MyStayConstants.VISIT_ID))
+            { 
+                println("match loc1 - createNew")
+                redirect(controller:"newProfile", action:"createVisit", params: params)
             }
-           
+        
+        def propertyId = request.getCookie(MyStayConstants.PROPERTY_ID)
+        def visitId =  request.getCookie(MyStayConstants.VISIT_ID)
+        
+        println("all loc2b "+visitId + " - "+propertyId)
+        
+        def modules = Module.withCriteria {
+        isNotNull("controller")
+        eq("status","ACTIVE")
+        createAlias("property","p")
+        eq("p.id", propertyId.toLong() )
         }
-    }
+        
+        render(view: 'index', model:[menuItemLst:modules])
+
+     }
+ 
 
      def home() {
-            //redirect(controller:"roomService", action:"index")
-             render(view: 'index')
+        println("7")
+        def propertyId = params.(MyStayConstants.PROPERTY_ID);
+        
+        //def manuItems = MenuItem.list();
+        def modules = Module.withCriteria {
+            isNotNull("controller")
+            eq("status","ACTIVE")
+            createAlias("property","p")
+            eq("p.id", propertyId.toLong() )
+        }
+
+        //redirect(controller:"roomService", action:"index")
+        render(view: 'index',model:[menuItemLst:modules])
      }
 }
