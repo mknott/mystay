@@ -43,9 +43,12 @@
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
   <script src="../assets/js/libs/modernizr-2.0.6.min.js"></script>
 
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
-  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+<!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />-->
+  <link rel="stylesheet" href="assets/css/jquery.mobile-1.1.0.min.css" />
+<!--  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>-->
+  <script src="assets/js/jquery-1.7.1.min.js"></script>
+<!--  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>-->
+  <script src="assets/js/jquery.mobile-1.1.0.min.js"></script>
 
   <link rel="stylesheet" href="../assets/css/main.css">
 </head>
@@ -68,69 +71,69 @@
 -->
     	<section class="content gradient clearfix">
 
-			<h1 class="modal-title">Create a profile</h1>
-			<p>
-                          <g:if test="${flash.message}">
-                                <div class="message">${flash.message}</div>
-                          </g:if>
-                        </p>
+            <h1 class="modal-title">Create a profile</h1>
+            <p>
+              <g:if test="${flash.message}">
+                    <div class="message">${flash.message}</div>
+              </g:if>
+            </p>
     	</section> <!-- /.content -->
 
-		<section class="content gradient clearfix">
-                        <g:form action="createProfile" >
-                            <div align="center" style="padding: 0px 20px 0px 10px">
-                             <label for="firstname" class="ui-input-text">* First Name</label>
-                             <input type="text" name="firstName" id="firstname" value="" placeholder="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+        <section class="content gradient clearfix">
+                <g:form action="createProfile" >
+                    <div align="center" style="padding: 0px 20px 0px 10px">
+                      <label for="firstname" class="ui-input-text">* First Name</label>
+                      <input type="text" name="firstName" id="firstname" value="" placeholder="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
 
-                             <label for="lastName" class="ui-input-text">* Last Name</label>
-                             <input type="text" name="lastName" id="lastname" value="" placeholder="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+                      <label for="lastName" class="ui-input-text">* Last Name</label>
+                      <input type="text" name="lastName" id="lastname" value="" placeholder="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
 
-                             <label for="emailAddress" class="ui-input-text">* Email Address</label>
-                             <input type="email" name="emailAddress" id="email" value="" placeholder="">
+                      <label for="emailAddress" class="ui-input-text">* Email Address</label>
+                      <input type="email" name="emailAddress" id="email" value="" placeholder="">
 <!--
-                             <label for="confirmEmailAddress" class="ui-input-text">* Confirm Email Address</label>
-                             <input type="email" name="confirmEmailAddress" id="email-confirm" value="" placeholder="">
+                      <label for="confirmEmailAddress" class="ui-input-text">* Confirm Email Address</label>
+                      <input type="email" name="confirmEmailAddress" id="email-confirm" value="" placeholder="">
 -->
-                             <label for="password" class="ui-input-text">* Password</label>
-                             <input type="password" name="password" id="password" value="" placeholder="">
+                      <label for="password" class="ui-input-text">* Password</label>
+                      <input type="password" name="password" id="password" value="" placeholder="">
 <!--
-                             <label for="confirmPassword" class="ui-input-text">* Confirm Password</label>
-                             <input type="password" name="confirmPassword" id="password-confirm" value="" placeholder="">
+                      <label for="confirmPassword" class="ui-input-text">* Confirm Password</label>
+                      <input type="password" name="confirmPassword" id="password-confirm" value="" placeholder="">
 -->
-                             <label for="address1" class="ui-input-text">Address Line 1</label>
-                             <input type="text" name="address1" id="address1" value="" placeholder="">
+                      <label for="address1" class="ui-input-text">Address Line 1</label>
+                      <input type="text" name="address1" id="address1" value="" placeholder="">
 
-                             <label for="address2" class="ui-input-text">Address Line 2</label>
-                             <input type="text" name="address2" id="address2" value="" placeholder="">
+                      <label for="address2" class="ui-input-text">Address Line 2</label>
+                      <input type="text" name="address2" id="address2" value="" placeholder="">
 
-                             <label for="city" class="ui-input-text">City</label>
-                             <input type="text" name="city" id="city" value="" placeholder="">
+                      <label for="city" class="ui-input-text">City</label>
+                      <input type="text" name="city" id="city" value="" placeholder="">
 
-                             <label for="state" class="ui-input-text">State</label>
-                             <select name="state" id="state" data-theme="q" data-shadow="false">
-                              <option value="">Select</option>
-                              <option value="ILLINOIS">ILLINOIS</option>
-                              <option value="NEW YORK">NEW YORK</option>
-                             </select>
+                      <label for="state" class="ui-input-text">State</label>
+                      <select name="state" id="state" data-theme="q" data-shadow="false">
+                      <option value="">Select</option>
+                      <option value="ILLINOIS">ILLINOIS</option>
+                      <option value="NEW YORK">NEW YORK</option>
+                      </select>
 
-                             <label for="country" class="ui-input-text">Country</label>
-                             <select name="country" id="country" data-theme="q" data-shadow="false">
-                              <option value="">Select</option>
-                              <option value="USA">USA</option>
-                              <option value="CANADA">CANADA</option>
-                             </select>
+                      <label for="country" class="ui-input-text">Country</label>
+                      <select name="country" id="country" data-theme="q" data-shadow="false">
+                      <option value="">Select</option>
+                      <option value="USA">USA</option>
+                      <option value="CANADA">CANADA</option>
+                      </select>
 
-                             <label for="postalCode" class="ui-input-text">Postal Code</label>
-                             <input type="text" name="postalCode" id="postalCode" value="" placeholder="">
+                      <label for="postalCode" class="ui-input-text">Postal Code</label>
+                      <input type="text" name="postalCode" id="postalCode" value="" placeholder="">
 
-                             <label for="mobileNo" class="ui-input-text">Mobile Number</label>
-                             <input type="text" name="mobileNo" id="mobileNo" value="" placeholder="">
+                      <label for="mobileNo" class="ui-input-text">Mobile Number</label>
+                      <input type="text" name="mobileNo" id="mobileNo" value="" placeholder="">
 
-                             <!--button>submit</button-->
-                               <g:submitButton value="submit" name="create"/>
-                            </div>
-                           </g:form>
-		</section>
+                      <!--button>submit</button-->
+                        <g:submitButton value="submit" name="create"/>
+                    </div>
+                    </g:form>
+        </section>
     </div>
 
 	<!-- Footer Include <?php include "../components/footer.html" ?>-->

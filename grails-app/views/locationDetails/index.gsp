@@ -44,9 +44,12 @@
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
   <script src="../assets/js/libs/modernizr-2.0.6.min.js"></script>
 
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
-  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+  <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />-->
+  <link rel="stylesheet" href="assets/css/jquery.mobile-1.1.0.min.css" />
+  <!--<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>-->
+  <script src="assets/js/jquery-1.7.1.min.js"></script>
+<!--  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>-->
+  <script src="assets/js/jquery.mobile-1.1.0.min.js"></script>
 
   <link rel="stylesheet" href="../assets/css/main.css">
 </head>
@@ -59,8 +62,8 @@
   -->
   <div id="[unique_id]" data-template="ldp" data-role="page">
 
-  	<!-- Header Include -->
-     <g:include controller="pageInclude" action="headerinclude" />
+    <!-- Header Include -->
+    <g:include controller="pageInclude" action="headerinclude" />
 
     <div id="main" role="main" data-role="content">
 <!--
@@ -72,8 +75,8 @@
     		</ul>
     	</section>
 -->
-		<section class="hero">
-    		<img class="scalable" src="../assets/img/fpo_640x288.gif">
+        <section class="hero">
+          <img class="scalable" src="../assets/img/fpo_640x288.gif">
     	</section>
 
     	<section class="content gradient clearfix">
@@ -89,12 +92,12 @@
 
                   </g:link>
 
-                  </g:each> 
+                </g:each> 
             </section>
     	</section>
     </div>
 
-	<!-- Footer Include -->
+    <!-- Footer Include -->
     <g:include controller="pageInclude" action="footerinclude" />
 
   </div> <!--! end of #container -->

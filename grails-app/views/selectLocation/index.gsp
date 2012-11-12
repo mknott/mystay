@@ -43,14 +43,14 @@
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
   <script src="assets/js/libs/modernizr-2.0.6.min.js"></script>
 
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
-  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <!--link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />-->
+  <link rel="stylesheet" href="assets/css/jquery.mobile-1.1.0.min.css" />
+  <script src="assets/js/jquery-1.7.1.min.js"></script>
   <script src="assets/js/jquery-mobile-custom.js"></script>
-  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
-
+  <!--script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>-->
+<script src="assets/js/jquery.mobile-1.1.0.min.js"></script>
+  
   <link rel="stylesheet" href="assets/css/main.css">
-
-
 
 </head>
 
@@ -63,7 +63,7 @@
     <div id="main" role="main" data-role="content">
       <section class="hero">
           <div class="mainlogo">
-                  <img src="assets/img/logo_standard.png">
+              <img src="assets/img/logo_standard.png">
           </div>
           <div id="myScroll" class="imagecarousel clearfix">
               <section>
@@ -124,7 +124,7 @@
                           <div class="prev ir" onclick="myScroll.scrollToPage('prev', 0);return false;"><a href="#">prev</a></div>
                           <div class="next ir" onclick="myScroll.scrollToPage('next', 0);return false;"><a href="#">next</a></div>
                           <div class="carouselNav hidden">
-                            <ul class="indicator"></ul>
+                          <ul class="indicator"></ul>
                           </div>
                       </div>
                   </div>

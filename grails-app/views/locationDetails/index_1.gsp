@@ -43,9 +43,12 @@
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
   <script src="../assets/js/libs/modernizr-2.0.6.min.js"></script>
 
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
-  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+<!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />-->
+  <link rel="stylesheet" href="assets/css/jquery.mobile-1.1.0.min.css" />
+<!-- <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>-->
+  <script src="assets/js/jquery-1.7.1.min.js"></script>
+<!--  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>-->
+  <script src="assets/js/jquery.mobile-1.1.0.min.js"></script>
 
   <link rel="stylesheet" href="../assets/css/main.css">
 </head>

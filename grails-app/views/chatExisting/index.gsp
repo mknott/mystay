@@ -45,9 +45,12 @@
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
   <script src="../assets/js/libs/modernizr-2.0.6.min.js"></script>
 
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
-  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+<!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />-->
+  <link rel="stylesheet" href="assets/css/jquery.mobile-1.1.0.min.css" />
+<!--  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>-->
+  <script src="assets/js/jquery-1.7.1.min.js"></script>
+<!--  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>-->
+  <script src="assets/js/jquery.mobile-1.1.0.min.js"></script>
 
   <link rel="stylesheet" href="../assets/css/main.css">
 
@@ -84,65 +87,64 @@
     		</p>
   	</section> <!-- /.content -->
 
-		<section class="content gradient clearfix">
-			<div class="container">
-			   <ul class="rows alternating">
-			   		<li class="clearfix">
+        <section class="content gradient clearfix">
+          <div class="container">
+              <ul class="rows alternating">
+                  <li class="clearfix">
 
-                                          <table id="chattable">
-                                            <tr>
-                                              <td>                                               
-                                              </td>
-                                            </tr>
-                                          </table>
+                    <table id="chattable">
+                      <tr>
+                        <td>                                               
+                        </td>
+                      </tr>
+                    </table>
 
-			   		</li>
-			   		<li class="clearfix">
-						 <g:form method="post">
+                  </li>
+                  <li class="clearfix">
+                      <g:form method="post">
+                        <div align="center">
 
-							<div align="center">
+                              <textarea id="chat_input" name="chat_input" placeholder="Write a reply..."></textarea>
+                              <INPUT type="hidden" id="chatwith" name="chatwwith" value="${chatwith}"/>
+                              <INPUT type="button" id="replytochat" value="reply to chat" onclick="javascript:sendMsgs();"/>
 
-								<textarea id="chat_input" name="chat_input" placeholder="Write a reply..."></textarea>
-                                                                <INPUT type="hidden" id="chatwith" name="chatwwith" value="${chatwith}"/>
-                                                                <INPUT type="button" id="replytochat" value="reply to chat" onclick="javascript:sendMsgs();"/>
-
-							</div>
+                        </div>
        <script language="javascript">
         var messageDisplayed = 0;
         function sendMsgs() {
-                                //alert("I m in Send message");
-                                 var sendXmlhttp=false;
-                                 var chat_input = document.getElementById("chat_input").value;
-                                 var chat_with = document.getElementById("chatwith").value;
-                                 //alert(chat_input);
-                                 var table = document.getElementById('chattable');
-                                 var rowCount = table.rows.length;
-                                 var row = table.insertRow(rowCount);
-                                 var cell = row.insertCell(0);
-                                 cell.innerHTML="<b>Me: </b> " + chat_input;
+            //alert("I m in Send message");
+              var sendXmlhttp=false;
+              var chat_input = document.getElementById("chat_input").value;
+              var chat_with = document.getElementById("chatwith").value;
+              //alert(chat_input);
+              var table = document.getElementById('chattable');
+              var rowCount = table.rows.length;
+              var row = table.insertRow(rowCount);
+              var cell = row.insertCell(0);
+              cell.innerHTML="<b>Me: </b> " + chat_input;
 
-                              try{
-                                    // Opera 8.0+, Firefox, Safari
-                                    sendXmlhttp = new XMLHttpRequest();
-                                 } catch (e){
-                                    // Internet Explorer Browsers
-                                    try{
-                                       sendXmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
-                                    } catch (e) {
-                                       try{
-                                          sendXmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                                       } catch (e){
-                                          // Something went wrong
-                                          alert("Your browser broke!");
-                                          return false;
-                                       }
-                                    }
-                                 }
-                                 sendXmlhttp.open("GET",'/MyStayApp/chatExisting/sendMessages?chat_input='+chat_input+"&chatwith="+chat_with , true);
-                                 sendXmlhttp.send(null);
-                                 document.getElementById("chat_input").value="";
-                                 messageDisplayed = messageDisplayed + 1;
+          try{
+                // Opera 8.0+, Firefox, Safari
+                sendXmlhttp = new XMLHttpRequest();
+              } catch (e){
+                // Internet Explorer Browsers
+                try{
+                    sendXmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e) {
+                    try{
+                      sendXmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    } catch (e){
+                      // Something went wrong
+                      alert("Your browser broke!");
                       return false;
+                    }
+                }
+              }
+              sendXmlhttp.open("GET",'/MyStayApp/chatExisting/sendMessages?chat_input='+chat_input+"&chatwith="+chat_with , true);
+              sendXmlhttp.send(null);
+              document.getElementById("chat_input").value="";
+              messageDisplayed = messageDisplayed + 1;
+  return false;
           }
 
           function getMessage(){
@@ -183,7 +185,6 @@
                                               }
                                             messageDisplayed = user_array.length;
                                         }
-
                                     }
                                  }
 
@@ -195,10 +196,10 @@
               window.setInterval("getMessage()",5000);
 
         </script>
-						</g:form>
-			   		</li>
-			   </ul>
-			</div>
+                      </g:form>
+                </li>
+              </ul>
+            </div>
 
 
 		</section>

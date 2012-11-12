@@ -5,7 +5,7 @@
                   <b>Guest:</b> ${myDetails.firstName} ${myDetails.lastName}<br>
           </p>
           <p>
-                  <b>Hotel Name:</b> <g:cookie name="hotelName" /><br>
+                  <b>Hotel Name:</b> ${myDetails.hotelName}<br>
                   <b>Room Number:</b> ${myDetails.roomNumber}<br>
                   <b>Check-in:</b> ${myDetails.checkInDate}<br>
                   <b>Check-out:</b> ${myDetails.checkOutDate}<br>

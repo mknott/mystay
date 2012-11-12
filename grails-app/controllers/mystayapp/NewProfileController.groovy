@@ -18,7 +18,7 @@ class NewProfileController {
         if (!propertyId)
         { 
             println("no propertyId bef")
-            redirect(controller:"selectLocation", permanent:"true")
+            redirect(controller:"selectLocation", action:"index", permanent:"true")
             println("no propertyId aft")
         }
         //check for new visit
@@ -26,7 +26,7 @@ class NewProfileController {
         else if (request.getCookie(MyStayConstants.VISIT_ID))
             {
             println("update "+request.getCookie(MyStayConstants.VISIT_ID))
-            redirect(action:"updateVisit")
+            redirect(action:"updateVisit", params: params)
             }    
         //cookies not set then create new
         else
@@ -155,28 +155,25 @@ println("prop2aft "+propertyId)
         //visit.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
         //visit.rewardsProgramId = params.(MyStayConstants.REWARDS_PROGRAM_ID);        
 
-        println("3 ")
-
         int time = 0;
         time = 1 * 60 * 60 * 24;
+
+        println("3propId: "+propertyId)
 
         def propId = new Cookie(MyStayConstants.PROPERTY_ID, propertyId);
         propId.maxAge = time;
         propId.setPath("/");
         response.addCookie(propId);
-        println("propId: "+propertyId)
 
         def firstN = new Cookie(MyStayConstants.FIRST_NAME, visit.firstName);
         firstN.maxAge = time;
         firstN.setPath("/");
         response.addCookie(firstN);
-        println("firstN: "+visit.firstName)
 
         def lastN = new Cookie(MyStayConstants.LAST_NAME, visit.lastName);
         lastN.maxAge = time;
         lastN.setPath("/");
         response.addCookie(lastN);
-        println("lastN: "+visit.lastName)
 
         def roomN = new Cookie(MyStayConstants.ROOM_NUMBER, visit.roomNumber);
         roomN.maxAge = time;
@@ -202,7 +199,6 @@ println("prop2aft "+propertyId)
         hotelNm.maxAge = time;
         hotelNm.setPath("/");
         response.addCookie(hotelNm);
-        println("hotelName "+ visit.hotelName)
         
 //        def myChats = new Cookie(MyStayConstants.MY_CHATS, visit.myChats);
 //        confirmationId.maxAge = time;
@@ -222,7 +218,7 @@ println("prop2aft "+propertyId)
         println("2after save" +visit.id)
         
         def visitId = new Cookie(MyStayConstants.VISIT_ID, visit.id.toString());
-        println("visitid:" + visitId)
+        println("new visitid:" + visitId)
         visitId.maxAge = time;
         visitId.setPath("/");
         if (visit.id.toString())
@@ -245,7 +241,7 @@ println("prop2aft "+propertyId)
                 println it
                 }
             }
-        println("2after 2nd save visitId: "+ visit.id + " userId:- " + useridStr)
+        println("2after 2nd save visitId: "+ visit.id + " new userId:- " + useridStr)
 
         if( (params.isCrtUserProf) && (params.isCrtUserProf = "Y"))
         {
@@ -256,7 +252,7 @@ println("prop2aft "+propertyId)
             params.isCrtUserProf = "N";
             
             println("6 Done with create visit")
-            redirect(controller:"locationDetails", action:"index" )
+            redirect(controller:"locationDetails", action:"index", permanent:"true" )
         }
      }
     
@@ -268,90 +264,92 @@ println("prop2aft "+propertyId)
         {
             redirect(controller:"selectLocation")
         }
+        println("19-next"+propertyId)
         
         def visit = new Visit();
-//instead of cookies, retrieve from db        
-        visit.firstName = getCookie(MyStayConstants.FIRST_NAME);
-        visit.lastName = getCookie(MyStayConstants.LAST_NAME);
-        visit.confirmationId = getCookie(MyStayConstants.CONFIRMATION_ID);
-        visit.roomNumber = getCookie(MyStayConstants.ROOM_NUMBER);
-        visit.checkInDate = getCookie(MyStayConstants.CHECKINDATE);
-        visit.checkOutDate = getCookie(MyStayConstants.CHECKOUTDATE);
-        visit.hotelName = getCookie(MyStayConstants.HOTEL_NAME);
-        visit.id = getCookie(MyStayConstants.VISIT_ID).toLong();
-        
-        println("visitid: " + visit.id)
-        visit.userId = getCookie(MyStayConstants.USER_ID);
+      //  visit.firstName = request.getCookie(MyStayConstants.FIRST_NAME);
+      //  visit.lastName = request.getCookie(MyStayConstants.LAST_NAME);
+      //  visit.confirmationId = request.getCookie(MyStayConstants.CONFIRMATION_ID);
+      //  visit.roomNumber = request.getCookie(MyStayConstants.ROOM_NUMBER);
+      //  visit.checkInDate = request.getCookie(MyStayConstants.CHECKINDATE);
+      //  visit.checkOutDate = request.getCookie(MyStayConstants.CHECKOUTDATE);
+      //  visit.hotelName = request.getCookie(MyStayConstants.HOTEL_NAME);
+      //  visit.id = request.getCookie(MyStayConstants.VISIT_ID).toLong();
+      //  visit.userId = request.getCookie(MyStayConstants.USER_ID);
         //visit.chatType = getCookie(MyStayConstants.CHAT_TYPE);
         //visit.myChats = 0;
         //visit.emailAddress = getCookie(MyStayConstants.EMAIL_ADDRESS);
         //visit.mobileNumber = getCookie(MyStayConstants.MOBILE_NUMBER);
         //visit.rewardsProgramId = getCookie(MyStayConstants.REWARDS_PROGRAM_ID);        
 
-        println("13")
+        visit.firstName = params.(MyStayConstants.FIRST_NAME);
+        visit.lastName = params.(MyStayConstants.LAST_NAME);
+        visit.confirmationId = params.(MyStayConstants.CONFIRMATION_ID);
+        visit.roomNumber = params.(MyStayConstants.ROOM_NUMBER);
+        visit.checkInDate = params.(MyStayConstants.CHECKINDATE);
+        visit.checkOutDate = params.(MyStayConstants.CHECKOUTDATE);
+        visit.hotelName = params.(MyStayConstants.HOTEL_NAME);
+        visit.id = params.(MyStayConstants.VISIT_ID);
+        visit.chatType = params.chatType;
+        visit.userId = request.getCookie(MyStayConstants.USER_ID);
+        //visit.myChats = 0;
+        //visit.emailAddress = params.(MyStayConstants.EMAIL_ADDRESS);
+        //visit.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
+        //visit.rewardsProgramId = params.(MyStayConstants.REWARDS_PROGRAM_ID);        
+
+        println("13"+visit.firstName)
 
         int time = 0;
         time = 1 * 60 * 60 * 24;
 
-        response.deleteCookie(MyStayConstants.PROPERTY_ID)
         def propId = new Cookie(MyStayConstants.PROPERTY_ID, propertyId);
         propId.maxAge = time;
         propId.setPath("/");
         response.addCookie(propId);
-        println("propId: "+propertyId)
 
-        response.deleteCookie(MyStayConstants.FIRST_NAME)
         def firstN = new Cookie(MyStayConstants.FIRST_NAME, visit.firstName);
         firstN.maxAge = time;
         firstN.setPath("/");
         response.addCookie(firstN);
-        println("1firstN: "+visit.firstName)
 
-        response.deleteCookie(MyStayConstants.LAST_NAME)
         def lastN = new Cookie(MyStayConstants.LAST_NAME, visit.lastName);
         lastN.maxAge = time;
         lastN.setPath("/");
         response.addCookie(lastN);
         println("1lastN: "+visit.lastName)
 
-        response.deleteCookie(MyStayConstants.ROOM_NUMBER)
         def roomN = new Cookie(MyStayConstants.ROOM_NUMBER, visit.roomNumber);
         roomN.maxAge = time;
         roomN.setPath("/");
         response.addCookie(roomN);
 
-        response.deleteCookie(MyStayConstants.CHECKINDATE)
         def checkN = new Cookie(MyStayConstants.CHECKINDATE, visit.checkInDate);
         checkN.maxAge = time;
         checkN.setPath("/");
         response.addCookie(checkN);
 
-        response.deleteCookie(MyStayConstants.CHECKOUTDATE)
         def checkOT = new Cookie(MyStayConstants.CHECKOUTDATE, visit.checkOutDate);
         checkOT.maxAge = time;
         checkOT.setPath("/");
         response.addCookie(checkOT);
 
-        response.deleteCookie(MyStayConstants.CONFIRMATION_ID)
         def confirmId = new Cookie(MyStayConstants.CONFIRMATION_ID, visit.confirmationId);
         confirmId.maxAge = time;
         confirmId.setPath("/");
         response.addCookie(confirmId);
 
-        response.deleteCookie(MyStayConstants.HOTEL_NAME)
         def hotelNm = new Cookie(MyStayConstants.HOTEL_NAME, visit.hotelName);
         hotelNm.maxAge = time;
         hotelNm.setPath("/");
         response.addCookie(hotelNm);
 
-        //response.deleteCookie(MyStayConstants.MY_CHATS)
         //def myChats = new Cookie(MyStayConstants.MY_CHATS, visit.myChats);
         //confirmationId.maxAge = time;
         //confirmationId.setPath("/");
         //response.addCookie(myChats);
-
         
-        println("1before save")
+        println("1before save"+visit.id)
+//        def widgetInstance = Widget.findByName('firstWidget') ?: new Widget(name: 'firstWidget').save(failOnError: true)
         def property = Property.findById(propertyId.toInteger() )
         property.addToVisits(visit)
         property.save(flush:true)
@@ -364,7 +362,6 @@ println("prop2aft "+propertyId)
             }
         }
         println("1after save")
-        
         if( (params.isCrtUserProf) && (params.isCrtUserProf = "Y"))
         {
             println("redirect to new profile")
@@ -379,7 +376,6 @@ println("prop2aft "+propertyId)
             }     
         
      }
-
 }
 
         ///======================================================

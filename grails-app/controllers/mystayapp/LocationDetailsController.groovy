@@ -40,7 +40,7 @@ class LocationDetailsController {
         eq("p.id", propertyId.toLong() )
         }
         
-        render(view: 'index', model:[menuItemLst:modules])
+        render( view:"index", model:[menuItemLst:modules])
 
      }
  
