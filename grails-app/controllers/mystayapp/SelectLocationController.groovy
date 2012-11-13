@@ -13,8 +13,8 @@ class SelectLocationController {
     { 
         println("hi")
         def SelectLocations = Property.list();
-        def propertyId = request.getCookie(MyStayConstants.PROPERTY_ID)
-
+        //def propertyId = request.getCookie(MyStayConstants.PROPERTY_ID)
+        //def propertyId = params.(MyStayConstants.PROPERTY_ID) ? params.(MyStayConstants.PROPERTY_ID) : session.getAttribute(MyStayConstants.PROPERTY_ID)
 
         render(view: 'index',model:[selectLocationList:SelectLocations])
     }

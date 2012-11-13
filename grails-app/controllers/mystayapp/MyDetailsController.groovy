@@ -9,9 +9,8 @@ class MyDetailsController {
 
     def index() {
     
-        System.out.println("IN MyDetailsController..");
+ //       System.out.println("MyDetailsController..");
         
-        //def email = request.getCookie("email");
         def firstName = request.getCookie(MyStayConstants.FIRST_NAME);
         def lastName = request.getCookie(MyStayConstants.LAST_NAME);
         def checkInDate = request.getCookie(MyStayConstants.CHECKINDATE);
@@ -20,9 +19,10 @@ class MyDetailsController {
         def hotelName = request.getCookie(MyStayConstants.HOTEL_NAME);
         def confirmationId = request.getCookie(MyStayConstants.CONFIRMATION_ID);
         def myChats = request.getCookie(MyStayConstants.MY_CHATS);
- 
-        println("hotelName from MyDetails" + hotelName)
-        
+        def emailAddress = request.getCookie(MyStayConstants.EMAIL_ADDRESS);
+        def mobileNumber = request.getCookie(MyStayConstants.MOBILE_NUMBER);
+        def rewardsProgramId = request.getCookie(MyStayConstants.REWARDS_PROGRAM_ID);
+     
         def myDetails = new Visit();             
         
         myDetails.firstName = firstName;

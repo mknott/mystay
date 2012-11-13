@@ -14,9 +14,9 @@ class Visit {
     String hotelName
     String myChats = "0"
     String userId //guestId
-  //  String rewardsProgramId
- //   String emailAddress
- //   String mobileNumber
+    String rewardsProgramId
+    String emailAddress
+    String mobileNumber
   //  String status = null;
   //  String locale = null;
   //  String latLng = null;
@@ -27,6 +27,7 @@ class Visit {
     
     static constraints = {
 //     propertyId(blank: false)
+    // userId //guestId
     // guestId(blank: false)
      roomNumber(blank: false, size: 1..30)
      checkInDate(blank: true)
@@ -37,8 +38,9 @@ class Visit {
      chatType(blank: true)
      confirmationId(blank: true)
      myChats(blank: true)
-    // userId //guestId
-    // emailAddress(email:true)
+     emailAddress(email:true,blank: true)
+     mobileNumber(size:10..20,blank: true)
+     rewardsProgramId(blank:true)
     // phoneCountryCode(size: 1..3)
     // phoneNumber(size: 10..20)
     // status(blank: false, inList: ["ACTIVE","INACTIVE"] )

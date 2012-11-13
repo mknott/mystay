@@ -69,7 +69,7 @@
 
       <div class="modal-title">Tell Us About Your Stay</div>
                                
-      <g:form url="[action:'index',controller:'newProfile']" method="post">
+      <g:form url="[action:'tellus',controller:'newProfile']" method="post" >
         <div align="center" style="padding: 0px 20px 0px 10px">
          <!-- Hello <g:cookie name="visitId" /> and ${visit.hotelName}-->
           <label for="hotelNameDisplay">Hotel Name</label>
@@ -114,9 +114,12 @@
           <label for="isCrtUserProf">Click to Create a User Profile</label>
           <input type="checkbox" name="isCrtUserProf" id="isCrtUserProf" value="1" placeholder="" data-theme="q">
 
+          <input type="hidden" name="emailAddress" id="emailAddress" value="${params.emailAddress}" />
+          <input type="hidden" name="mobileNumber" id="mobileNumber" value="${params.mobileNumber}" />
+          <input type="hidden" name="rewardsProgramId" id="rewardsProgramId" value="${params.rewardsProgramId}" />
           <input type="hidden" name="chatType" id="chatType" value="${params.chatType}" />
           <input type="hidden" name="userId" id="userId" value="${params.userId}" />
-          <input type="hidden" name="propertyId" id="propertyId" value="${property.id}" />
+          <input type="hidden" name="propertyId" id="propertyId" value="${params.propertyId}" />
           <!--button>Register My Stay</button-->
           <g:submitButton name="submitPage" value="Register My Stay" />
         </div>

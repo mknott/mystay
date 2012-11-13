@@ -39,7 +39,7 @@ class LoginController {
                 if((userProfile.emailAddress == userProfileInstance.emailAddress) && (userProfile.password == userProfileInstance.password))
                 {
                             //System.out.println("userNm: "+userProfileInstance.emailAddress);
-                            //render(view: 'tell-us')
+                            //render(view: 'tellus')
                             def email = new Cookie("email", userProfile.emailAddress);
                             email.maxAge = time;
                             email.setPath("/");

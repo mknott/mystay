@@ -139,7 +139,7 @@
 
           <p>Select from these participating properties</p>
 
-          <g:form url="[action:'tellus',controller:'newProfile']" method="post">
+          <g:form url="[action:'index',controller:'newProfile']" method="post">
               <div align="center">
               <div class="ui-select">
               <div class="ui-btn ui-btn-corner-all ui-fullsize ui-btn-block ui-btn-icon-right ui-btn-up-q" data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-d" data-iconpos="right" data-theme="q" data-inline="false" data-mini="false">

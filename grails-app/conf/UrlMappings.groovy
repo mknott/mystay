@@ -9,5 +9,9 @@ class UrlMappings {
         "500"(view:'/error')
         "/"(controller: "selectLocation")
         //"/"(view:"/SelectLocation/index")
+        
+    "/locationDetails/home" {
+        }
+
     }
 }

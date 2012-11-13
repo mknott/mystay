@@ -47,9 +47,8 @@ class LocationDetailsController {
 
      def home() {
         println("7")
-        def propertyId = params.(MyStayConstants.PROPERTY_ID);
+        def propertyId = session.getAttribute("propertyId") //params.(MyStayConstants.PROPERTY_ID);
         
-        //def manuItems = MenuItem.list();
         def modules = Module.withCriteria {
             isNotNull("controller")
             eq("status","ACTIVE")
@@ -57,7 +56,6 @@ class LocationDetailsController {
             eq("p.id", propertyId.toLong() )
         }
 
-        //redirect(controller:"roomService", action:"index")
         render(view: 'index',model:[menuItemLst:modules])
      }
 }

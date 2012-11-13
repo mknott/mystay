@@ -34,7 +34,7 @@ public static final String MOBILE_NUMBER="mobileNumber";
 public static final String VISIT_ID="visitId";
 public static final String PROPERTY_ID="propertyId";
 public static final String MY_CHATS="myChats";
-public static final String REWARDS_PROGRAM_ID="rewardsProgramId;";
+public static final String REWARDS_PROGRAM_ID="rewardsProgramId";
         
 public static final String USER_ID="USER_ID";
 
