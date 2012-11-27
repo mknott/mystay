@@ -18,6 +18,7 @@ class Module {
     Boolean chatEnabled
     String message
     String name
+    Integer displayOrder
 
     
     static constraints = {

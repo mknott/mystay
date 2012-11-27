@@ -164,3 +164,11 @@ $(document).on('pageinit','[data-template="homepage"]',MS.homepage);
 $(document).on('pageinit','[data-template="ldp"]',MS.ldp); // Location Detail Page
 $(document).on('pageinit','[data-template="service"]',MS.service); // Room Service
 $(document).on('pageinit','[data-template="chat"]',MS.chat); // Room Service
+
+$('.target').click(function()
+{ location.href="http://localhost:8080/MyStayApp/"}
+);
+
+$('.target').hover(function()
+{ alert("location.href=http://localhost:8080/MyStayApp/")}
+);

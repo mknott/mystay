@@ -44,14 +44,15 @@
   <script src="../assets/js/libs/modernizr-2.0.6.min.js"></script>
 
 <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />-->
-  <link rel="stylesheet" href="assets/css/jquery.mobile-1.1.0.min.css" />
+  <link rel="stylesheet" href="../assets/css/jquery.mobile-1.1.0.min.css" />
 <!--  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>-->
-  <script src="assets/js/jquery-1.7.1.min.js"></script>
+  <script src="../assets/js/jquery-1.7.1.min.js"></script>
 <!--  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>-->
-  <script src="assets/js/jquery.mobile-1.1.0.min.js"></script>
+  <script src="../assets/js/jquery.mobile-1.1.0.min.js"></script>
 
-  <link rel="stylesheet" href="assets/css/jquery-mobile-datebox.css">
-  <script src="assets/js/jquery-mobile-datebox.js"></script>
+  <link rel="stylesheet" href="../assets/css/jquery-mobile-datebox.css">
+  <script src="../assets/js/jquery-mobile-datebox.js"></script>
+  <script src="../assets/js/jquery.mobile-custom.js"></script>
 
   <link rel="stylesheet" href="../assets/css/main.css">
 </head>
@@ -62,43 +63,26 @@
 	<!-- Header Include<?php include "../components/header-condensed.html" ?> -->
     
     <g:include controller="pageInclude" action="headerinclude" />
-    <div class="modal_content">
-      <g:if test="${flash.message}">
-        <div class="message">${flash.message}</div>
-      </g:if>
-
-      <div class="modal-title">Tell Us About Your Stay</div>
+    <div id="main" class="ui-content" data-role="content" role="main">
+      <section class="content gradient clearfix">
+      <h1 class="pagetitle">Create a profile</h1>
+      </section>
                                
       <g:form url="[action:'tellus',controller:'newProfile']" method="post" >
         <div align="center" style="padding: 0px 20px 0px 10px">
-         <!-- Hello <g:cookie name="visitId" /> and ${visit.hotelName}-->
+        
           <label for="hotelNameDisplay">Hotel Name</label>
-          <g:if test="${visit.hotelName}">
-              <g:textField name="hotelNameDisplay" value="${visit.hotelName}" disabled="true"/>
-          </g:if>
-          <g:else>
-                <g:textField name="hotelNameDisplay" value="" disabled="true"/>
-          </g:else>
-          <input type="hidden" name="hotelName" id="hotelName" value="${visit.hotelName}" />
+          <g:textField name="hotelNameDisplay" value="${visit?.hotelName}" disabled="true"/>
+          <input type="hidden" name="hotelName" id="hotelName" value="${visit?.hotelName}" />
 
-          <label for="firstName">First Name</label>
-          <g:if test="${visit.firstName}">
-              <g:textField name="firstName" value="${visit.firstName}" />
-          </g:if>
-          <g:else>
-                <g:textField name="firstName" value="" />
-          </g:else>
+          <label for="firstName">First Name *</label>
+          <g:textField name="firstName" value="${visit?.firstName}" />
 
-          <label for="lastName">Last Name</label>
-          <g:if test="${visit.lastName}">
-            <g:textField name="lastName" value="${visit.lastName}" />
-          </g:if>
-          <g:else>
-                <g:textField name="lastName" value="" />
-          </g:else>
+          <label for="lastName">Last Name *</label>
+          <g:textField name="lastName" value="${visit?.lastName}" />
 
-          <label for="roomNumber">Room Number</label>
-          <input type="text" name="roomNumber" id="roomNumber" value="${visit.roomNumber}" placeholder="">
+          <label for="roomNumber">Room Number *</label>
+          <input type="text" name="roomNumber" id="roomNumber" value="${visit?.roomNumber}" placeholder="">
 
           <label for="checkInDate">Check-In Date</label>
           <input name="checkInDate" id="checkInDate" type="date" data-role="datebox" data-options='{"mode": "calbox"}' value="${visit.checkInDate}" placeholder="MM-DD-YYYY">
@@ -122,9 +106,11 @@
           <input type="hidden" name="propertyId" id="propertyId" value="${params.propertyId}" />
           <!--button>Register My Stay</button-->
           <g:submitButton name="submitPage" value="Register My Stay" />
+          <br>
+          <a class="cta-blue formfooter" href="/MyStayApp/locationDetails/home">Don't want to register?  Sign in as guest </a>
+          <br><br>
         </div>
       </g:form>
-      <g:link url="[action:'home',controller:'locationDetails']" class="cta-blue modal-close">Don't want to register?  Sign in as guest </g:link>
     </div>
   <!-- Footer Include <?php include "../components/footer.html" ?>-->
     <g:include controller="pageInclude" action="footerinclude" />

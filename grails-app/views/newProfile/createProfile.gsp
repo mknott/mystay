@@ -50,9 +50,6 @@
 <!--  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>-->
   <script src="assets/js/jquery.mobile-1.1.0.min.js"></script>
 
-  <link rel="stylesheet" href="assets/css/jquery-mobile-datebox.css">
-  <script src="assets/js/jquery-mobile-datebox.js"></script>
-
   <link rel="stylesheet" href="../assets/css/main.css">
 </head>
 
@@ -62,71 +59,110 @@
 	<!-- Header Include<?php include "../components/header-condensed.html" ?> -->
     
     <g:include controller="pageInclude" action="headerinclude" />
-    <div class="modal_content">
-      <g:if test="${flash.message}">
-        <div class="message">${flash.message}</div>
-      </g:if>
 
-      <div class="modal-title">Tell Us About Your Stay</div>
-                               
-      <g:form url="[action:'tellus',controller:'newProfile']" method="post" >
-        <div align="center" style="padding: 0px 20px 0px 10px">
-         <!-- Hello <g:cookie name="visitId" /> and ${visit.hotelName}-->
-          <label for="hotelNameDisplay">Hotel Name</label>
-          <g:if test="${visit.hotelName}">
-              <g:textField name="hotelNameDisplay" value="${visit.hotelName}" disabled="true"/>
-          </g:if>
-          <g:else>
-                <g:textField name="hotelNameDisplay" value="" disabled="true"/>
-          </g:else>
-          <input type="hidden" name="hotelName" id="hotelName" value="${visit.hotelName}" />
+  
+    <div id="main" class="ui-content" data-role="content" role="main">
+        <section class="content gradient clearfix">
+        <h1 class="pagetitle">Create a profile</h1>
+        </section>
 
-          <label for="firstName">First Name</label>
-          <g:if test="${visit.firstName}">
-              <g:textField name="firstName" value="${visit.firstName}" />
-          </g:if>
-          <g:else>
-                <g:textField name="firstName" value="" />
-          </g:else>
+        <section class="content gradient clearfix">
+                <g:form action="createProfile" >
+                    <div align="center" style="padding: 0px 20px 0px 10px">
+                      
+                    <label for="firstName">First Name *</label>
+                    <g:if test="${visit.firstName}">
+                        <g:textField name="firstName" value="${visit.firstName}" />
+                    </g:if>
+                    <g:else>
+                          <g:textField name="firstName" value="" />
+                    </g:else>
 
-          <label for="lastName">Last Name</label>
-          <g:if test="${visit.lastName}">
-            <g:textField name="lastName" value="${visit.lastName}" />
-          </g:if>
-          <g:else>
-                <g:textField name="lastName" value="" />
-          </g:else>
+                    <label for="lastName">Last Name *</label>
+                    <g:if test="${visit.lastName}">
+                        <g:textField name="lastName" value="${visit.lastName}" />
+                    </g:if>
+                    <g:else>
+                          <g:textField name="lastName" value="" />
+                    </g:else>
 
-          <label for="roomNumber">Room Number</label>
-          <input type="text" name="roomNumber" id="roomNumber" value="${visit.roomNumber}" placeholder="">
+                    <label for="emailAddress">Email Address *</label>
+                    <g:if test="${userProfile.emailAddress}">
+                        <g:textField name="emailAddress" value="${userProfile.emailAddress}" />
+                    </g:if>
+                    <g:else>
+                          <g:textField name="emailAddress" value="" />
+                    </g:else>
 
-          <label for="checkInDate">Check-In Date</label>
-          <input name="checkInDate" id="checkInDate" type="date" data-role="datebox" data-options='{"mode": "calbox"}' value="${visit.checkInDate}" placeholder="MM-DD-YYYY">
-                 <!--<input name="checkInDate" id="checkInDate" type="text" value="${visit.checkInDate}">-->
+                    <label for="mobileNumber">Mobile Number</label>
+                    <g:if test="${userProfile.mobileNumber}">
+                        <g:textField name="mobileNumber" value="${userProfile.mobileNumber}" />
+                    </g:if>
+                    <g:else>
+                          <g:textField name="mobileNumber" value="" />
+                    </g:else>
 
-          <label for="checkOutDate">Check-Out Date</label>
-          <input name="checkOutDate" id="checkOutDate" type="date" data-role="datebox" data-options='{"mode": "calbox"}' value="${visit.checkOutDate}" placeholder="MM-DD-YYYY">
-          <!--<input name="checkOutDate" id="checkOutDate" type="text" value="${visit.checkOutDate}">-->
+                    <label for="address1">Address Line 1</label>
+                    <g:if test="${userProfile.address1}">
+                        <g:textField name="address1" value="${userProfile.address1}" />
+                    </g:if>
+                    <g:else>
+                          <g:textField name="address1" value="" />
+                    </g:else>
 
-          <label for="confirmationId">Reservation Confirmation</label>
-          <input type="text" name="confirmationId" id="confirmationId" value="${visit.confirmationId}" placeholder="">
+                    <label for="address2">Address Line 2</label>
+                    <g:if test="${userProfile.address2}">
+                        <g:textField name="address2" value="${userProfile.address2}" />
+                    </g:if>
+                    <g:else>
+                          <g:textField name="address2" value="" />
+                    </g:else>
 
-          <label for="isCrtUserProf">Click to Create a User Profile</label>
-          <input type="checkbox" name="isCrtUserProf" id="isCrtUserProf" value="1" placeholder="" data-theme="q">
+                    <label for="city">City</label>
+                    <g:if test="${userProfile.city}">
+                        <g:textField name="city" value="${userProfile.city}" />
+                    </g:if>
+                    <g:else>
+                          <g:textField name="city" value="" />
+                    </g:else>
+<!--
+                      <label for="password" class="ui-input-text">* Password</label>
+                      <input type="password" name="password" id="password" value="" placeholder="">
+-->
+<!--
+                      <label for="confirmPassword" class="ui-input-text">* Confirm Password</label>
+                      <input type="password" name="confirmPassword" id="password-confirm" value="" placeholder="">
+-->
 
-          <input type="hidden" name="emailAddress" id="emailAddress" value="${params.emailAddress}" />
-          <input type="hidden" name="mobileNumber" id="mobileNumber" value="${params.mobileNumber}" />
-          <input type="hidden" name="rewardsProgramId" id="rewardsProgramId" value="${params.rewardsProgramId}" />
-          <input type="hidden" name="chatType" id="chatType" value="${params.chatType}" />
-          <input type="hidden" name="userId" id="userId" value="${params.userId}" />
-          <input type="hidden" name="propertyId" id="propertyId" value="${params.propertyId}" />
-          <!--button>Register My Stay</button-->
-          <g:submitButton name="submitPage" value="Register My Stay" />
-        </div>
-      </g:form>
-      <g:link url="[action:'home',controller:'locationDetails']" class="cta-blue modal-close">Don't want to register?  Sign in as guest </g:link>
+                      <label for="state" class="ui-input-text">State</label>
+                      <select name="state" id="state" data-theme="q" data-shadow="false">
+                      <option value="">Select</option>
+                      <option value="ILLINOIS">ILLINOIS</option>
+                      <option value="NEW YORK">NEW YORK</option>
+                      </select>
+
+                      <label for="country" class="ui-input-text">Country</label>
+                      <select name="country" id="country" data-theme="q" data-shadow="false">
+                      <option value="">Select</option>
+                      <option value="USA">USA</option>
+                      <option value="CANADA">CANADA</option>
+                      </select>
+
+                      <label for="postalCode" class="ui-input-text">Postal Code</label>
+                      <input type="text" name="postalCode" id="postalCode" value="" placeholder="">
+
+                      <label for="password" class="ui-input-text">Password</label>
+                      <input type="password" name="password" id="password" value="" placeholder="">
+
+
+                      <!--button>submit</button-->
+                        <g:submitButton value="submit" name="create"/>
+                    </div>
+                    </g:form>
+        </section>
     </div>
-  <!-- Footer Include <?php include "../components/footer.html" ?>-->
+
+	<!-- Footer Include <?php include "../components/footer.html" ?>-->
     <g:include controller="pageInclude" action="footerinclude" />
 
   </div> <!--! end of #container -->
@@ -142,8 +178,6 @@
   <script src="../assets/js/helper.js"></script>
   <script src="../assets/js/plugins.js"></script>
   <script src="../assets/js/script.js"></script>
-  
- 
   <!-- end scripts-->
 
   <!-- Debugger - remove for production -->
@@ -157,7 +191,6 @@
     g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
     s.parentNode.insertBefore(g,s)}(document,"script"));
   </script>
-
 
 </body>
 </html>

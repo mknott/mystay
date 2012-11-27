@@ -3,19 +3,17 @@
 
       <p>
               <b>Guest:</b> ${myDetails.firstName} ${myDetails.lastName}<br>
-      </p>
-      <p>
               <b>Email:</b> ${myDetails.emailAddress} ${myDetails.emailAddress}<br>
-              <b>Mobile:</b> ${myDetails.mobileNumber} ${myDetails.mobileNumber}<br>
-              <b>Rewards:</b> ${myDetails.rewardsProgramId}
+              <b>Phone:</b> ${myDetails.mobileNumber} ${myDetails.mobileNumber}<br>
+              <b>Reward Program #:</b> ${myDetails.rewardsProgramId}
       </p>
       <p>
-              <b>Reservation Details:</b><br>
               <b>Hotel Name:</b> ${myDetails.hotelName}<br>
-              <b>Room Number:</b> ${myDetails.roomNumber}<br>
+              <b>Confirmation Number:</b> ${myDetails.confirmationId}<br>
+              <b>Additional Reservation Details:</b><br>
+              <b>Room #:</b> ${myDetails.roomNumber}<br>
               <b>Check-in:</b> ${myDetails.checkInDate}<br>
               <b>Check-out:</b> ${myDetails.checkOutDate}<br>
-              <b>Confirmation Number:</b> ${myDetails.confirmationId}
       </p>
       <p>
               <b>MyStay Chats:</b> ${myDetails.myChats}

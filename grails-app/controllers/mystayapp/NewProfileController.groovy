@@ -55,7 +55,7 @@ class NewProfileController {
     def tellus()
     {
         println("in tellus "+params.(MyStayConstants.PROPERTY_ID)+" - "+session.getAttribute("propertyID")+" - "+request.getCookie("propertyId"))  
-        def propertyId = params.(MyStayConstants.PROPERTY_ID) ? params.(MyStayConstants.PROPERTY_ID) : session.getAttribute(MyStayConstants.PROPERTY_ID)
+        def propertyId = params.(MyStayConstants.PROPERTY_ID) ? params.(MyStayConstants.PROPERTY_ID) : (session.getAttribute(MyStayConstants.PROPERTY_ID)? session.getAttribute(MyStayConstants.PROPERTY_ID):request.getCookie("propertyId"))
         if (!propertyId)
         {   //start over
             println("no prop2-bef"+request.getCookie("propertyId"))      
@@ -239,9 +239,17 @@ class NewProfileController {
 
         if( (params.isCrtUserProf) && (params.isCrtUserProf = "Y"))
         {
+            println("create new userProfile")
+            def userProfile = new UserProfile();
+            userProfile.firstName = params.(MyStayConstants.FIRST_NAME);
+            userProfile.lastName = params.(MyStayConstants.LAST_NAME);
+            userProfile.emailAddress = params.(MyStayConstants.EMAIL_ADDRESS);
+            userProfile.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
+            //userProfile.userId = params.userId;
+          
             println("redirect to newProfile")
-            redirect(controller:"newProfile", action:"createProfile")
-             
+         //   redirect(controller:"newProfile", action:"createProfile", )
+            render(view: 'createProfile',model: [visit: visit, params: params, userProfile: userProfile] ) 
         }else{
             params.isCrtUserProf = "N";
             
@@ -367,33 +375,66 @@ class NewProfileController {
         println("1after save")
         if( (params.isCrtUserProf) && (params.isCrtUserProf = "Y"))
         {
+            println("create new userProfile")
+            def userProfile = new UserProfile();
+            userProfile.firstName = params.(MyStayConstants.FIRST_NAME);
+            userProfile.lastName = params.(MyStayConstants.LAST_NAME);
+            userProfile.emailAddress = params.(MyStayConstants.EMAIL_ADDRESS);
+            userProfile.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
+            //userProfile.userId = params.userId;
+          
             println("redirect to new profile")
-            redirect(controller:"newProfile", action:"index")
+//            redirect(controller:"newProfile", action:"index")
+            render(view: 'createProfile',model: [visit: visit, params: params, userProfile: userProfile] ) 
              
         }else{
             println("12-locationDetails")
             params.isCrtUserProf = "N";
             redirect(controller:"locationDetails", action:"index")
-            }     
-        
+            } 
      }
 
 
     def createProfile()
     {
-            println("Create a new User Profile");
+            println("Create a new User Profile"+params);
        
-            def guestInstance = new UserProfile(params)
-            guestInstance.save(flush: true)
-            println("Name: " + guestInstance.firstName);
-            flash.message = message(code: 'default.mtstay.message', args: [guestInstance.firstName])
+            def userProfile = new UserProfile()
+            userProfile.firstName = params.(MyStayConstants.FIRST_NAME);
+            userProfile.lastName = params.(MyStayConstants.LAST_NAME);
+            userProfile.emailAddress = params.(MyStayConstants.EMAIL_ADDRESS);
+            userProfile.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
+            userProfile.password = params.(MyStayConstants.PASSWORD);
+
+            userProfile.save(flush: true)
+
+            if (!userProfile.save()) {
+                userProfile.errors.each {
+                println it
+                }
+            }
+        
+            println("Name: " + userProfile.firstName);
+            println("Email: " + userProfile.emailAddress);
+            flash.message = message(code: 'default.mtstay.message', args: [userProfile.firstName])
             println("MSG: " + flash.message);
 
-            //render(view: 'tellus',model: [guestInstance: guestInstance])
+            int time = 0;
+            time = 1 * 60 * 60 * 24;
 
+            def email = new Cookie(MyStayConstants.EMAIL_ADDRESS, userProfile.emailAddress);
+            email.maxAge = time;
+            email.setPath("/");
+            response.addCookie(email);
+        
+            def mobile = new Cookie(MyStayConstants.MOBILE_NUMBER, userProfile.mobileNumber);
+            mobile.maxAge = time;
+            mobile.setPath("/");
+            response.addCookie(mobile);
+     
+            //render(view: 'tellus',model: [guestInstance: guestInstance])
             redirect(controller:"locationDetails", action:"home")
     }
-
 
 }
 

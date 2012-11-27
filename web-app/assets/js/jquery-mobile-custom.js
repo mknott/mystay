@@ -1,7 +1,9 @@
 
-$(document).bind("mobileinit", function(){
+$(document).bind("mobileinit", function()
+{
   $.extend(  $.mobile , {
     defaultPageTransition: 'fade'
   });
-});
+}
+);
 

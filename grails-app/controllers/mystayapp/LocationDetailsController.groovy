@@ -11,7 +11,6 @@ class LocationDetailsController {
         System.out.println("reached here loc"+params);
         
         println("visitId cookie: "+request.getCookie(MyStayConstants.VISIT_ID))        
-        println("propertyId cookie: "+request.getCookie(MyStayConstants.PROPERTY_ID))
 
         //if cookies are set and match previous id and hotel, then update visit
         if (!params.propertyId && !request.getCookie(MyStayConstants.PROPERTY_ID)) 
@@ -30,17 +29,25 @@ class LocationDetailsController {
         
         def propertyId = request.getCookie(MyStayConstants.PROPERTY_ID)
         def visitId =  request.getCookie(MyStayConstants.VISIT_ID)
-        
         println("all loc2b "+visitId + " - "+propertyId)
+
+        def propertyResult = new Property();
+        propertyResult = Property.findById(propertyId.toInteger() );
+            
+        def propertyImage = propertyResult.propertyImage.toString();
+        println("image retrieve "+propertyImage)
+        def hotelName = propertyResult.hotelName.toString();
+        println("hotelName retrieve "+hotelName)
         
         def modules = Module.withCriteria {
         isNotNull("controller")
         eq("status","ACTIVE")
         createAlias("property","p")
         eq("p.id", propertyId.toLong() )
+        order("displayOrder")
         }
         
-        render( view:"index", model:[menuItemLst:modules])
+        render( view:"index", model:[menuItemLst:modules, property:propertyResult])
 
      }
  
@@ -54,6 +61,7 @@ class LocationDetailsController {
             eq("status","ACTIVE")
             createAlias("property","p")
             eq("p.id", propertyId.toLong() )
+            order("display_order","asc")
         }
 
         render(view: 'index',model:[menuItemLst:modules])

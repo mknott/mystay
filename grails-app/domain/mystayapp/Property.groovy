@@ -10,6 +10,8 @@ class Property {
     String status
     Date activeDate
     Date inactiveDate
+    String propertyImage
+    String propertyBGColor
     
     static constraints = {
      hotelName blank: false, unique:true, size:5..30, nullable: true
@@ -20,6 +22,8 @@ class Property {
      status blank: false, inList: ["ACTIVE","INACTIVE"], nullable: true
      activeDate blank: false, nullable: true
      inactiveDate blank: true, nullable: true
+     propertyImage blank: true, nullable: true
+     propertyBGColor blank: true, nullable: true
     }
     
     //static hasMany = [visit:Visit]

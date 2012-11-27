@@ -40,15 +40,14 @@
 		<!-- more tags for your 'head' to consider h5bp.com/d/head-Tips -->
 
 		<!-- Main Stylesheet -->
-		<link rel="stylesheet" href="../assets/css/reset.css">
+		<link rel="stylesheet" href="assets/css/reset.css">
 
 		<!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
 		<script src="../assets/js/libs/modernizr-2.0.6.min.js"></script>
 
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
 		
-
-		<link rel="stylesheet" href="../assets/css/main.css">
+		<link rel="stylesheet" href="assets/css/main.css">
 	</head>
 
 	<body>
@@ -79,39 +78,36 @@
                	</section> 
                 <!-- /.content -->
 
-                      <section class="chat content gradient clearfix">
+                <section class="chat content gradient clearfix">
 		<!-- COMPONENT: Single Chat Session -->
                  <g:each in="${msglist}" var="item">
                       <g:link class="tile" controller="chatExisting" action="chatExistingIndex" params="[conv_id:item.convID, frmUsr:item.fromUser,toUsr:item.toUser]">
-					<div class="container">
-						<ul>
-							<li class="clearfix">
-								<!-- Badge div should be left out if no new messages -->
-								<div class="badge orange">
-									5
-								</div>
-								<div class="avatar">
-									<img src="../assets/img/fpo_100x100.gif" class="scalable">
-								</div>
-								<div class="username">
-									${item.fromUser}
-								</div>
-								<div class="timestamp">
-									${item.sentDate} in room
-								</div>
-								<div class="message">
-									${item.msgBody}
-								</div>
-							</li>
-						</ul>
-					</div>
+                          <div class="container">
+                            <ul>
+                              <li class="clearfix">
+                                  <!-- Badge div should be left out if no new messages -->
+                                  <div class="badge orange">
+                                          5
+                                  </div>
+                                  <div class="avatar">
+                                          <img src="../assets/img/fpo_100x100.gif" class="scalable">
+                                  </div>
+                                  <div class="username">
+                                          ${item.fromUser}
+                                  </div>
+                                  <div class="timestamp">
+                                          ${item.sentDate} in room
+                                  </div>
+                                  <div class="message">
+                                          ${item.msgBody}
+                                  </div>
+                              </li>
+                            </ul>
+                          </div>
 			</g:link>
                       <!-- /Single Chat Session -->
-                </g:each>
-				
-				
-			</section>
-
+                </g:each>		
+               </section>
 	
 		</div> <!-- /#main -->
 	

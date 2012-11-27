@@ -195,11 +195,18 @@ dd {
  *  Common Header
  */
 header.condensed {
-	background: url("../img/logo_small.png") no-repeat #3896D4;
+	background: #3896D4;
 	background-size: contain;
 	height: 36px;
 }
 
+.target {
+    	background: url("../img/logo_small.png") 0 0 no-repeat;
+        background-size: contain;
+	height: 36px;
+        width: 90px;
+        float: left;
+}
 /* *********************************
  *  Other
  */

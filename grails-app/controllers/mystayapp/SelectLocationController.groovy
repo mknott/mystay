@@ -12,10 +12,14 @@ class SelectLocationController {
     def index() 
     { 
         println("hi")
-        def SelectLocations = Property.list();
+        def SelectLocationsx = Property.list();
         //def propertyId = request.getCookie(MyStayConstants.PROPERTY_ID)
         //def propertyId = params.(MyStayConstants.PROPERTY_ID) ? params.(MyStayConstants.PROPERTY_ID) : session.getAttribute(MyStayConstants.PROPERTY_ID)
 
+        def SelectLocations = Property.withCriteria {
+        eq("status","ACTIVE")
+        }
+        
         render(view: 'index',model:[selectLocationList:SelectLocations])
     }
 }

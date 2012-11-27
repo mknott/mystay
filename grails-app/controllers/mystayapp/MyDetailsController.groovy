@@ -22,7 +22,7 @@ class MyDetailsController {
         def emailAddress = request.getCookie(MyStayConstants.EMAIL_ADDRESS);
         def mobileNumber = request.getCookie(MyStayConstants.MOBILE_NUMBER);
         def rewardsProgramId = request.getCookie(MyStayConstants.REWARDS_PROGRAM_ID);
-     
+    println("email"+ emailAddress) 
         def myDetails = new Visit();             
         
         myDetails.firstName = firstName;
@@ -33,6 +33,8 @@ class MyDetailsController {
         myDetails.hotelName = hotelName;
         myDetails.confirmationId = confirmationId;
         myDetails.myChats = myChats;
+        myDetails.emailAddress = emailAddress;
+        myDetails.mobileNumber = mobileNumber;
         
         render(view: 'mydetails', model: [myDetails: myDetails])
     }
