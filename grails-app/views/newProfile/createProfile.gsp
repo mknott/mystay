@@ -43,12 +43,15 @@
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
   <script src="../assets/js/libs/modernizr-2.0.6.min.js"></script>
 
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
-  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+<!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />-->
+  <link rel="stylesheet" href="assets/css/jquery.mobile-1.1.0.min.css" />
+<!--  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>-->
+  <script src="assets/js/jquery-1.7.1.min.js"></script>
+<!--  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>-->
+  <script src="assets/js/jquery.mobile-1.1.0.min.js"></script>
 
-  <link rel="stylesheet" href="../assets/css/jquery-mobile-datebox.css">
-  <script src="../assets/js/jquery-mobile-datebox.js"></script>
+  <link rel="stylesheet" href="assets/css/jquery-mobile-datebox.css">
+  <script src="assets/js/jquery-mobile-datebox.js"></script>
 
   <link rel="stylesheet" href="../assets/css/main.css">
 </head>
@@ -66,7 +69,7 @@
 
       <div class="modal-title">Tell Us About Your Stay</div>
                                
-      <g:form url="[action:'index',controller:'newProfile']" method="post">
+      <g:form url="[action:'tellus',controller:'newProfile']" method="post" >
         <div align="center" style="padding: 0px 20px 0px 10px">
          <!-- Hello <g:cookie name="visitId" /> and ${visit.hotelName}-->
           <label for="hotelNameDisplay">Hotel Name</label>
@@ -98,22 +101,25 @@
           <input type="text" name="roomNumber" id="roomNumber" value="${visit.roomNumber}" placeholder="">
 
           <label for="checkInDate">Check-In Date</label>
-          <input name="checkInDate" id="checkInDate" type="date" data-role="datebox" data-options='{"mode": "calbox"}' value="${visit.checkInDate}">
+          <input name="checkInDate" id="checkInDate" type="date" data-role="datebox" data-options='{"mode": "calbox"}' value="${visit.checkInDate}" placeholder="MM-DD-YYYY">
                  <!--<input name="checkInDate" id="checkInDate" type="text" value="${visit.checkInDate}">-->
 
           <label for="checkOutDate">Check-Out Date</label>
-          <input name="checkOutDate" id="checkOutDate" type="date" data-role="datebox" data-options='{"mode": "calbox"}' value="${visit.checkOutDate}">
+          <input name="checkOutDate" id="checkOutDate" type="date" data-role="datebox" data-options='{"mode": "calbox"}' value="${visit.checkOutDate}" placeholder="MM-DD-YYYY">
           <!--<input name="checkOutDate" id="checkOutDate" type="text" value="${visit.checkOutDate}">-->
 
           <label for="confirmationId">Reservation Confirmation</label>
-          <input type="text" name="confirmationId" id="confirmationId" value="" placeholder="">
+          <input type="text" name="confirmationId" id="confirmationId" value="${visit.confirmationId}" placeholder="">
 
           <label for="isCrtUserProf">Click to Create a User Profile</label>
           <input type="checkbox" name="isCrtUserProf" id="isCrtUserProf" value="1" placeholder="" data-theme="q">
 
+          <input type="hidden" name="emailAddress" id="emailAddress" value="${params.emailAddress}" />
+          <input type="hidden" name="mobileNumber" id="mobileNumber" value="${params.mobileNumber}" />
+          <input type="hidden" name="rewardsProgramId" id="rewardsProgramId" value="${params.rewardsProgramId}" />
           <input type="hidden" name="chatType" id="chatType" value="${params.chatType}" />
           <input type="hidden" name="userId" id="userId" value="${params.userId}" />
-          <input type="hidden" name="propertyId" id="propertyId" value="${property.id}" />
+          <input type="hidden" name="propertyId" id="propertyId" value="${params.propertyId}" />
           <!--button>Register My Stay</button-->
           <g:submitButton name="submitPage" value="Register My Stay" />
         </div>

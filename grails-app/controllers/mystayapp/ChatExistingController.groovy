@@ -41,7 +41,6 @@ class ChatExistingController {
       def visitId = request.getCookie(MyStayConstants.VISIT_ID);
       def username = request.getCookie(MyStayConstants.USER_ID);
       
-      
       boolean isUserOnline = false;
       int numberOfActiveUser = 0;
 
@@ -165,11 +164,11 @@ class ChatExistingController {
 
 
 
-    def loagMessagesFromSession(){
+    def loadMessagesFromSession(){
       //new
       def session = RequestContextHolder.currentRequestAttributes().getSession()
       JSONArray msgLst = (JSONArray)session.getAttribute(MyStayConstants.MY_MESSAGE_LIST);
-      //println "loagMessagesFromSession: msgLst : " + msgLst;
+      //println "loadMessagesFromSession: msgLst : " + msgLst;
       render(msgLst);
     }
 
