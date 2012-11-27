@@ -7,11 +7,11 @@ class UrlMappings {
             }
 	}
         "500"(view:'/error')
-        "/"(controller: "selectLocation")
+               "/"(controller: "selectLocation")
         //"/"(view:"/SelectLocation/index")
-        
-    "/locationDetails/home" {
-        }
-
+"/locationDetails" {
+controller = "locationDetails"
+action = "index"
+}
     }
 }
