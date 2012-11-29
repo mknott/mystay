@@ -38,19 +38,19 @@
   <!-- more tags for your 'head' to consider h5bp.com/d/head-Tips -->
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="/MyStayApp/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
 
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
-  <script src="/MyStayApp/assets/js/libs/modernizr-2.0.6.min.js"></script>
+  <script src="/assets/js/libs/modernizr-2.0.6.min.js"></script>
 
   <!--link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />-->
-  <link rel="stylesheet" href="/MyStayApp/assets/css/jquery.mobile-1.1.0.min.css" />
-  <script src="/MyStayApp/assets/js/jquery-1.7.1.min.js"></script>
-  <script src="/MyStayApp/assets/js/jquery-mobile-custom.js"></script>
+  <link rel="stylesheet" href="/assets/css/jquery.mobile-1.1.0.min.css" />
+  <script src="/assets/js/jquery-1.7.1.min.js"></script>
+  <script src="/assets/js/jquery-mobile-custom.js"></script>
   <!--script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>-->
-<script src="/MyStayApp/assets/js/jquery.mobile-1.1.0.min.js"></script>
+<script src="/assets/js/jquery.mobile-1.1.0.min.js"></script>
   
-  <link rel="stylesheet" href="/MyStayApp/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
 
 </head>
 
@@ -72,11 +72,11 @@
                           <div id="scroller" class="scroller">
                               <ul class="scrollItems hidden">
                                   <li class="current">
-                                      <img src="/MyStayApp/assets/img/myStay_iPhone_mobileweb_homepage_02.jpg" alt="" />
+                                      <img src="/assets/img/myStay_iPhone_mobileweb_homepage_02.jpg" alt="" />
                                       <div class="content">
                                           <g:link  class="bubble" controller="locationDetails" action="index">
                                             <div class="bubble-icon">
-                                               <img src="/MyStayApp/assets/img/icon_mobile.png">
+                                               <img src="/assets/img/icon_mobile.png">
                                             </div>
                                             <div class="bubble-title">relax@</div>
                                             <div class="bubble-content">Order a drink while you’re relaxing by the pool</div>
@@ -84,11 +84,11 @@
                                       </div>
                                   </li>
                                   <li>
-                                      <img src="/MyStayApp/assets/img/myStay_iPhone_mobileweb_homepage_03_02.jpg" alt="" />
+                                      <img src="/assets/img/myStay_iPhone_mobileweb_homepage_03_02.jpg" alt="" />
                                       <div class="content">
-                                          <g:link  class="bubble" controller="locationDetails" action="index">
+                                          <g:link class="bubble" controller="locationDetails" action="index">
                                             <div class="bubble-icon">
-                                              <img src="/MyStayApp/assets/img/icon_service.png">
+                                              <img src="/assets/img/icon_service.png">
                                             </div>
                                             <div class="bubble-title">quick@</div>
                                             <div class="bubble-content">Order a quick bite to eat before my next meeting</div>
@@ -96,11 +96,11 @@
                                       </div>
                                   </li>
                                   <li>
-                                      <img src="/MyStayApp/assets/img/myStay_iPhone_mobileweb_homepage_05_02.jpg" alt="" />
+                                      <img src="/assets/img/myStay_iPhone_mobileweb_homepage_05_02.jpg" alt="" />
                                       <div class="content">
                                           <g:link  class="bubble" controller="locationDetails" action="index">
                                             <div class="bubble-icon">
-                                              <img src="/MyStayApp/assets/img/icon_relax.png">
+                                              <img src="/assets/img/icon_relax.png">
                                             </div>
                                             <div class="bubble-title">unwind@</div>
                                             <div class="bubble-content">Schedule a spa appointment from the comfort of your room</div>
@@ -108,11 +108,11 @@
                                       </div>
                                   </li>
                                   <li>
-                                      <img src="/MyStayApp/assets/img/myStay_iPhone_mobileweb_homepage_06_02.jpg" alt="" />
+                                      <img src="/assets/img/myStay_iPhone_mobileweb_homepage_06_02.jpg" alt="" />
                                       <div class="content">
                                           <g:link  class="bubble" controller="locationDetails" action="index">
                                             <div class="bubble-icon">
-                                              <img src="/MyStayApp/assets/img/icon_dine.png">
+                                              <img src="/assets/img/icon_dine.png">
                                             </div>
                                             <div class="bubble-title">dine@</div>
                                             <div class="bubble-content">Make dinner reservations while you are on the slopes</div>
@@ -164,7 +164,7 @@
 
     <footer>
         <section class="social">
-                share this @ <img src="/MyStayApp/assets/img/fpo_social.png" width="98">
+                share this @ <img src="/assets/img/fpo_social.png" width="98">
         </section>
         <section class="links centered clearfix">
             <ul>
@@ -185,9 +185,9 @@
   <script>window.jQuery || document.write('<script src="/MyStayApp/assets/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 
   <!-- scripts concatenated and minified via ant build script-->
-  <script src="/MyStayApp/assets/js/helper.js"></script>
-  <script src="/MyStayApp/assets/js/plugins.js"></script>
-  <script src="/MyStayApp/assets/js/script.js"></script>
+  <script src="/assets/js/helper.js"></script>
+  <script src="/assets/js/plugins.js"></script>
+  <script src="/assets/js/script.js"></script>
   <!-- end scripts-->
 
   <!-- Debugger - remove for production -->

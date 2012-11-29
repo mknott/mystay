@@ -72,12 +72,14 @@ grails.hibernate.cache.queries = true
 environments {
     development {
         grails.logging.jul.usebridge = true
+ //       grails.serverURL = "http://localhost:8080/MyStayApp"
     }
     production {
         grails.logging.jul.usebridge = false
-        // TODO: grails.serverURL = "http://www.changeme.com"
+ //       grails.serverURL = "http://localhost:8080/MyStayApp"
     }
 }
+grails.app.context = "/"
 
 // log4j configuration
 log4j = {

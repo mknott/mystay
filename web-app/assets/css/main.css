@@ -391,6 +391,7 @@ footer .social {
     font-weight: bold;
     margin-bottom: 10px;
     text-align: center;
+    padding-top: 3px;
 }
 .links {
     overflow-x: hidden;
@@ -673,6 +674,8 @@ header .links *, .ui-body-c header .ui-link:visited {
 }
 .bubble-content {
     font-size: 0.7em;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 .bubble-icon {
     height: 40px;
@@ -746,6 +749,7 @@ h1.pagetitle.center {
     position: relative;
     text-align: center;
     width: 24%;
+    height:80px;
 }
 
 .grid4 .caption {

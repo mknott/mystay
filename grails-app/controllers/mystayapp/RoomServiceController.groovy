@@ -3,7 +3,7 @@ package mystayapp
 class RoomServiceController {
 
     def index() {
-        
-        render(view: 'index')
+        println("params: "+params)
+        render(view: 'index',model: [ params: params])
     }
 }

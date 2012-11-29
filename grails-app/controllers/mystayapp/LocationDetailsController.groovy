@@ -26,14 +26,17 @@ class LocationDetailsController {
                 println("match loc1 - createNew")
                 redirect(controller:"newProfile", action:"createVisit", params: params)
             }
-        
+        println("before all loc2b ")
+
         def propertyId = request.getCookie(MyStayConstants.PROPERTY_ID)
         def visitId =  request.getCookie(MyStayConstants.VISIT_ID)
         println("all loc2b "+visitId + " - "+propertyId)
 
         def propertyResult = new Property();
         propertyResult = Property.findById(propertyId.toInteger() );
-            
+           
+        println("propertid" + propertyId);
+        
         def propertyImage = propertyResult.propertyImage.toString();
         println("image retrieve "+propertyImage)
         def hotelName = propertyResult.hotelName.toString();
@@ -53,17 +56,29 @@ class LocationDetailsController {
  
 
      def home() {
-        println("7")
+        println("locationdetails.home")
+
         def propertyId = session.getAttribute("propertyId") //params.(MyStayConstants.PROPERTY_ID);
+        println("prop: "+propertyId)
         
+        def propertyResult = new Property();
+        propertyResult = Property.findById(propertyId.toInteger() );
+           
+        println("propertyid" + propertyId);
+        
+        def propertyImage = propertyResult.propertyImage.toString();
+        println("image retrieve "+propertyImage)
+        def hotelName = propertyResult.hotelName.toString();
+        println("hotelName retrieve "+hotelName)
+
         def modules = Module.withCriteria {
             isNotNull("controller")
             eq("status","ACTIVE")
             createAlias("property","p")
             eq("p.id", propertyId.toLong() )
-            order("display_order","asc")
+            order("displayOrder","asc")
         }
 
-        render(view: 'index',model:[menuItemLst:modules])
+        render(view: 'index',model:[menuItemLst:modules, property:propertyResult])
      }
 }
