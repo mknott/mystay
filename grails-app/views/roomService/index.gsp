@@ -38,19 +38,19 @@
   <!-- more tags for your 'head' to consider h5bp.com/d/head-Tips -->
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
 
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
-  <script src="../assets/js/libs/modernizr-2.0.6.min.js"></script>
+  <script src="/assets/js/libs/modernizr-2.0.6.min.js"></script>
 
   <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />-->
-  <link rel="stylesheet" href="assets/css/jquery.mobile-1.1.0.min.css" />
+  <link rel="stylesheet" href="/assets/css/jquery.mobile-1.1.0.min.css" />
   <!--<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>-->
-  <script src="assets/js/jquery-1.7.1.min.js"></script>
+  <script src="/assets/js/jquery-1.7.1.min.js"></script>
   <!--<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>-->
-  <script src="assets/js/jquery.mobile-1.1.0.min.js"></script>
+  <script src="/assets/js/jquery.mobile-1.1.0.min.js"></script>
 
-  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 
 <body>
@@ -74,18 +74,18 @@
 -->
       <g:if test="${params.propertyImage}">
         <section class="brand" style="background-color: ${params.propertyBGColor};">
-            <div class="img" ><img src="../assets/img/${params.propertyImage}"></div>
+            <div class="img" ><img src="/assets/img/${params.propertyImage}"></div>
       </g:if>
       <g:else>
         <section class="brand">
-            <div class="img" ><img src="../assets/img/fpo_640x288.gif"></div>
+            <div class="img" ><img src="/assets/img/fpo_640x288.gif"></div>
       </g:else>
         </section>
 
     	<section class="content gradient clearfix">
                 <div class="chat-icon">
                           <g:link controller="chatNew" action="index">
-                                <img class="scalable" src="../assets/img/icon_chatnow.png">
+                                <img class="scalable" src="/assets/img/icon_chatnow.png">
                           </g:link>
                 </div>
 
@@ -103,19 +103,19 @@
                             <div class="h3-sub">Hours 6:00am - 11:00am</div>
                     </h3>
                     <ul class="rows alternating">
-                            <li class="modal clearfix" href="../staticpages/modal-additem.html">
+                            <li class="modal clearfix" href="/staticpages/modal-additem.html">
                                     <div class="label menu-item">Waffles</div>
                                     <div class="info menu-item-price">$9.99</div>
                             </li>
-                            <li class="modal clearfix" href="../staticpages/modal-additem.html">
+                            <li class="modal clearfix" href="/staticpages/modal-additem.html">
                                     <div class="label menu-item">Eggs Benedict</div>
                                     <div class="info menu-item-price">$10.99</div>
                             </li>
-                            <li class="modal clearfix" href="../staticpages/modal-additem.html">
+                            <li class="modal clearfix" href="/staticpages/modal-additem.html">
                                     <div class="label menu-item">Coffee</div>
                                     <div class="info menu-item-price">$3.99</div>
                             </li>
-                            <li class="modal clearfix" href="../staticpages/modal-additem.html">
+                            <li class="modal clearfix" href="/staticpages/modal-additem.html">
                                     <div class="label menu-item">Hot Oatmeal</div>
                                     <div class="info menu-item-price">$5.99</div>
                             </li>
@@ -127,15 +127,15 @@
                             <div class="h3-sub">Hours 11:00am - 4:00pm</div>
                     </h3>
                     <ul class="rows alternating">
-                            <li class="modal clearfix" href="../staticpages/modal-additem.html">
+                            <li class="modal clearfix" href="/staticpages/modal-additem.html">
                                     <div class="label menu-item">Pizza</div>
                                     <div class="info menu-item-price">$13.99</div>
                             </li>
-                            <li class="modal clearfix" href="../staticpages/modal-additem.html">
+                            <li class="modal clearfix" href="/staticpages/modal-additem.html">
                                     <div class="label menu-item">Hamburger</div>
                                     <div class="info menu-item-price">$9.99</div>
                             </li>
-                            <li class="modal clearfix" href="../staticpages/modal-additem.html">
+                            <li class="modal clearfix" href="/staticpages/modal-additem.html">
                                     <div class="label menu-item">Coke Products</div>
                                     <div class="info menu-item-price">$3.99</div>
                             </li>
@@ -147,15 +147,15 @@
                             <div class="h3-sub">Hours 4:00pm - 11:00pm</div>
                     </h3>
                     <ul class="rows alternating">
-                            <li class="modal clearfix" href="../staticpages/modal-additem.html">
+                            <li class="modal clearfix" href="/staticpages/modal-additem.html">
                                     <div class="label menu-item">Steak</div>
                                     <div class="info menu-item-price">$20.99</div>
                             </li>
-                            <li class="modal clearfix" href="../staticpages/modal-additem.html">
+                            <li class="modal clearfix" href="/staticpages/modal-additem.html">
                                     <div class="label menu-item">Sushi</div>
                                     <div class="info menu-item-price">$19.99</div>
                             </li>
-                            <li class="modal clearfix" href="../staticpages/modal-additem.html">
+                            <li class="modal clearfix" href="/staticpages/modal-additem.html">
                                     <div class="label menu-item">Bottle of Red Wine</div>
                                     <div class="info menu-item-price">$35.99</div>
                             </li>
@@ -167,15 +167,15 @@
                             <div class="h3-sub">Available 24 Hours</div>
                     </h3>
                     <ul class="rows alternating">
-                            <li class="modal clearfix" href="../staticpages/modal-additem.html">
+                            <li class="modal clearfix" href="/staticpages/modal-additem.html">
                                     <div class="label menu-item">Ice Cream</div>
                                     <div class="info menu-item-price">$5.99</div>
                             </li>
-                            <li class="modal clearfix" href="../staticpages/modal-additem.html">
+                            <li class="modal clearfix" href="/staticpages/modal-additem.html">
                                     <div class="label menu-item">Pizza</div>
                                     <div class="info menu-item-price">$12.99</div>
                             </li>
-                            <li class="modal clearfix" href="../staticpages/modal-additem.html">
+                            <li class="modal clearfix" href="/staticpages/modal-additem.html">
                                     <div class="label menu-item">Cookies</div>
                                     <div class="info menu-item-price">$4.99</div>
                             </li>
@@ -194,12 +194,12 @@
 
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
   <!--script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script-->
-  <script>window.jQuery || document.write('<script src="assets/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+  <script>window.jQuery || document.write('<script src="/assets/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 
   <!-- scripts concatenated and minified via ant build script-->
-  <script src="../assets/js/helper.js"></script>
-  <script src="../assets/js/plugins.js"></script>
-  <script src="../assets/js/script.js"></script>
+  <script src="/assets/js/helper.js"></script>
+  <script src="/assets/js/plugins.js"></script>
+  <script src="/assets/js/script.js"></script>
   <!-- end scripts-->
 
   <!-- Debugger - remove for production -->

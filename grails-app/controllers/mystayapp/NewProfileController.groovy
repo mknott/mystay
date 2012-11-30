@@ -377,6 +377,10 @@ class NewProfileController {
           
             println("redirect to update profile")
 //            redirect(controller:"newProfile", action:"index")
+println("1 "+visit)
+println("2 "+params)
+println("3 "+userProfile)
+
             render(view: 'updateProfile',model: [visit: visit, params: params, userProfile: userProfile] ) 
              
         }else{
@@ -390,26 +394,20 @@ class NewProfileController {
     def createProfile()
     {
             println("Create a new User Profile"+params);
-       
             def userProfile = new UserProfile()
             userProfile.firstName = params.(MyStayConstants.FIRST_NAME);
             userProfile.lastName = params.(MyStayConstants.LAST_NAME);
             userProfile.emailAddress = params.(MyStayConstants.EMAIL_ADDRESS);
             userProfile.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
             userProfile.password = params.(MyStayConstants.PASSWORD);
-
             userProfile.save(flush: true)
-
             if (!userProfile.save()) {
                 userProfile.errors.each {
-                println it
-                }
+                println it }
             }
         
             println("Name: " + userProfile.firstName);
-            println("Email: " + userProfile.emailAddress);
-            flash.message = message(code: 'default.mtstay.message', args: [userProfile.firstName])
-            println("MSG: " + flash.message);
+            flash.message = message(code: 'default.mystay.message', args: [userProfile.firstName])
 
             int time = 0;
             time = 1 * 60 * 60 * 24;
@@ -424,42 +422,32 @@ class NewProfileController {
             mobile.setPath("/");
             response.addCookie(mobile);
      
-            //render(view: 'tellus',model: [guestInstance: guestInstance])
             redirect(controller:"locationDetails", action:"home")
     }
 
     def updateProfile()
     {
-            println("Update User Profile"+params);
-    
-        def userId = session.getAttribute(MyStayConstants.USER_ID) ? session.getAttribute(MyStayConstants.USER_ID) : params.(MyStayConstants.USER_ID) 
-        if(!userId)
-        {
-            redirect(controller:"selectLocation")
-        }
-        println("updateUserProfile "+userId)
-        def userProfile = UserProfile.findById(userId.toInteger() )
-        println("userprofile "+userProfile)
-
-            //def userProfile = new UserProfile()
+            println("Update User Profile");
+            def userId = session.getAttribute(MyStayConstants.USER_ID) ? session.getAttribute(MyStayConstants.USER_ID) : params.(MyStayConstants.USER_ID) 
+            if(!userId)
+            {
+                redirect(controller:"selectLocation")
+            }
+            println("updateUserProfile "+userId)
+            def userProfile = UserProfile.findById(userId.toInteger() )
             userProfile.firstName = params.(MyStayConstants.FIRST_NAME);
             userProfile.lastName = params.(MyStayConstants.LAST_NAME);
             userProfile.emailAddress = params.(MyStayConstants.EMAIL_ADDRESS);
             userProfile.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
             userProfile.password = params.(MyStayConstants.PASSWORD);
-
             userProfile.save(flush: true)
-
             if (!userProfile.save()) {
                 userProfile.errors.each {
-                println it
-                }
+                println it }
             }
         
             println("Name: " + userProfile.firstName);
-            println("Email: " + userProfile.emailAddress);
             flash.message = message(code: 'default.mtstay.message', args: [userProfile.firstName])
-            println("MSG: " + flash.message);
 
             int time = 0;
             time = 1 * 60 * 60 * 24;
@@ -474,7 +462,6 @@ class NewProfileController {
             mobile.setPath("/");
             response.addCookie(mobile);
      
-            //render(view: 'tellus',model: [guestInstance: guestInstance])
             redirect(controller:"locationDetails", action:"home")
     }
 

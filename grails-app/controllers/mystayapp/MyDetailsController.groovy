@@ -9,7 +9,7 @@ class MyDetailsController {
 
     def index() {
     
- //       System.out.println("MyDetailsController..");
+        System.out.println("MyDetailsController..");
         
         def firstName = request.getCookie(MyStayConstants.FIRST_NAME);
         def lastName = request.getCookie(MyStayConstants.LAST_NAME);
@@ -22,7 +22,8 @@ class MyDetailsController {
         def emailAddress = request.getCookie(MyStayConstants.EMAIL_ADDRESS);
         def mobileNumber = request.getCookie(MyStayConstants.MOBILE_NUMBER);
         def rewardsProgramId = request.getCookie(MyStayConstants.REWARDS_PROGRAM_ID);
-    println("email"+ emailAddress) 
+    println("fname "+ firstName) 
+    println("email "+ emailAddress) 
         def myDetails = new Visit();             
         
         myDetails.firstName = firstName;

@@ -11,15 +11,22 @@ class SelectLocationController {
     
     def index() 
     { 
-        println("hi")
-        def SelectLocationsx = Property.list();
-        //def propertyId = request.getCookie(MyStayConstants.PROPERTY_ID)
-        //def propertyId = params.(MyStayConstants.PROPERTY_ID) ? params.(MyStayConstants.PROPERTY_ID) : session.getAttribute(MyStayConstants.PROPERTY_ID)
-
-        def SelectLocations = Property.withCriteria {
-        eq("status","ACTIVE")
+        println("home")
+        //if cookies are set and then redirect to locationDetails unless edit flag sent
+        if (!request.getCookie(MyStayConstants.PROPERTY_ID) ||
+        (params.editLocation && params.editLocation=="Y")
+        )
+        {
+            println("no cookie set "+ request.getCookie(MyStayConstants.PROPERTY_ID) + "param" + params)
+            def SelectLocations = Property.withCriteria {
+            eq("status","ACTIVE")
+            }
+            render(view: 'index',model:[selectLocationList:SelectLocations])
         }
-        
-        render(view: 'index',model:[selectLocationList:SelectLocations])
+        else
+        { 
+            println("cookie set "+params.propertyId)
+            redirect(controller:"locationDetails")
+        }
     }
 }
