@@ -50,7 +50,7 @@ class LocationDetailsController {
         order("displayOrder")
         }
         
-        render( view:"index", model:[menuItemLst:modules, property:propertyResult])
+        render( view:"index", model:[moduleList:modules, property:propertyResult])
 
      }
  
@@ -79,6 +79,6 @@ class LocationDetailsController {
             order("displayOrder","asc")
         }
 
-        render(view: 'index',model:[menuItemLst:modules, property:propertyResult])
+        render(view: 'index',model:[moduleList:modules, property:propertyResult])
      }
 }
