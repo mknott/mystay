@@ -1,6 +1,6 @@
     <footer>
 		<section class="social modal" href="modal-share.html">
-			share this @ <img src="../assets/img/fpo_social.png" width="98">
+			share this @ <img src="/assets/img/fpo_social.png" width="98">
 		</section>
 		<section class="links centered clearfix">
 			<ul>

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * MBP - Mobile boilerplate helper functions
  */
 (function(document){

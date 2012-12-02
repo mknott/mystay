@@ -35,10 +35,9 @@ public static final String VISIT_ID="visitId";
 public static final String PROPERTY_ID="propertyId";
 public static final String MY_CHATS="myChats";
 public static final String REWARDS_PROGRAM_ID="rewardsProgramId";
-        
-public static final String USER_ID="USER_ID";
-
-public static final String PASSWORD="PASSWORD";
+public static final String USER_ID="userId";
+public static final String USER_PROFILE_ID="userProfileId";
+public static final String PASSWORD="password";
 
 public static final String MSG_LIST="MSG_LIST";
 

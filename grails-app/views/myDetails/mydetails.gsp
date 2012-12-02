@@ -24,8 +24,5 @@
       <p>
               <g:link url="[action:'index',controller:'newProfile']" class="cta-blue ui-link modal-close"> Update my information </g:link>
       </p>
-      <!-- <p>
-              <a href="" class="cta-blue modal-close">close</a>
-      </p>-->
   </div>
 </div>

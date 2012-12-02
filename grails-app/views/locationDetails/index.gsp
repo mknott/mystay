@@ -17,13 +17,13 @@
 
   <!-- Home screen icon  Mathias Bynens mathiasbynens.be/notes/touch-icons -->
   <!-- For iPhone 4 with high-resolution Retina display: -->
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/img/h/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/h/apple-touch-icon.png">
   <!-- For first-generation iPad: -->
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/img/m/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/m/apple-touch-icon.png">
   <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-  <link rel="apple-touch-icon-precomposed" href="assets/img/l/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="/assets/img/l/apple-touch-icon-precomposed.png">
   <!-- For nokia devices: -->
-  <link rel="shortcut icon" href="assets/img/l/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/img/l/apple-touch-icon.png">
 
   <!-- iOS web app, delete if not needed. https://github.com/h5bp/mobile-boilerplate/issues/94 -->
   <!-- <meta name="apple-mobile-web-app-capable" content="yes">
@@ -47,7 +47,7 @@
   <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />-->
   <link rel="stylesheet" href="/assets/css/jquery.mobile-1.1.0.min.css" />
   <!--<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>-->
-  <script src="/assets/js/jquery-1.7.1.min.js"></script>
+  <script src="/assets/js/libs/jquery-1.7.1.min.js"></script>
 <!--  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>-->
   <script src="/assets/js/jquery.mobile-1.1.0.min.js"></script>
 
@@ -89,7 +89,7 @@
           <h1 class="pagetitle center">Available Services</h1>
             <section class="grid4 clearfix">
                     <!-- Tile Template -->
-                <g:each in="${menuItemLst}" var="item">
+                <g:each in="${moduleList}" var="item">
                   <g:link class="tile" controller="${item.controller}" action="${item.action}" 
                           params="[chat_input:item.message, chat_topic:item.name]">
                           <img class="scalable" src="${item.imageSrc}">

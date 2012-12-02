@@ -707,7 +707,7 @@ header .links *, .ui-body-c header .ui-link:visited {
 }
 #breadcrumb.links li:after {
     color: #666666;
-    content: " »";
+    content: " Â»";
 }
 #breadcrumb.links li:last-child {
     color: #666666;

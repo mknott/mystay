@@ -15,6 +15,7 @@ footer .social img {
     background-clip: border-box;
     background-color: transparent;
     background-image: linear-gradient(to bottom, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+    background-image: -webkit-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0) 50%);
     background-origin: padding-box;
     background-position: 0 0;
     background-repeat: repeat;
@@ -29,6 +30,10 @@ footer .social img {
     background-clip: border-box;
     background-color: transparent;
     background-image: linear-gradient(to bottom, #47B5E0 0%, #3A95D9 100%);
+    background-image: -o-gradient(top, #47B5E0, #3A95D9 50%);
+    background-image: -moz-gradient(top, #47B5E0, #3A95D9 50%);
+    background-image: -webkit-gradient(top, #47B5E0, #3A95D9 50%);
+    background: -webkit-linear-gradient(#47B5E0, #3A95D9);
     background-origin: padding-box;
     background-position: 0 0;
     background-repeat: repeat;
@@ -376,6 +381,7 @@ footer {
     background-clip: border-box;
     background-color: transparent;
     background-image: linear-gradient(to bottom, #E6E6E6 0%, #E6E6E6 68%, #C7C7C7 100%);
+    background-image: -webkit-linear-gradient(top, #E6E6E6 0%, #E6E6E6 68%, #C7C7C7 100%);
     background-origin: padding-box;
     background-position: 0 0;
     background-repeat: repeat;
@@ -454,6 +460,7 @@ header .links *, .ui-body-c header .ui-link:visited {
     background-clip: border-box;
     background-color: transparent;
     background-image: linear-gradient(to bottom, #E9E9E9 0%, rgba(233, 233, 233, 0) 50px);
+    background-image: -webkit-linear-gradient(top, #E9E9E9 0%, rgba(233, 233, 233, 0) 50px);
     background-origin: padding-box;
     background-position: 0 0;
     background-repeat: repeat;

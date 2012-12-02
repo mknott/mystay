@@ -16,13 +16,13 @@
 
   <!-- Home screen icon  Mathias Bynens mathiasbynens.be/notes/touch-icons -->
   <!-- For iPhone 4 with high-resolution Retina display: -->
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/img/h/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/h/apple-touch-icon.png">
   <!-- For first-generation iPad: -->
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/img/m/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/m/apple-touch-icon.png">
   <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-  <link rel="apple-touch-icon-precomposed" href="../assets/img/l/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="/assets/img/l/apple-touch-icon-precomposed.png">
   <!-- For nokia devices: -->
-  <link rel="shortcut icon" href="../assets/img/l/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/img/l/apple-touch-icon.png">
 
   <!-- iOS web app, delete if not needed. https://github.com/h5bp/mobile-boilerplate/issues/94 -->
   <!-- <meta name="apple-mobile-web-app-capable" content="yes">
@@ -45,18 +45,13 @@
 
 <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />-->
   <link rel="stylesheet" href="/assets/css/jquery.mobile-1.1.0.min.css" />
-<!--  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>-->
-  <script src="/assets/js/jquery-1.7.1.min.js"></script>
-<!--  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>-->
-  <script src="/assets/js/jquery.mobile-1.1.0.min.js"></script>
-
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 
 <body>
   <div id="container" data-role="page" data-template="chat">
 
-	<!-- Header Include<?php include "../components/header-condensed.html" ?> -->
+  <!-- Header Include<?php include "../components/header-condensed.html" ?> -->
     
     <g:include controller="pageInclude" action="headerinclude" />
 
@@ -67,102 +62,57 @@
         </section>
 
         <section class="content gradient clearfix">
-                <g:form action="createProfile" >
-                    <div align="center" style="padding: 0px 20px 0px 10px">
-                      
-                    <label for="firstName">First Name *</label>
-                    <g:if test="${visit.firstName}">
-                        <g:textField name="firstName" value="${visit.firstName}" />
-                    </g:if>
-                    <g:else>
-                          <g:textField name="firstName" value="" />
-                    </g:else>
+          <g:form action="createProfile" >
+          <div align="center" style="padding: 0px 20px 0px 10px">      
+              <label for="lastName">First Name *</label>
+              <g:textField name="firstName" value="${visit?.firstName}" />
 
-                    <label for="lastName">Last Name *</label>
-                    <g:if test="${visit.lastName}">
-                        <g:textField name="lastName" value="${visit.lastName}" />
-                    </g:if>
-                    <g:else>
-                          <g:textField name="lastName" value="" />
-                    </g:else>
+              <label for="lastName">Last Name *</label>
+              <g:textField name="lastName" value="${visit?.lastName}" />
 
-                    <label for="emailAddress">Email Address *</label>
-                    <g:if test="${userProfile.emailAddress}">
-                        <g:textField name="emailAddress" value="${userProfile.emailAddress}" />
-                    </g:if>
-                    <g:else>
-                          <g:textField name="emailAddress" value="" />
-                    </g:else>
+              <label for="emailAddress">Email Address *</label>
+              <g:textField name="emailAddress" value="${userProfile?.emailAddress}" />
 
-                    <label for="mobileNumber">Mobile Number</label>
-                    <g:if test="${userProfile.mobileNumber}">
-                        <g:textField name="mobileNumber" value="${userProfile.mobileNumber}" />
-                    </g:if>
-                    <g:else>
-                          <g:textField name="mobileNumber" value="" />
-                    </g:else>
+              <label for="mobileNumber">Mobile Number</label>
+              <g:textField name="mobileNumber" value="${userProfile?.mobileNumber}" />
 
-                    <label for="address1">Address Line 1</label>
-                    <g:if test="${userProfile.address1}">
-                        <g:textField name="address1" value="${userProfile.address1}" />
-                    </g:if>
-                    <g:else>
-                          <g:textField name="address1" value="" />
-                    </g:else>
+              <label for="address1">Address Line 1</label>
+              <g:textField name="address1" value="${userProfile?.address1}" />
 
-                    <label for="address2">Address Line 2</label>
-                    <g:if test="${userProfile.address2}">
-                        <g:textField name="address2" value="${userProfile.address2}" />
-                    </g:if>
-                    <g:else>
-                          <g:textField name="address2" value="" />
-                    </g:else>
+              <label for="address2">Address Line 2</label>
+              <g:textField name="address2" value="${userProfile?.address2}" />
 
-                    <label for="city">City</label>
-                    <g:if test="${userProfile.city}">
-                        <g:textField name="city" value="${userProfile.city}" />
-                    </g:if>
-                    <g:else>
-                          <g:textField name="city" value="" />
-                    </g:else>
-<!--
-                      <label for="password" class="ui-input-text">* Password</label>
-                      <input type="password" name="password" id="password" value="" placeholder="">
--->
-<!--
-                      <label for="confirmPassword" class="ui-input-text">* Confirm Password</label>
-                      <input type="password" name="confirmPassword" id="password-confirm" value="" placeholder="">
--->
+              <label for="city">City</label>
+              <g:textField name="city" value="${userProfile?.city}" />
 
-                      <label for="state" class="ui-input-text">State</label>
-                      <select name="state" id="state" data-theme="q" data-shadow="false">
-                      <option value="">Select</option>
-                      <option value="ILLINOIS">ILLINOIS</option>
-                      <option value="NEW YORK">NEW YORK</option>
-                      </select>
+              <label for="state" class="ui-input-text">State</label>
+              <select name="state" id="state" data-theme="q" data-shadow="false">
+              <option value="">Select</option>
+              <option value="ILLINOIS">ILLINOIS</option>
+              <option value="NEW YORK">NEW YORK</option>
+              </select>
 
-                      <label for="country" class="ui-input-text">Country</label>
-                      <select name="country" id="country" data-theme="q" data-shadow="false">
-                      <option value="">Select</option>
-                      <option value="USA">USA</option>
-                      <option value="CANADA">CANADA</option>
-                      </select>
+              <label for="country" class="ui-input-text">Country</label>
+              <select name="country" id="country" data-theme="q" data-shadow="false">
+              <option value="">Select</option>
+              <option value="USA">USA</option>
+              <option value="CANADA">CANADA</option>
+              </select>
 
-                      <label for="postalCode" class="ui-input-text">Postal Code</label>
-                      <input type="text" name="postalCode" id="postalCode" value="" placeholder="">
+              <label for="postalCode" class="ui-input-text">Postal Code</label>
+              <g:textField name="postalCode" value="${userProfile?.postalCode}" />
 
-                      <label for="password" class="ui-input-text">Password</label>
-                      <input type="password" name="password" id="password" value="" placeholder="">
+              <label for="password" class="ui-input-text">Password</label>
+              <g:textField type="password" name="password" id="password" value="${userProfile?.password}" />
 
-
-                      <!--button>submit</button-->
-                        <g:submitButton value="submit" name="create"/>
-                    </div>
-                    </g:form>
+              <!--button>submit</button-->
+              <g:submitButton value="submit" name="create"/>
+          </div>
+          </g:form>
         </section>
     </div>
 
-	<!-- Footer Include <?php include "../components/footer.html" ?>-->
+    <!-- Footer Include <?php include "../components/footer.html" ?>-->
     <g:include controller="pageInclude" action="footerinclude" />
 
   </div> <!--! end of #container -->
@@ -172,7 +122,11 @@
 
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
   <!--script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script-->
-  <script>window.jQuery || document.write('<script src="../assets/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+  <script>window.jQuery || document.write('<script src="/assets/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+<!--  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>-->
+  <script src="/assets/js/libs/jquery-1.7.1.min.js"></script>
+<!--  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>-->
+  <script src="/assets/js/jquery.mobile-1.1.0.min.js"></script>
 
   <!-- scripts concatenated and minified via ant build script-->
   <script src="/assets/js/helper.js"></script>

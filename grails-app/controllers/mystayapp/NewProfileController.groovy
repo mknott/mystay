@@ -17,9 +17,9 @@ class NewProfileController {
             session["propertyId"] = params.propertyId
         }
         
-        def propertyId = params.(MyStayConstants.PROPERTY_ID) ? params.(MyStayConstants.PROPERTY_ID) : session.getAttribute(MyStayConstants.PROPERTY_ID)
-        println("index params.propertyId: "+ params.propertyId+ " session.propertyId: "+ session.getAttribute("propertyId"))
-
+        def propertyId = params.(MyStayConstants.PROPERTY_ID) ? params.(MyStayConstants.PROPERTY_ID) : request.getCookie("propertyId")
+      //  println("index params.propertyId: "+ params.propertyId+ " session.propertyId: "+ session.getAttribute("propertyId"))
+        println("calculated propertyId: " + propertyId)
         if(!propertyId)
         {
             //start over
@@ -116,7 +116,7 @@ class NewProfileController {
         println("createVisit")
  
         def propertyId = params.(MyStayConstants.PROPERTY_ID);
-                
+println ("prop1: " + propertyId)                
         def visit = new Visit();
         visit.firstName = params.(MyStayConstants.FIRST_NAME);
         visit.lastName = params.(MyStayConstants.LAST_NAME);
@@ -240,16 +240,16 @@ class NewProfileController {
         if( (params.isCrtUserProf) && (params.isCrtUserProf = "Y"))
         {
             println("create new userProfile")
-            def userProfile = new UserProfile();
-            userProfile.firstName = params.(MyStayConstants.FIRST_NAME);
-            userProfile.lastName = params.(MyStayConstants.LAST_NAME);
-            userProfile.emailAddress = params.(MyStayConstants.EMAIL_ADDRESS);
-            userProfile.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
+   //         def userProfile = new UserProfile();
+    //        userProfile.firstName = params.(MyStayConstants.FIRST_NAME);
+    //        userProfile.lastName = params.(MyStayConstants.LAST_NAME);
+    //        userProfile.emailAddress = params.(MyStayConstants.EMAIL_ADDRESS);
+    //        userProfile.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
             //userProfile.userId = params.userId;
           
             println("redirect to newProfile")
          //   redirect(controller:"newProfile", action:"createProfile", )
-            render(view: 'createProfile',model: [visit: visit, params: params, userProfile: userProfile] ) 
+            render(view: 'createProfile',model: [visit: visit, params: params] ) 
         }else{
             params.isCrtUserProf = "N";
             
@@ -257,9 +257,7 @@ class NewProfileController {
             redirect(controller:"locationDetails", action:"index")
         }
      }
-    
-    
-    
+        
     def updateVisit() {
         println("19")
         
@@ -272,7 +270,7 @@ class NewProfileController {
         def visitId = session.getAttribute(MyStayConstants.VISIT_ID) ? session.getAttribute(MyStayConstants.VISIT_ID) : params.(MyStayConstants.VISIT_ID) 
         println("19-next "+propertyId+" "+visitId)
         def visit = Visit.findById(visitId.toInteger() )
-        println("visit "+visit)
+        println("visit2 "+visit.userId)
         
         visit.firstName = params.(MyStayConstants.FIRST_NAME);
         visit.lastName = params.(MyStayConstants.LAST_NAME);
@@ -286,8 +284,7 @@ class NewProfileController {
         visit.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
         visit.rewardsProgramId = params.(MyStayConstants.REWARDS_PROGRAM_ID);        
         //visit.chatType = params.chatType;
-        //visit.userId = request.getCookie(MyStayConstants.USER_ID);
-
+        
         int time = 0;
         time = 1 * 60 * 60 * 24;
 
@@ -331,11 +328,6 @@ class NewProfileController {
         hotelNm.setPath("/");
         response.addCookie(hotelNm);
 
-        def chats = new Cookie(MyStayConstants.MY_CHATS, visit.myChats);
-        chats.maxAge = time;
-        chats.setPath("/");
-        response.addCookie(chats);
-/*
         def email = new Cookie(MyStayConstants.EMAIL_ADDRESS, visit.emailAddress);
         email.maxAge = time;
         email.setPath("/");
@@ -345,6 +337,11 @@ class NewProfileController {
         mobile.maxAge = time;
         mobile.setPath("/");
         response.addCookie(mobile);
+/*
+        def chats = new Cookie(MyStayConstants.MY_CHATS, visit.myChats);
+        chats.maxAge = time;
+        chats.setPath("/");
+        response.addCookie(chats);
 
         def reward = new Cookie(MyStayConstants.REWARDS_PROGRAM_ID, visit.rewardsProgramId);
         reward.maxAge = time;
@@ -367,22 +364,22 @@ class NewProfileController {
         println("1after save")
         if( (params.isCrtUserProf) && (params.isCrtUserProf = "Y"))
         {
-            println("update userProfile")
-            def userProfile = new UserProfile();
-            userProfile.firstName = params.(MyStayConstants.FIRST_NAME);
-            userProfile.lastName = params.(MyStayConstants.LAST_NAME);
-            userProfile.emailAddress = params.(MyStayConstants.EMAIL_ADDRESS);
-            userProfile.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
-            //userProfile.userId = params.userId;
-          
-            println("redirect to update profile")
-//            redirect(controller:"newProfile", action:"index")
-println("1 "+visit)
-println("2 "+params)
-println("3 "+userProfile)
-
-            render(view: 'updateProfile',model: [visit: visit, params: params, userProfile: userProfile] ) 
-             
+            println("update userProfile1")
+            def userProfileId = params.(MyStayConstants.USER_PROFILE_ID) ? params.(MyStayConstants.USER_PROFILE_ID) : request.getCookie("userProfileId")
+            println("update userProfile2 "+userProfileId)
+            def userProfile = UserProfile.findById(userProfileId )
+            println("update userProfile3")
+  
+            if (userProfile.id)
+            {
+                println("userProfile update "+userProfile.id)
+                render(view: 'updateProfile',model: [visit: visit, params: params, userProfile: userProfile] ) 
+            }
+            else
+            {
+                println("userProfile create")
+                render(view: 'createProfile',model: [visit: visit, params: params, userProfile: userProfile] ) 
+            }
         }else{
             println("12-locationDetails")
             params.isCrtUserProf = "N";
@@ -393,78 +390,102 @@ println("3 "+userProfile)
 
     def createProfile()
     {
-            println("Create a new User Profile"+params);
-            def userProfile = new UserProfile()
-            userProfile.firstName = params.(MyStayConstants.FIRST_NAME);
-            userProfile.lastName = params.(MyStayConstants.LAST_NAME);
-            userProfile.emailAddress = params.(MyStayConstants.EMAIL_ADDRESS);
-            userProfile.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
-            userProfile.password = params.(MyStayConstants.PASSWORD);
-            userProfile.save(flush: true)
-            if (!userProfile.save()) {
-                userProfile.errors.each {
-                println it }
-            }
-        
-            println("Name: " + userProfile.firstName);
-            flash.message = message(code: 'default.mystay.message', args: [userProfile.firstName])
+        println("Create a new User Profile"+params);
+        def userProfile = new UserProfile()
+        userProfile.firstName = params.(MyStayConstants.FIRST_NAME);
+        userProfile.lastName = params.(MyStayConstants.LAST_NAME);
+        userProfile.emailAddress = params.(MyStayConstants.EMAIL_ADDRESS);
+        userProfile.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
+        userProfile.address1 = params.address1;
+        userProfile.address2 = params.address2;
+        userProfile.city = params.city;
+        userProfile.postalCode = params.postalCode;
+        userProfile.state = params.state;
+        userProfile.country = params.country;
+        userProfile.password = params.(MyStayConstants.PASSWORD);
 
-            int time = 0;
-            time = 1 * 60 * 60 * 24;
+        userProfile.save(flush: true)
+        if (!userProfile.save()) {
+            userProfile.errors.each {
+            println it }
+        }
 
-            def email = new Cookie(MyStayConstants.EMAIL_ADDRESS, userProfile.emailAddress);
-            email.maxAge = time;
-            email.setPath("/");
-            response.addCookie(email);
-        
-            def mobile = new Cookie(MyStayConstants.MOBILE_NUMBER, userProfile.mobileNumber);
-            mobile.maxAge = time;
-            mobile.setPath("/");
-            response.addCookie(mobile);
-     
-            redirect(controller:"locationDetails", action:"home")
+        flash.message = message(code: 'default.mystay.message', args: [userProfile.firstName])
+
+        int time = 0;
+        time = 1 * 60 * 60 * 24;
+
+        def userProfId = new Cookie(MyStayConstants.USER_PROFILE_ID, userProfile.id.toString() );
+        userProfId.maxAge = time;
+        userProfId.setPath("/");
+        response.addCookie(userProfId);
+
+        def email = new Cookie(MyStayConstants.EMAIL_ADDRESS, userProfile.emailAddress);
+        email.maxAge = time;
+        email.setPath("/");
+        response.addCookie(email);
+
+        def mobile = new Cookie(MyStayConstants.MOBILE_NUMBER, userProfile.mobileNumber);
+        mobile.maxAge = time;
+        mobile.setPath("/");
+        response.addCookie(mobile);
+
+        redirect(controller:"locationDetails", action:"home")
     }
 
     def updateProfile()
     {
-            println("Update User Profile");
-            def userId = session.getAttribute(MyStayConstants.USER_ID) ? session.getAttribute(MyStayConstants.USER_ID) : params.(MyStayConstants.USER_ID) 
-            if(!userId)
-            {
-                redirect(controller:"selectLocation")
-            }
-            println("updateUserProfile "+userId)
-            def userProfile = UserProfile.findById(userId.toInteger() )
-            userProfile.firstName = params.(MyStayConstants.FIRST_NAME);
-            userProfile.lastName = params.(MyStayConstants.LAST_NAME);
-            userProfile.emailAddress = params.(MyStayConstants.EMAIL_ADDRESS);
-            userProfile.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
-            userProfile.password = params.(MyStayConstants.PASSWORD);
-            userProfile.save(flush: true)
-            if (!userProfile.save()) {
-                userProfile.errors.each {
-                println it }
-            }
-        
-            println("Name: " + userProfile.firstName);
-            flash.message = message(code: 'default.mtstay.message', args: [userProfile.firstName])
+        println("In Update User Profile");
+        def userProfileId = session.getAttribute(MyStayConstants.USER_PROFILE_ID) ? session.getAttribute(MyStayConstants.USER_PROFILE_ID) : params.(MyStayConstants.USER_PROFILE_ID) 
+        if(!userProfileId)
+        {
+            redirect(controller:"selectLocation")
+        }
+        println("updateUserProfile for: "+userProfileId)
 
-            int time = 0;
-            time = 1 * 60 * 60 * 24;
-
-            def email = new Cookie(MyStayConstants.EMAIL_ADDRESS, userProfile.emailAddress);
-            email.maxAge = time;
-            email.setPath("/");
-            response.addCookie(email);
+        def userProfile = UserProfile.findById(userProfileId.toInteger() )
+        userProfile.firstName = params.(MyStayConstants.FIRST_NAME);
+        userProfile.lastName = params.(MyStayConstants.LAST_NAME);
+        userProfile.emailAddress = params.(MyStayConstants.EMAIL_ADDRESS);
+        userProfile.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
+        userProfile.address1 = params.address1;
+        userProfile.address2 = params.address2;
+        userProfile.city = params.city;
+        userProfile.postalCode = params.postalCode;
+        userProfile.state = params.state;
+        userProfile.country = params.country;
+        userProfile.password = params.(MyStayConstants.PASSWORD);
         
-            def mobile = new Cookie(MyStayConstants.MOBILE_NUMBER, userProfile.mobileNumber);
-            mobile.maxAge = time;
-            mobile.setPath("/");
-            response.addCookie(mobile);
-     
-            redirect(controller:"locationDetails", action:"home")
+        userProfile.save(flush: true)
+        if (!userProfile.save()) {
+            userProfile.errors.each {
+            println it
+            }
+        }                               
+
+        println("updated userProfileId: " + userProfile.id);
+        flash.message = message(code: 'default.mtstay.message', args: [userProfile.firstName])
+
+        int time = 0;
+        time = 1 * 60 * 60 * 24;
+
+        def userProfId = new Cookie(MyStayConstants.USER_PROFILE_ID, userProfile.id.toString() );
+        userProfId.maxAge = time;
+        userProfId.setPath("/");
+        response.addCookie(userProfId);
+
+        def email = new Cookie(MyStayConstants.EMAIL_ADDRESS, userProfile.emailAddress);
+        email.maxAge = time;
+        email.setPath("/");
+        response.addCookie(email);
+
+        def mobile = new Cookie(MyStayConstants.MOBILE_NUMBER, userProfile.mobileNumber);
+        mobile.maxAge = time;
+        mobile.setPath("/");
+        response.addCookie(mobile);
+
+        redirect(controller:"locationDetails", action:"home")
     }
-
 }
 
         ///======================================================

@@ -79,7 +79,7 @@
                                                <img src="/assets/img/icon_mobile.png">
                                             </div>
                                             <div class="bubble-title">relax@</div>
-                                            <div class="bubble-content">Order a drink while you’re relaxing by the pool</div>
+                                            <div class="bubble-content">Order a drink while youâ€™re relaxing by the pool</div>
                                           </g:link>
                                       </div>
                                   </li>

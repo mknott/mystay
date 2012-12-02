@@ -16,13 +16,13 @@
 
   <!-- Home screen icon  Mathias Bynens mathiasbynens.be/notes/touch-icons -->
   <!-- For iPhone 4 with high-resolution Retina display: -->
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/img/h/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/h/apple-touch-icon.png">
   <!-- For first-generation iPad: -->
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/img/m/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/m/apple-touch-icon.png">
   <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-  <link rel="apple-touch-icon-precomposed" href="../assets/img/l/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="/assets/img/l/apple-touch-icon-precomposed.png">
   <!-- For nokia devices: -->
-  <link rel="shortcut icon" href="../assets/img/l/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/img/l/apple-touch-icon.png">
 
   <!-- iOS web app, delete if not needed. https://github.com/h5bp/mobile-boilerplate/issues/94 -->
   <!-- <meta name="apple-mobile-web-app-capable" content="yes">
@@ -46,7 +46,7 @@
 <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />-->
   <link rel="stylesheet" href="/assets/css/jquery.mobile-1.1.0.min.css" />
 <!--  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>-->
-  <script src="/assets/js/jquery-1.7.1.min.js"></script>
+  <script src="/assets/js/libs/jquery-1.7.1.min.js"></script>
 <!--  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>-->
   <script src="/assets/js/jquery.mobile-1.1.0.min.js"></script>
 
@@ -54,7 +54,7 @@
   <script src="/assets/js/jquery-mobile-datebox.js"></script>
   <script src="/assets/js/jquery.mobile-custom.js"></script>
 
-  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 
 <body>
@@ -71,8 +71,10 @@
       <g:form url="[action:'tellus',controller:'newProfile']" method="post" >
         <div align="center" style="padding: 0px 20px 0px 10px">
         
-          <label for="hotelNameDisplay">Hotel Name <g:link controller="selectLocation" action="index" params="[editLocation='Y']" class="cta-blue">Change</g:link>
-</label>
+          <label for="hotelNameDisplay">Hotel Name 
+<!--            <g:link controller="selectLocation" action="index" params="[editLocation='Y']" class="cta-blue">Change</g:link>-->
+              <a href="/selectLocation/index?editLocation=Y" class="cta-blue">Change</a>
+          </label>
           <g:textField name="hotelNameDisplay" value="${visit?.hotelName}" disabled="true"/>
           <input type="hidden" name="hotelName" id="hotelName" value="${visit?.hotelName}" />
 
@@ -124,7 +126,7 @@
 
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
   <!--script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script-->
-  <script>window.jQuery || document.write('<script src="../assets/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+  <script>window.jQuery || document.write('<script src="/assets/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 
   <!-- scripts concatenated and minified via ant build script-->
   <script src="/assets/js/helper.js"></script>

@@ -17,7 +17,7 @@ class SelectLocationController {
         (params.editLocation && params.editLocation=="Y")
         )
         {
-            println("no cookie set "+ request.getCookie(MyStayConstants.PROPERTY_ID) + "param" + params)
+            println("no cookie set or edit "+ request.getCookie(MyStayConstants.PROPERTY_ID) + " params " + params)
             def SelectLocations = Property.withCriteria {
             eq("status","ACTIVE")
             }
@@ -25,7 +25,7 @@ class SelectLocationController {
         }
         else
         { 
-            println("cookie set "+params.propertyId)
+            println("cookie set "+request.getCookie(MyStayConstants.PROPERTY_ID) + " - "+params.editLocation)
             redirect(controller:"locationDetails")
         }
     }
