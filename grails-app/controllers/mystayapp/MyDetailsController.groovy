@@ -11,6 +11,8 @@ class MyDetailsController {
     
         System.out.println("MyDetailsController..");
         
+        def propertyId = request.getCookie(MyStayConstants.PROPERTY_ID);
+        def visitId = request.getCookie(MyStayConstants.VISIT_ID);
         def firstName = request.getCookie(MyStayConstants.FIRST_NAME);
         def lastName = request.getCookie(MyStayConstants.LAST_NAME);
         def checkInDate = request.getCookie(MyStayConstants.CHECKINDATE);

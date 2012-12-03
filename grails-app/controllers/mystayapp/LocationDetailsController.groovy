@@ -61,8 +61,8 @@ class LocationDetailsController {
         def propertyId = session.getAttribute("propertyId") //params.(MyStayConstants.PROPERTY_ID);
         println("prop: "+propertyId)
         
-        def propertyResult = new Property();
-        propertyResult = Property.findById(propertyId.toInteger() );
+        //def propertyResult = new Property();
+        def propertyResult = Property.findById(propertyId.toInteger() );
            
         println("propertyid" + propertyId);
         
@@ -81,4 +81,15 @@ class LocationDetailsController {
 
         render(view: 'index',model:[moduleList:modules, property:propertyResult])
      }
+     
+     def propertyInfo() {
+        System.out.println("LocationDetailsController..");
+        def propertyId = request.getCookie(MyStayConstants.PROPERTY_ID);
+        def visitId = request.getCookie(MyStayConstants.VISIT_ID);
+        
+        def propertyResult = Property.findById(propertyId.toInteger() );
+        render(view: 'propertyInfo', model: [propertyResult: propertyResult])
+    }
 }
+
+        
