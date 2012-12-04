@@ -5,6 +5,12 @@ import com.utility.*;
 
 class PageIncludeController {
 
+    def headinclude()
+    {
+        render(view: 'head')
+    }
+    
+    
     def headerinclude()
     {
         def visit = new Visit(); 
@@ -34,8 +40,6 @@ class PageIncludeController {
     
     def footerinclude()
     {
-        
-        render(view: 'footer') 
-    
+        render(view: 'footer')
     }
 }
