@@ -46,25 +46,24 @@
           <input type="text" name="roomNumber" id="roomNumber" value="${visit?.roomNumber}" placeholder="">
 
           <label for="checkInDate">Check-In Date</label>
-          <input name="checkInDate" id="checkInDate" type="date" data-role="datebox" data-options='{"mode": "calbox"}' value="${visit.checkInDate}" placeholder="MM-DD-YYYY">
-                 <!--<input name="checkInDate" id="checkInDate" type="text" value="${visit.checkInDate}">-->
+          <input name="checkInDate" id="checkInDate" type="date" data-role="datebox" data-options='{"mode": "calbox"}' value="${visit?.checkInDate}" placeholder="MM-DD-YYYY">
+                 <!--<input name="checkInDate" id="checkInDate" type="text" value="${visit?.checkInDate}">-->
 
           <label for="checkOutDate">Check-Out Date</label>
-          <input name="checkOutDate" id="checkOutDate" type="date" data-role="datebox" data-options='{"mode": "calbox"}' value="${visit.checkOutDate}" placeholder="MM-DD-YYYY">
-          <!--<input name="checkOutDate" id="checkOutDate" type="text" value="${visit.checkOutDate}">-->
+          <input name="checkOutDate" id="checkOutDate" type="date" data-role="datebox" data-options='{"mode": "calbox"}' value="${visit?.checkOutDate}" placeholder="MM-DD-YYYY">
+          <!--<input name="checkOutDate" id="checkOutDate" type="text" value="${visit?.checkOutDate}">-->
 
           <label for="confirmationId">Reservation Confirmation</label>
-          <input type="text" name="confirmationId" id="confirmationId" value="${visit.confirmationId}" placeholder="">
+          <input type="text" name="confirmationId" id="confirmationId" value="${visit?.confirmationId}" placeholder="">
 
-          <label for="isCrtUserProf">Click to Create a User Profile</label>
-          <input type="checkbox" name="isCrtUserProf" id="isCrtUserProf" value="1" placeholder="" data-theme="q">
-
-          <input type="hidden" name="emailAddress" id="emailAddress" value="${params.emailAddress}" />
-          <input type="hidden" name="mobileNumber" id="mobileNumber" value="${params.mobileNumber}" />
-          <input type="hidden" name="rewardsProgramId" id="rewardsProgramId" value="${params.rewardsProgramId}" />
-          <input type="hidden" name="chatType" id="chatType" value="${params.chatType}" />
-          <input type="hidden" name="userId" id="userId" value="${params.userId}" />
-          <input type="hidden" name="propertyId" id="propertyId" value="${params.propertyId}" />
+          <label for="hasUserProf">Click to Create a User Profile</label>
+          <input type="checkbox" name="hasUserProf" id="hasUserProf" value="${params.hasUserProf}" placeholder="" data-theme="q"> 
+          <input type="hidden" name="emailAddress" id="emailAddress" value="${params?.emailAddress}" />
+          <input type="hidden" name="mobileNumber" id="mobileNumber" value="${params?.mobileNumber}" />
+          <input type="hidden" name="rewardsProgramId" id="rewardsProgramId" value="${params?.rewardsProgramId}" />
+          <input type="hidden" name="chatType" id="chatType" value="${params?.chatType}" />
+          <input type="hidden" name="userId" id="userId" value="${params?.userId}" />
+          <input type="hidden" name="propertyId" id="propertyId" value="${params?.propertyId}" />
           <!--button>Register My Stay</button-->
           <g:submitButton name="submitPage" value="Register My Stay" />
           <br>

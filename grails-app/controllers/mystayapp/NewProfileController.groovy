@@ -237,7 +237,7 @@ println ("prop1: " + propertyId)
             }
         println("2after 2nd save visitId: "+ visit.id + " new userId:- " + useridStr)
 
-        if( (params.isCrtUserProf) && (params.isCrtUserProf = "Y"))
+        if( (params.hasUserProf) && (params.hasUserProf == "Y"))
         {
             println("create new userProfile")
    //         def userProfile = new UserProfile();
@@ -251,7 +251,7 @@ println ("prop1: " + propertyId)
          //   redirect(controller:"newProfile", action:"createProfile", )
             render(view: 'createProfile',model: [visit: visit, params: params] ) 
         }else{
-            params.isCrtUserProf = "N";
+            params.hasCrtUserProf = "N";
             
             println("6 Done with create visit")
             redirect(controller:"locationDetails", action:"index")
@@ -362,7 +362,7 @@ println ("prop1: " + propertyId)
             }
         }
         println("1after save")
-        if( (params.isCrtUserProf) && (params.isCrtUserProf = "Y"))
+        if( (params.hasCrtUserProf) && (params.hasCrtUserProf == "Y"))
         {
             println("update userProfile1")
             def userProfileId = params.(MyStayConstants.USER_PROFILE_ID) ? params.(MyStayConstants.USER_PROFILE_ID) : request.getCookie("userProfileId")
@@ -382,7 +382,7 @@ println ("prop1: " + propertyId)
             }
         }else{
             println("12-locationDetails")
-            params.isCrtUserProf = "N";
+            params.hasCrtUserProf = "N";
             redirect(controller:"locationDetails", action:"index")
             } 
      }

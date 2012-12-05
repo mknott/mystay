@@ -48,7 +48,7 @@ class LocationDetailsController {
         createAlias("property","p")
         eq("p.id", propertyId.toLong() )
         order("displayOrder")
-        }
+        } 
         
         render( view:"index", model:[moduleList:modules, property:propertyResult])
 

@@ -12,7 +12,6 @@
                   <g:link controller="LocationDetails" action="propertyInfo" class="modal">Need Support</g:link>
                 </g:if>
             </li>
-            <!--li><span href="/staticpages/modal-needhelp.html" class="modal">Need Support</span></li-->
             <!--li><g:link controller="login" action="index">login</g:link></li-->
         </ul>
     </section>

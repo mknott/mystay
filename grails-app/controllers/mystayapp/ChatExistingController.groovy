@@ -137,9 +137,11 @@ class ChatExistingController {
                       isUserOnline = false;
                       continue;
                   }
-
+//TO-DO: is it possible to add admin to conversation without addin a message?
                   msgto= auser.userName;
                   println msgto
+                  
+                println session
 
                  chat = connection.getChatManager().createChat(msgto + MyStayConstants.CHAT_DOMAIN, new XmppMessageListener(session));
                  chat.sendMessage(firstmsg);

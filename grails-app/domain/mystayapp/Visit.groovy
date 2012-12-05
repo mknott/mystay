@@ -2,8 +2,6 @@ package mystayapp
 
 class Visit {
 
-    //Integer propertyId
-    //Boolean isCrtUserProf = false
     String firstName
     String lastName
     String roomNumber
@@ -17,6 +15,8 @@ class Visit {
     String mobileNumber
     String rewardsProgramId
     String myChats = "0"
+    String hasUserProf 
+   // Boolean hasUserProf = false
   //  String status = null;
   //  String locale = null;
   //  String latLng = null;
@@ -26,7 +26,6 @@ class Visit {
   //  Date initialVisitDate = null;
     
     static constraints = {
-//     propertyId(blank: false)
     // userId //guestId
     // guestId(blank: false)
      firstName(blank: false, size: 1..30, nullable:false)
@@ -34,7 +33,7 @@ class Visit {
      roomNumber(blank: false, size: 1..30, nullable:false)
      checkInDate(blank: true, nullable:true)
      checkOutDate(blank: true, nullable:true)
-    // isCrtUserProf(blank: true)
+     hasUserProf(blank: true, nullable:true)
      chatType(blank: true, nullable:true)
      confirmationId(blank: true, nullable:true)
      myChats(blank: true, nullable:true)
@@ -48,7 +47,6 @@ class Visit {
     // referrer(display: false)
     // clientIP(display: false)
     // initialVisitDate(display: false)
-    // isCrtUserProf blank: true
     }
     
     static belongsTo = [property:Property ] //,guest:Guest]

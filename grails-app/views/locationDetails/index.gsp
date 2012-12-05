@@ -27,15 +27,6 @@
     <g:include controller="pageInclude" action="headerinclude" />
 
     <div id="main" role="main" data-role="content">
-<!--
-    	<section id="breadcrumb" class="links">
-    		<ul>
-    			<li><a href="../" data-rel="back">Home</a></li>
-    			<li>Level2</li>
-    			<li>Level3</li>
-    		</ul>
-    	</section>
--->
       <g:if test="${property.propertyImage}">
         <section class="brand" style="background-color: ${property.propertyBGColor};">
             <div class="img" ><img src="/assets/img/${property.propertyImage}"></div>
@@ -52,7 +43,7 @@
                     <!-- Tile Template -->
                 <g:each in="${moduleList}" var="item">
                   <g:link class="tile" controller="${item.controller}" action="${item.action}" 
-                          params="[chat_input:item.message, chat_topic:item.name]">
+                          params="[chat_input:item.message, chat_topic:item.name, module_id:item.id ]">
                           <img class="scalable" src="${item.imageSrc}">
                           <div class="caption">${item.caption}</div>
                   	  <div class="badge orange">1</div>
