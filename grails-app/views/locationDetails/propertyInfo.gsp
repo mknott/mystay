@@ -42,7 +42,7 @@
 		<dt>Did my order go through?</dt>
 		<dd>
 		  As soon as you click the "place my order" button, your order is 
-                  sent to the restaurant.  We then messege you a receipt when the
+                  sent to the restaurant.  We then message you a receipt when the
                   restaurant confirms an estimated delivery time, typically within 
                   10 minutes.
 		</dd>

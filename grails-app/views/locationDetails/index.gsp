@@ -43,11 +43,13 @@
                     <!-- Tile Template -->
                 <g:each in="${moduleList}" var="item">
                   <g:link class="tile" controller="${item.controller}" action="${item.action}" 
-                          params="[chat_input:item.message, chat_topic:item.name, module_id:item.id ]">
-                          <img class="scalable" src="${item.imageSrc}">
-                          <div class="caption">${item.caption}</div>
-                  	  <div class="badge orange">1</div>
-
+                      params="[chat_input:item.message, chat_topic:item.name, module_id:item.id ]">
+                      <img class="scalable" src="${item.imageSrc}">
+                      <div class="caption">${item.caption}</div>
+<!--TO-DO: replace with dynamic chat-message indicator from module to visit-->                    
+                      <g:if test="${item.name=='RoomSvc'}">
+                        <div class="badge orange">1</div>
+                      </g:if>
                   </g:link>
                 </g:each> 
             </section>

@@ -1,7 +1,9 @@
 <header data-role="header" data-position="fixed" class="condensed">
     <section class="links clearfix">
         <ul>
-            <!--li><g:link controller="locationDetails" action="index" class="modal modal-close">Home</g:link></li-->
+            <li>
+                <g:link controller="locationDetails" action="index" class="modal-close">Home</g:link>
+            </li>
             <li>
                 <g:if test="${cookie(name:'visitId')}">
                   <g:link controller="MyDetails" action="index" class="modal">My Details</g:link>

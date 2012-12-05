@@ -13,6 +13,9 @@ import com.chat.XmppMessageListener;
 import org.json.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import groovy.sql.Sql;
+import org.json.JSONObject;
+import org.json.JSONArray;
+import groovy.json.JsonSlurper;
 import org.jivesoftware.smack.AccountManager;
 import com.utility.*;
 import org.jivesoftware.smack.packet.Message;
@@ -53,7 +56,6 @@ class ChatExistingController {
          userProfileInstance = UserProfile.find("from UserProfile as b where b.firstName=?",firstName);
        }
       
-
       if(userProfileInstance!=null)
       {
         username = userProfileInstance.emailAddress;
@@ -61,36 +63,34 @@ class ChatExistingController {
         connection.login(username,password);
         
       } else{
+        if(firstName == null || firstName.trim().equals("")){
+            connection.loginAnonymously();
+            //println "Anonymous ID: " + connection.getUser(); bbab86bf@
+            String anonUserName = connection.getUser();
+            session.setAttribute(MyStayConstants.USER_ID, anonUserName.substring(0,anonUserName.indexOf('@')));
+            isAnonymus = true;
+        }else{
+            AccountManager accmanager = connection.getAccountManager();
+            println username;
+            def password = lastName;
+            def temp_name = "";
+            //Sql db = new Sql(dataSource)
+            //def result = db.rows("SELECT username FROM ofuser");
+            db.eachRow("select * from ofuser where username='"+username+"'",{ row ->
+                temp_name=row.username;
+            })
+            println "username: " + temp_name;
 
-            if(firstName == null || firstName.trim().equals("")){
-                connection.loginAnonymously();
-                //println "Anonymous ID: " + connection.getUser(); bbab86bf@
-                String anonUserName = connection.getUser();
-                session.setAttribute(MyStayConstants.USER_ID, anonUserName.substring(0,anonUserName.indexOf('@')));
-                isAnonymus = true;
-            }else{
-              AccountManager accmanager = connection.getAccountManager();
-              println username;
-              def password = lastName;
-              def temp_name = "";
-              //Sql db = new Sql(dataSource)
-              //def result = db.rows("SELECT username FROM ofuser");
-              db.eachRow("select * from ofuser where username='"+username+"'",{ row ->
-                    temp_name=row.username;
-               })
-               println "username: " + temp_name;
-
-                if(temp_name.equalsIgnoreCase(""))
-                {
-                    try{
-                        accmanager.createAccount(username,password);
-                    }catch(Exception e){
-                        println "User Already Exists.."
-                    }
+            if(temp_name.equalsIgnoreCase(""))
+            {
+                try{
+                    accmanager.createAccount(username,password);
+                }catch(Exception e){
+                    println "User Already Exists.."
                 }
-              connection.login(username,password);
             }
-
+            connection.login(username,password);
+        }
       }
       session.setAttribute(MyStayConstants.XMPP_CONN,connection);
       // XMPP server Login - End ===============================================
@@ -179,13 +179,12 @@ class ChatExistingController {
        String msgs = params.chat_input.trim();
        String msgTo = params.chatwith + MyStayConstants.CHAT_DOMAIN;
        
-       //new
        def session = RequestContextHolder.currentRequestAttributes().getSession()
        XMPPConnection connection =  session.getAttribute(MyStayConstants.XMPP_CONN);
 
-         if(isAutoReplyExists(msgs)){
+       if(isAutoReplyExists(msgs)){
            msgTo = MyStayConstants.AUTO_RLY_USR + MyStayConstants.CHAT_DOMAIN;
-         }
+       }
 
        println msgTo
 
@@ -238,33 +237,29 @@ class ChatExistingController {
         db.eachRow("select ofmsg.fromjid,ofmsg.tojid,ofmsg.body from ofmessagearchive ofmsg "+
                     "where ofmsg.conversationid='"+convid+"' order by ofmsg.sentdate",{ row ->
                         String frmUser = row.fromjid.substring(0,row.fromjid.indexOf('@'));
-                        
 
-                       if(MyStayConstants.MY_SELF.equals(compareWith)){
-                          compareWith = toUser;
-                        }
-                        println "1."+frmUser
-                        println "2."+compareWith
-                        //println "3."+toUser
-                        
-                            if(frmUser.equals(compareWith)){
-                                msgLst.put("<b>"+msgto+" :</b>"+row.body);
-                               }else{
-                                msgLst.put("<b>"+MyStayConstants.MY_SELF+" :</b>"+row.body);
-                               }
-                       
+            if(MyStayConstants.MY_SELF.equals(compareWith)){
+                compareWith = toUser;
+            }
+            println "1."+frmUser
+            println "2."+compareWith
+            //println "3."+toUser
 
-              })
+            if(frmUser.equals(compareWith)){
+                msgLst.put("<b>"+msgto+" :</b>"+row.body);
+                }else{
+                msgLst.put("<b>"+MyStayConstants.MY_SELF+" :</b>"+row.body);
+                }
+            }
+        )
           
         session.setAttribute(MyStayConstants.MY_MESSAGE_LIST,msgLst);
-
         
         if(MyStayConstants.MY_SELF.equals(msgto)){
             render(view: 'index',model:[chatwith:toUser])
         }else{
            render(view: 'index',model:[chatwith:msgto])
         }
-       
     }
 
      private boolean isAutoReplyExists(String msgBody){

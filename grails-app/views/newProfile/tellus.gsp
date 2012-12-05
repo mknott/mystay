@@ -57,7 +57,7 @@
           <input type="text" name="confirmationId" id="confirmationId" value="${visit?.confirmationId}" placeholder="">
 
           <label for="hasUserProf">Click to Create a User Profile</label>
-          <input type="checkbox" name="hasUserProf" id="hasUserProf" value="${params.hasUserProf}" placeholder="" data-theme="q"> 
+          <input type="checkbox" name="hasUserProf" id="hasUserProf" value="1" placeholder="" data-theme="q"> 
           <input type="hidden" name="emailAddress" id="emailAddress" value="${params?.emailAddress}" />
           <input type="hidden" name="mobileNumber" id="mobileNumber" value="${params?.mobileNumber}" />
           <input type="hidden" name="rewardsProgramId" id="rewardsProgramId" value="${params?.rewardsProgramId}" />
