@@ -12,7 +12,7 @@
         </section>
   </footer>
  
-  </div> <!--! end of #container 
+  </div> <!-- end of #container -->
   
   <div id="modal_content" class="reveal-modal" style="visibility: hidden;">
 	Content was not loaded properly.
