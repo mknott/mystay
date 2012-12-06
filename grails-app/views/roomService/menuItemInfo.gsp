@@ -2,7 +2,7 @@
   <div class="modal-title">Order Room Service</div>
   <dl>
       <dd>
-        <b>Item: </b>${menuItem.name}</b></br>
+        <b>Item: </b>${menuItem.name}</br>
         <b>Description: </b>${menuItem.caption}</b><br>
         <b>Options: </b>${menuItem.message}</b>
       </dd>
@@ -30,8 +30,7 @@ Here are my special instructions:
         communicated through your room number and hotel bill.
         <br><br>
         Don't see what you need, 
-        <g:link url="[action:'index',controller:'roomService']" class="cta-blue ui-link modal-close"> 
-          chat with us</g:link>
+        <g:link class="cta-blue ui-link modal-close" controller="chatNew" action="index" params="[module_id:params.module_id]"> chat with us </g:link>
       </dd>
   </dl>
      

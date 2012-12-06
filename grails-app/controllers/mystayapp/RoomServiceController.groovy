@@ -8,7 +8,7 @@ import com.utility.*;
 class RoomServiceController {
 
     def index() {
-        println("params: "+params)
+        println("rs index params: "+params)
 
         def menuList = Menu.withCriteria {
             createAlias("module","m")
@@ -21,12 +21,12 @@ println("render room service")
     
          
     def menuItemInfo() {
-        System.out.println("RoomServiceController.."+params);
+        System.out.println("RoomServiceController.."+params.module_id);
         def menuItemId = params.menu_item_id;
-        
+        System.out.println("RoomServiceController.menuItemId.."+menuItemId);
         def menuItemResult = MenuItem.findById(menuItemId.toInteger() );
-        System.out.println("RoomService2.."+menuItemResult);
+        System.out.println("RoomService2.."+menuItemResult+ " "+params);
 
-        render(view: 'menuItemInfo', model: [menuItem: menuItemResult])
+        render(view: 'menuItemInfo', model: [ params: params, menuItem: menuItemResult])
     }
 }

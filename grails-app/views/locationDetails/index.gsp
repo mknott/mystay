@@ -41,13 +41,13 @@
           <h1 class="pagetitle center">Available Services</h1>
             <section class="grid4 clearfix">
                     <!-- Tile Template -->
-                <g:each in="${moduleList}" var="item">
-                  <g:link class="tile" controller="${item.controller}" action="${item.action}" 
-                      params="[chat_input:item.message, chat_topic:item.name, module_id:item.id ]">
-                      <img class="scalable" src="${item.imageSrc}">
-                      <div class="caption">${item.caption}</div>
+                <g:each in="${moduleList}" var="module">
+                  <g:link class="tile" controller="${module.controller}" action="${module.action}" 
+                      params="[chat_input:module.message, chat_topic:module.name, module_id:module.id ]">
+                      <img class="scalable" src="${module.imageSrc}">
+                      <div class="caption">${module.caption}</div>
 <!--TO-DO: replace with dynamic chat-message indicator from module to visit-->                    
-                      <g:if test="${item.name=='RoomSvc'}">
+                      <g:if test="${module.name=='Room Service'}">
                         <div class="badge orange">1</div>
                       </g:if>
                   </g:link>

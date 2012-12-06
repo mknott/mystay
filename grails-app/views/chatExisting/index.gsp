@@ -23,8 +23,9 @@
       <section class="content gradient clearfix">
           <h1 class="pagetitle">Chat With Room Service</h1>
           <p>
-            <g:link  url="[action:'index',controller:'chatManager']" class="cta-blue ui-link modal-close"> Back to chat list </g:link>
-            <g:link  url="[action:'index',controller:'roomService']" class="cta-blue ui-link modal-close"> Back to room service </g:link>
+            <g:link url="[action:'index',controller:'chatManager']" class="cta-blue ui-link modal-close"> Back to chat list </g:link>
+            <g:link class="cta-blue ui-link modal-close" controller="roomService" action="index" 
+              params="[chat_input:module.message, chat_topic:module.name, module_id:module.id ]"> Back to room service </g:link>
           </p>
       </section> 
 
@@ -58,10 +59,12 @@
 
             </li>
             <li class="clearfix">
-              <g:form method="post">
+              <!--g:form method="post"-->
+              <g:form url="[action:'index',controller:'chatExisting']" method="post">
                   <div align="center">
                       <textarea id="chat_input" name="chat_input" placeholder="Write a reply..."></textarea>
                       <INPUT type="hidden" id="chatwith" name="chatwwith" value="${chatwith}"/>
+                      
                       <INPUT type="button" id="replytochat" value="reply to chat" onclick="javascript:sendMsgs();"/>
                   </div>
 
@@ -97,7 +100,7 @@
                         }
                       }
 
-                      sendXmlhttp.open("GET",'/MyStayApp/chatExisting/sendMessages?chat_input='+chat_input+"&chatwith="+chat_with , true);
+                      sendXmlhttp.open("GET",'/chatExisting/sendMessages?chat_input='+chat_input+"&chatwith="+chat_with , true);
                       sendXmlhttp.send(null);
                       document.getElementById("chat_input").value="";
                       messageDisplayed = messageDisplayed + 1;
@@ -127,7 +130,7 @@
                         }
                       }
 
-                      getXmlhttp.open("GET",'/MyStayApp/chatExisting/loadMessagesFromSession' , true);
+                      getXmlhttp.open("GET",'/chatExisting/loadMessagesFromSession' , true);
                       getXmlhttp.onreadystatechange= function() {
                         if (getXmlhttp.readyState==4) {
                           var status = getXmlhttp.responseText;

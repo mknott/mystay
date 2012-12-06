@@ -13,16 +13,16 @@ import org.springframework.web.context.request.RequestContextHolder;
 class ChatNewController {
 
     def index() {
-        //new
-     def session = RequestContextHolder.currentRequestAttributes().getSession()
-     session.invalidate()
-     render(view: 'index')
+        println("chatnew params"+ params);
+        def session = RequestContextHolder.currentRequestAttributes().getSession()
+        session.invalidate()
+        render(view: "index", model:[params:params])
     }
 
 
     def startChat(){
-      //redirect(controller: "chatExisting", action: "index")
-      //forward controller: "chatExisting", action: "index"
+        //redirect(controller: "chatExisting", action: "index")
+        //forward controller: "chatExisting", action: "index"
     }
 
 }

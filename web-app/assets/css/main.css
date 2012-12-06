@@ -91,6 +91,11 @@ textarea.ui-input-text {
 input.ui-input-text, 
 textarea.ui-input-text {
 	margin-top: 5px;
+        height: auto;
+        max-height: 100%;
+      /*  padding-bottom: 20%;*/
+        font-size: 14px;
+        font-family: sans-serif;
 }
 label.ui-input-text,
 label.ui-select {
@@ -780,8 +785,9 @@ form label.ui-select {
 		visibility: hidden;
 		top: 45px; 
 		left: 50%;
+                right: 2%;
 		margin-left: -48%;
-		width: 95%;
+		padding-right: 10px;
 		background: #eee url("/assets/img/modal-gloss.png") no-repeat -200px -80px;
 		position: absolute;
 		z-index: 2001;
@@ -1059,3 +1065,7 @@ footer {
     font-weight: bold;
 }
 
+.ui-body-c .ui-link {
+    color: #ffffff;
+    font-weight: bold;
+}

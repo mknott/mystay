@@ -27,6 +27,7 @@ class ChatExistingController {
     def dataSource
 
     def index() {
+        println("params"+ params);
       XMPPConnection connection= null;
       Chat chat=null;
       Sql db = new Sql(dataSource)

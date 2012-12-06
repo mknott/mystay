@@ -31,7 +31,7 @@
 
     	<section class="content gradient clearfix">
           <div class="chat-icon">
-            <g:link controller="chatNew" action="index">
+            <g:link controller="chatNew" action="index" params="[module_id:params.module_id]">
               <img class="scalable" src="/assets/img/icon_chatnow.png">
             </g:link>
           </div>
@@ -54,12 +54,12 @@
               <ul class="rows alternating ">
               <g:each var="item" in="${menu.menuItem}">
                 <li class="modal clearfix">
-
-                <g:link controller="${item.controller}" action="${item.action}" class="modal"params="[menu_item_id:item.id ]">
+                    <g:link controller="${item.controller}" action="${item.action}" class="modal" params="[menu_item_id:item.id,module_id:params.module_id]">
+            <!--          ${item.controller} - ${item.action} - ${item.id} -->
                     <div class="label menu-item">${item.name}</div>
                     <div class="info menu-item-price">${item.price} </div>
                 </g:link>
-              </li>
+                </li>
               </g:each> 
               </ul>
            </div>

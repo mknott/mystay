@@ -28,7 +28,8 @@
             during and after your stay.
             <br/>
               <g:link url="[action:'index',controller:'chatManager']" class="cta-blue ui-link modal-close"> Back to chat list </g:link>
-              <g:link url="[action:'index',controller:'roomService']" class="cta-blue ui-link modal-close"> Back to room service </g:link>
+              <g:link class="cta-blue ui-link modal-close" controller="roomService" action="index" params="[module_id:params.module_id]"> Back to room service </g:link>
+             
             </p>
     	</section> <!-- /.content -->
 
