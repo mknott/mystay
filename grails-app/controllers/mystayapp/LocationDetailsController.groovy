@@ -8,14 +8,14 @@ import com.utility.*;
 class LocationDetailsController {
 
      def index() {
-        System.out.println("reached here loc"+params);
+        System.out.println("locationDetails.reached here loc"+params);
         
-        println("visitId cookie: "+request.getCookie(MyStayConstants.VISIT_ID))        
+        println("locationDetails.visitId cookie: "+request.getCookie(MyStayConstants.VISIT_ID))        
 
         //if cookies are set and match previous id and hotel, then update visit
         if (!params.propertyId && !request.getCookie(MyStayConstants.PROPERTY_ID)) 
         { 
-            println("all new loc "+params.visitId+" - "+params.propertyId)
+            println("locationDetails.all new loc "+params.visitId+" - "+params.propertyId)
             redirect(controller:"selectLocation")
         }
             
@@ -23,31 +23,29 @@ class LocationDetailsController {
         //visit cookie set but doesn't match, then create new visit 
         if (!request.getCookie(MyStayConstants.VISIT_ID))
             { 
-                println("match loc1 - createNew")
+                println("locationDetails. haspropertyId but no visitId "+params)
                 redirect(controller:"newProfile", action:"createVisit", params: params)
             }
-        println("before all loc2b ")
+        println("locationDetails.before all loc2b ")
 
         def propertyId = request.getCookie(MyStayConstants.PROPERTY_ID)
         def visitId =  request.getCookie(MyStayConstants.VISIT_ID)
-        println("all loc2b "+visitId + " - "+propertyId)
+        println("locationDetails.all loc2b "+visitId + " - "+propertyId)
 
         def propertyResult = new Property();
         propertyResult = Property.findById(propertyId.toInteger() );
            
-        println("propertid" + propertyId);
+        println("locationDetails.propertid" + propertyId);
         
         def propertyImage = propertyResult.propertyImage.toString();
-        println("image retrieve "+propertyImage)
         def hotelName = propertyResult.hotelName.toString();
-        println("hotelName retrieve "+hotelName)
         
         def modules = Module.withCriteria {
-        isNotNull("controller")
-        eq("status","ACTIVE")
-        createAlias("property","p")
-        eq("p.id", propertyId.toLong() )
-        order("displayOrder")
+            isNotNull("controller")
+            eq("status","ACTIVE")
+            createAlias("property","p")
+            eq("p.id", propertyId.toLong() )
+            order("displayOrder")
         } 
         
         render( view:"index", model:[moduleList:modules, property:propertyResult])
@@ -56,20 +54,18 @@ class LocationDetailsController {
  
 
      def home() {
-        println("locationdetails.home")
+        println("locationDetails.locationdetails.home")
 
         def propertyId = session.getAttribute("propertyId") //params.(MyStayConstants.PROPERTY_ID);
-        println("prop: "+propertyId)
+        println("locationDetails.prop: "+propertyId)
         
         //def propertyResult = new Property();
         def propertyResult = Property.findById(propertyId.toInteger() );
            
-        println("propertyid" + propertyId);
+        println("locationDetails.propertyid" + propertyId);
         
         def propertyImage = propertyResult.propertyImage.toString();
-        println("image retrieve "+propertyImage)
         def hotelName = propertyResult.hotelName.toString();
-        println("hotelName retrieve "+hotelName)
 
         def modules = Module.withCriteria {
             isNotNull("controller")
