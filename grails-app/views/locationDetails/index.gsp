@@ -1,5 +1,4 @@
-<!doctype html> <!-- Conditional comment for mobile ie7 blogs.msdn.com/b/iemobile/ -->
-<!--[if<!doctype html> 
+<!doctype html> 
 <!-- Conditional comment for mobile ie7 blogs.msdn.com/b/iemobile/ -->
 <!--[if IEMobile 7 ]>    <html class="no-js iem7" lang="en"> <![endif]-->
 <!--[if (gt IEMobile 7)|!(IEMobile)]><!-->
@@ -11,20 +10,18 @@
 
   <title>Tell us about your stay</title>
 
-  <g:include controller="pageInclude" action="headinclude" />
+  <g:include controller="pageInclude" action="headerinclude" />
 
 </head>
 
 <body>
-
   <!--
   	The ID below has a value which needs to be unique within the entire site.
   	LDP_id should be replaced with "LDP_{location_id}" to ensure uniqueness
   -->
   <div id="[unique_id]" data-template="ldp" data-role="page">
 
-    <!-- Header Include -->
-    <g:include controller="pageInclude" action="headerinclude" />
+    <g:include controller="pageInclude" action="headerbar" />
 
     <div id="main" role="main" data-role="content">
       <g:if test="${property.propertyImage}">
@@ -56,7 +53,11 @@
     	</section>
     </div>
 
-    <g:include controller="pageInclude" action="footerinclude" />
+    <g:include controller="pageInclude" action="footerbar" />
+    
+  </div> <!-- end of #container -->
+
+  <g:include controller="pageInclude" action="footerinclude" />
 
 </body>
 </html>

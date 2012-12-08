@@ -1,6 +1,5 @@
 <div class="modal_content">
    <div class="modal-title">Need Help?</div>
-
 	<dl>
 		<dt>Hotel Information</dt>
 		<dd>
@@ -48,5 +47,4 @@
 		</dd>
 	</dl>
 	<a href="#" class="cta-blue modal-close">close</a>
-   </div>
 </div>

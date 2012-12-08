@@ -10,17 +10,13 @@
 
   <title>Tell us about yourself</title>
 
-  <g:include controller="pageInclude" action="headinclude" />
+  <g:include controller="pageInclude" action="headerinclude" />
 
 </head>
 
 <body>
   <div id="container" data-role="page" data-template="chat">
-
-  <!-- Header Include<?php include "../components/header-condensed.html" ?> -->
-    
-    <g:include controller="pageInclude" action="headerinclude" />
-
+    <g:include controller="pageInclude" action="headerbar" />
   
     <div id="main" class="ui-content" data-role="content" role="main">
         <section class="content gradient clearfix">
@@ -37,10 +33,10 @@
               <g:textField name="lastName" value="${visit?.lastName}" />
 
               <label for="emailAddress">Email Address *</label>
-              <g:textField name="emailAddress" value="${userProfile?.emailAddress}" />
+              <g:textField type="email" name="emailAddress" value="${userProfile?.emailAddress}" />
 
               <label for="mobileNumber">Mobile Number</label>
-              <g:textField name="mobileNumber" value="${userProfile?.mobileNumber}" />
+              <g:textField type="number" name="mobileNumber" value="${userProfile?.mobileNumber}" />
 
               <label for="address1">Address Line 1</label>
               <g:textField name="address1" value="${userProfile?.address1}" />
@@ -79,7 +75,11 @@
         </section>
     </div>
 
-    <g:include controller="pageInclude" action="footerinclude" />
+    <g:include controller="pageInclude" action="footerbar" />
+    
+  </div> <!-- end of #container -->
+
+  <g:include controller="pageInclude" action="footerinclude" />
 
 </body>
 </html>

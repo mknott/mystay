@@ -5,18 +5,23 @@ import com.utility.*;
 
 class PageIncludeController {
 
-    def headinclude()
-    {
-        render(view: 'head')
-    }
-    
-    
     def headerinclude()
     {
-        def visit = new Visit(); 
         render(view: 'header')
     }
     
+    
+    def headerbar()
+    {
+        def visit = new Visit(); 
+        render(view: 'headerbar')
+    }
+    
+    def footerbar()
+    {
+        render(view: 'footerbar')
+    }
+
     def footerinclude()
     {
         render(view: 'footer')

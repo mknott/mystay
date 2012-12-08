@@ -10,38 +10,46 @@ class NewProfileController {
     static defaultAction = "index"
     
     def index() {
-        println("newProfile index")        
+        println("NewProfileController.index newProfile index")        
         if (params.(MyStayConstants.PROPERTY_ID))
         {
-            println("look up session")
+            println("NewProfileController.index look up propertyid for session: "+params.(MyStayConstants.PROPERTY_ID))
             session["propertyId"] = params.propertyId
         }
+
+        println("NewProfileController.index params.propertyId: -" + params.(MyStayConstants.PROPERTY_ID) +"-")
         
-        def propertyId = params.(MyStayConstants.PROPERTY_ID) ? params.(MyStayConstants.PROPERTY_ID) : request.getCookie("propertyId")
+        def propertyId = params.(MyStayConstants.PROPERTY_ID)? params.(MyStayConstants.PROPERTY_ID) : request.getCookie(MyStayConstants.PROPERTY_ID)
       //  println("index params.propertyId: "+ params.propertyId+ " session.propertyId: "+ session.getAttribute("propertyId"))
-        println("calculated propertyId: " + propertyId)
+        println("NewProfileController.index calculated propertyId: " + propertyId)
         if(!propertyId)
         {
             //start over
-            println("send to selectLocation")      
+            println("NewProfileController.index send to selectLocation")      
+            
+            def propId = new Cookie(MyStayConstants.PROPERTY_ID, propertyId);
+            propId.maxAge = (0);
+            propId.setPath("/");
+            response.addCookie(propId);
+            
             redirect(controller: "selectLocation", action:"index")
         }
         else
         { 
-            println("newProfile index with propertyId, params.propertyId: "+ params.propertyId+ " session.propertyId: "+ session.getAttribute("propertyId"))
+            println("NewProfileController.index find property with propertyId: "+propertyId)
             def propertyResult = new Property();
             propertyResult = Property.findById(propertyId.toInteger() );
             def hotelName = propertyResult.hotelName.toString();
-            println("hotelName retrieve "+hotelName)
+            println("NewProfileController.hotelName retrieve "+hotelName)
             
-            def visitId = session.getAttribute(MyStayConstants.VISIT_ID) ? session.getAttribute(MyStayConstants.VISIT_ID) : params.(MyStayConstants.VISIT_ID)
-            println("index params.visitId: "+ params.visitId+ " session.visitId: "+ session.getAttribute("visitId"))
+            def visitId = session.getAttribute(MyStayConstants.VISIT_ID) ? session.getAttribute(MyStayConstants.VISIT_ID) : request.getCookie(MyStayConstants.VISIT_ID)
+            println("NewProfileController.index params.visitId: "+ params.visitId+ " session.visitId: "+ request.getCookie(MyStayConstants.VISIT_ID))
             def visit = new Visit()
             if (visitId)
             {
-                visit = Visit.findById(visitId)
+                visit = Visit.findById(visitId) 
             }
-            println("params.visitId: "+ params.visitId+ " session.visitId: "+ session.getAttribute("visitId"))
+            println("NewProfileController.index params.visitId: "+ params.visitId+ " cookie.visitId: "+ request.getCookie(MyStayConstants.VISIT_ID))
             visit.hotelName = hotelName
             
             render(view: 'tellus',model: [visit: visit, params: params] ) 
@@ -50,40 +58,37 @@ class NewProfileController {
     
 
     def dataSource
-
     
+    //post from tellus.gsp
     def tellus()
     {
-        println("in tellus "+params.(MyStayConstants.PROPERTY_ID)+" - "+session.getAttribute("propertyID")+" - "+request.getCookie("propertyId"))  
-        def propertyId = params.(MyStayConstants.PROPERTY_ID) ? params.(MyStayConstants.PROPERTY_ID) : (session.getAttribute(MyStayConstants.PROPERTY_ID)? session.getAttribute(MyStayConstants.PROPERTY_ID):request.getCookie("propertyId"))
-        if (!propertyId)
+        println("NewProfileController.tellus-"+params.(MyStayConstants.PROPERTY_ID)+"-"+session.getAttribute("propertyID")+"-"+request.getCookie(MyStayConstants.PROPERTY_ID)+"-")  
+        def propertyId = params.(MyStayConstants.PROPERTY_ID) ? params.(MyStayConstants.PROPERTY_ID) : session.getAttribute(MyStayConstants.PROPERTY_ID)? session.getAttribute(MyStayConstants.PROPERTY_ID):request.getCookie(MyStayConstants.PROPERTY_ID)
+        println("NewProfileController.propertyId "+propertyId)
+        if (!propertyId?.trim())
         {   //start over
-            println("no prop2-bef"+request.getCookie("propertyId"))      
+            println("NewProfileController.tellus no property")      
             redirect(controller: "selectLocation", action:"index")
         }
         else 
         {
-            if (!session.getAttribute("propertyId"))
-            {
-                session["propertyId"] = propertyId
-                println("in tellus set session propertyId")  
-            }
-
-            def visitId = session.getAttribute(MyStayConstants.VISIT_ID) ? session.getAttribute(MyStayConstants.VISIT_ID) : params.(MyStayConstants.VISIT_ID) 
+            println("NewProfileController.tellus with propertId: "+propertyId)
+            def visitId = session.getAttribute(MyStayConstants.VISIT_ID) ? session.getAttribute(MyStayConstants.VISIT_ID) : params.(MyStayConstants.VISIT_ID) ? params.(MyStayConstants.VISIT_ID):request.getCookie(MyStayConstants.VISIT_ID)
             if (visitId)
             {
-                println("params.visitId: "+ params.visitId+ " session.visitId: "+ session.getAttribute("visitId"))
+                println("NewProfileController.tellus params.visitId: "+ params.visitId+ " session.visitId: "+ session.getAttribute("visitId"))
                 if (!session.getAttribute("propertyId"))
                 {
                     session["visitId"] = visitId
-                    println("in tellus set session visitId")  
+                    println("NewProfileController.tellus set session visitId")  
                 }
 //                def visit = Visit.findById(visitId)
                 //visitId already exists in session - update (or send to locationDetails)
-                println("update-bef "+visitId)
+                println("NewProfileController.tellus update-bef "+visitId) 
+                params.(MyStayConstants.VISIT_ID) = visitId
                 redirect(action:"updateVisit", params: params)
             }    
-            else
+            else 
             { 
                 //create new visit
 //                def propertyResult = new Property();
@@ -93,7 +98,7 @@ class NewProfileController {
 //                
 //                def visit = new Visit()
 //                visit.hotelName = hotelName
-                println("all new1 "+params.visitId + " - "+params.propertyId)
+                println("NewProfileController.tellus all new1 "+params.visitId + " - "+params.propertyId)
                 redirect(action:"createVisit", params: params)
             }
 //                render(view: 'tellus',model: [visit: visit, params: params] )   
@@ -113,10 +118,10 @@ class NewProfileController {
     //--------------------------------//
          
     def createVisit() {
-        println("createVisit")
+        println("NewProfileController.createVisit "+params)
  
         def propertyId = params.(MyStayConstants.PROPERTY_ID);
-println ("prop1: " + propertyId)                
+println ("NewProfileController.createVisit propertyId1: " + propertyId)                
         def visit = new Visit();
         visit.firstName = params.(MyStayConstants.FIRST_NAME);
         visit.lastName = params.(MyStayConstants.LAST_NAME);
@@ -133,10 +138,19 @@ println ("prop1: " + propertyId)
         visit.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
         visit.rewardsProgramId = params.(MyStayConstants.REWARDS_PROGRAM_ID);        
 
+        //visit.validate()
+        //if (visit.hasErrors()) {
+        //    visit.errors.each {
+        //        println it
+        //    }
+            //return [ params: params]
+            //render(view: 'tellus',model: [visit: visit, params: params] ) 
+        //}
+        
         int time = 0;
         time = 1 * 60 * 60 * 24;
 
-        println("3propId: "+propertyId)
+        println("NewProfileController.createVisit propertyId2: "+propertyId)
 
         def propId = new Cookie(MyStayConstants.PROPERTY_ID, propertyId);
         propId.maxAge = time;
@@ -198,7 +212,7 @@ println ("prop1: " + propertyId)
         reward.setPath("/");
         response.addCookie(reward);
 */
-        println("2before save")
+        println("NewProfileController.createVisit before save")
         def property = Property.findById(propertyId.toInteger() )
             property.addToVisits(visit)
             property.save(flush:true)
@@ -208,10 +222,10 @@ println ("prop1: " + propertyId)
                 println it
                 }
             }
-        println("2after save" +visit.id)
+        println("NewProfileController.createVisit after save" +visit.id)
         
         def visitId = new Cookie(MyStayConstants.VISIT_ID, visit.id.toString());
-        println("new visitid:" + visitId)
+        println("NewProfileController.createVisit new visitid:" + visitId)
         visitId.maxAge = time;
         visitId.setPath("/");
         if (visit.id.toString())
@@ -227,19 +241,26 @@ println ("prop1: " + propertyId)
         response.addCookie(userId);
 
         visit.userId = useridStr;
+
+        //visit.validate()
+        //if (visit.hasErrors()) {
+        //    visit.errors.each {
+        //        println it
+        //    }
+        //}
         
-        println("2before 2nd save: ")
+        println("NewProfileController.createVisit before 2nd save: ")
         visit.save(flush: true)
             if (!visit.save()) {
                 visit.errors.each {
                 println it
                 }
             }
-        println("2after 2nd save visitId: "+ visit.id + " new userId:- " + useridStr)
+        println("NewProfileController.createVisit after 2nd save visitId: "+ visit.id + " new userId:- " + useridStr)
 
         if( (params.hasUserProf) && (params.hasUserProf = "Y"))
         {
-            println("create new userProfile")
+            println("NewProfileController.createVisit new userProfile")
    //         def userProfile = new UserProfile();
     //        userProfile.firstName = params.(MyStayConstants.FIRST_NAME);
     //        userProfile.lastName = params.(MyStayConstants.LAST_NAME);
@@ -247,30 +268,30 @@ println ("prop1: " + propertyId)
     //        userProfile.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
             //userProfile.userId = params.userId;
           
-            println("redirect to newProfile")
+            println("NewProfileController.createVisit redirect to newProfile")
          //   redirect(controller:"newProfile", action:"createProfile", )
             render(view: 'createProfile',model: [visit: visit, params: params] ) 
         }else{
             params.hasUserProf = "N";
             
-            println("6 Done with create visit")
+            println("NewProfileController.createVisit no userProfile")
             redirect(controller:"locationDetails", action:"index")
         }
      }
         
     def updateVisit() {
-        println("19")
+        println("NewProfileController.updateVisit")
         
-        def propertyId = params.(MyStayConstants.PROPERTY_ID) ? params.(MyStayConstants.PROPERTY_ID) : session.getAttribute(MyStayConstants.PROPERTY_ID)
+        def propertyId = params.(MyStayConstants.PROPERTY_ID) ? params.(MyStayConstants.PROPERTY_ID) : session.getAttribute(MyStayConstants.PROPERTY_ID)? session.getAttribute(MyStayConstants.PROPERTY_ID):request.getCookie(MyStayConstants.PROPERTY_ID)
         if(!propertyId)
         {
+            println("NewProfileController.updateVisit no propertyId")
             redirect(controller:"selectLocation")
         }
     
         def visitId = session.getAttribute(MyStayConstants.VISIT_ID) ? session.getAttribute(MyStayConstants.VISIT_ID) : params.(MyStayConstants.VISIT_ID) 
-        println("19-next "+propertyId+" "+visitId)
+        println("NewProfileController.updateVisit next "+propertyId+" "+visitId)
         def visit = Visit.findById(visitId.toInteger() )
-        println("visit2 "+visit.userId)
         
         visit.firstName = params.(MyStayConstants.FIRST_NAME);
         visit.lastName = params.(MyStayConstants.LAST_NAME);
@@ -284,6 +305,13 @@ println ("prop1: " + propertyId)
         visit.mobileNumber = params.(MyStayConstants.MOBILE_NUMBER);
         visit.rewardsProgramId = params.(MyStayConstants.REWARDS_PROGRAM_ID);        
         //visit.chatType = params.chatType;
+
+        //visit.validate()
+        //if (visit.hasErrors()) {
+        //    visit.errors.each {
+        //        println it
+        //    }
+        //}
         
         int time = 0;
         time = 1 * 60 * 60 * 24;
@@ -348,9 +376,17 @@ println ("prop1: " + propertyId)
         reward.setPath("/");
         response.addCookie(reward);
   */      
-        println("1before save"+visit.id)
 
-        //        def widgetInstance = Widget.findByName('firstWidget') ?: new Widget(name: 'firstWidget').save(failOnError: true)
+        //visit.validate()
+        //if (visit.hasErrors()) {
+        //    visit.errors.each {
+        //        println it
+        //    }
+        //}
+
+        println("NewProfileController.updateVisit before save"+visit.id)
+
+//        def widgetInstance = Widget.findByName('firstWidget') ?: new Widget(name: 'firstWidget').save(failOnError: true)
         def property = Property.findById(propertyId.toInteger() )
         property.addToVisits(visit)
         property.save(flush:true)
@@ -361,28 +397,26 @@ println ("prop1: " + propertyId)
             println it
             }
         }
-        println("1after save")
-        println("hasUserProf " +params.hasUserProf)
+        println("NewProfileController.updateVisit after save, hasUserProf " +params.hasUserProf)
         if( (params.hasUserProf) && (params.hasUserProf = "Y"))
         {
-            println("update userProfile1")
-            def userProfileId = params.(MyStayConstants.USER_PROFILE_ID) ? params.(MyStayConstants.USER_PROFILE_ID) : request.getCookie("userProfileId")
-            println("update userProfile2 "+userProfileId)
-            def userProfile = UserProfile.findById(userProfileId )
-            println("update userProfile3")
+            println("NewProfileController.updateVisit hasUserProf: "+params.hasUserProf)
+            def userProfileId = params.(MyStayConstants.USER_PROFILE_ID) ? params.(MyStayConstants.USER_PROFILE_ID) : request.getCookie(MyStayConstants.USER_PROFILE_ID)
+            println("NewProfileController.updateVisit userProfileId: "+userProfileId)
   
-            if (userProfile.id)
+            if (userProfileId)
             {
-                println("userProfile update "+userProfile.id)
+                println("NewProfileController.userProfile update lookup ")
+                def userProfile = UserProfile.findById(userProfileId )
                 render(view: 'updateProfile',model: [visit: visit, params: params, userProfile: userProfile] ) 
             }
             else
             {
-                println("userProfile create")
-                render(view: 'createProfile',model: [visit: visit, params: params, userProfile: userProfile] ) 
+                println("NewProfileController.userProfile create new")
+                render(view: 'createProfile',model: [visit: visit, params: params] ) 
             }
         }else{
-            println("12-locationDetails")
+            println("NewProfileController.updateVisit no updateProfile")
             params.hasUserProf = "N";
             redirect(controller:"locationDetails", action:"index")
             } 
@@ -391,7 +425,7 @@ println ("prop1: " + propertyId)
 
     def createProfile()
     {
-        println("Create a new User Profile"+params);
+        println("NewProfileController.createProfile a new User Profile"+params);
         def userProfile = new UserProfile()
         userProfile.firstName = params.(MyStayConstants.FIRST_NAME);
         userProfile.lastName = params.(MyStayConstants.LAST_NAME);
@@ -404,6 +438,13 @@ println ("prop1: " + propertyId)
         userProfile.state = params.state;
         userProfile.country = params.country;
         userProfile.password = params.(MyStayConstants.PASSWORD);
+
+        //userProfile.validate()
+        //if (userProfile.hasErrors()) {
+        //    userProfile.errors.each {
+        //        println it
+        //    }
+        //}
 
         userProfile.save(flush: true)
         if (!userProfile.save()) {
@@ -436,13 +477,13 @@ println ("prop1: " + propertyId)
 
     def updateProfile()
     {
-        println("In Update User Profile");
+        println("NewProfileController.updateProfile User Profile");
         def userProfileId = session.getAttribute(MyStayConstants.USER_PROFILE_ID) ? session.getAttribute(MyStayConstants.USER_PROFILE_ID) : params.(MyStayConstants.USER_PROFILE_ID) 
         if(!userProfileId)
         {
             redirect(controller:"selectLocation")
         }
-        println("updateUserProfile for: "+userProfileId)
+        println("NewProfileController.updateProfile for: "+userProfileId)
 
         def userProfile = UserProfile.findById(userProfileId.toInteger() )
         userProfile.firstName = params.(MyStayConstants.FIRST_NAME);
@@ -456,6 +497,13 @@ println ("prop1: " + propertyId)
         userProfile.state = params.state;
         userProfile.country = params.country;
         userProfile.password = params.(MyStayConstants.PASSWORD);
+ 
+        //userProfile.validate()
+        //if (userProfile.hasErrors()) {
+        //    userProfile.errors.each {
+        //        println it
+        //    }
+        //}
         
         userProfile.save(flush: true)
         if (!userProfile.save()) {
@@ -464,7 +512,7 @@ println ("prop1: " + propertyId)
             }
         }                               
 
-        println("updated userProfileId: " + userProfile.id);
+        println("NewProfileController.updateProfile after save userProfileId: " + userProfile.id);
         flash.message = message(code: 'default.mtstay.message', args: [userProfile.firstName])
 
         int time = 0;

@@ -10,14 +10,14 @@
 
   <title>Chat with us</title>
 
-  <g:include controller="pageInclude" action="headinclude" />
+  <g:include controller="pageInclude" action="headerinclude" />
 
 </head>
 
 <body>
   <div id="container" data-role="page" data-template="chat">
     <!-- Header Include -->
-    <g:include controller="pageInclude" action="headerinclude" />
+    <g:include controller="pageInclude" action="headerbar" />
     <div id="main" role="main" data-role="content">
 
       <section class="content gradient clearfix">
@@ -166,7 +166,11 @@
       </section>
     </div>
 
-    <g:include controller="pageInclude" action="footerinclude" />
+    <g:include controller="pageInclude" action="footerbar" />
+    
+  </div> <!-- end of #container -->
+
+  <g:include controller="pageInclude" action="footerinclude" />
 
 </body>
 </html>

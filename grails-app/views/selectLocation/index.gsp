@@ -5,20 +5,17 @@
 <html class="no-js" lang="en">
 <!--<![endif]-->
 
-  <head>
+<head>
   <meta charset="utf-8">
 
   <title>select your location</title>
 
-  <g:include controller="pageInclude" action="headinclude" />
+  <g:include controller="pageInclude" action="headerinclude" />
 
 </head>
 
 <body>
   <div id="homepage" data-template="homepage" data-role="page">
-    <header data-role="header">
-
-    </header>
     
     <div id="main" role="main" data-role="content">
       <section class="hero">
@@ -34,7 +31,7 @@
                       <div id="wrapper" class="wrapper">
                           <div id="scroller" class="scroller">
                               <ul class="scrollItems hidden">
-                                  <li class="current">
+                                 <li class="current">
                                       <img src="/assets/img/myStay_iPhone_mobileweb_homepage_02.jpg" alt="" />
                                       <div class="content">
                                           <g:link  class="bubble" controller="locationDetails" action="index">
@@ -117,7 +114,11 @@
       </section>
     </div>
 
-    <g:include controller="pageInclude" action="footerinclude" />
+    <g:include controller="pageInclude" action="footerbar" />
+    
+  </div> <!-- end of #container -->
 
-  </body>
+  <g:include controller="pageInclude" action="footerinclude" />
+
+</body>
 </html>

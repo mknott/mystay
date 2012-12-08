@@ -10,24 +10,29 @@
 
   <title>Tell us about your stay</title>
 
-  <g:include controller="pageInclude" action="headinclude" />
+  <g:include controller="pageInclude" action="headerinclude" />
 
 </head>
 
 <body>
   <div id="container" data-role="page" data-template="chat">
+    <g:include controller="pageInclude" action="headerbar" />
 
-	<!-- Header Include<?php include "../components/header-condensed.html" ?> -->
-    
-    <g:include controller="pageInclude" action="headerinclude" />
     <div id="main" class="ui-content" data-role="content" role="main">
       <section class="content gradient clearfix">
-      <h1 class="pagetitle">Create a profile</h1>
+      <h1 class="pagetitle">Create a stay</h1>
+      Tell us about your stay 
       </section>
                                
       <g:form url="[action:'tellus',controller:'newProfile']" method="post" >
         <div align="center" style="padding: 0px 20px 0px 10px">
-        
+          
+          <g:hasErrors bean="${command}">
+              <div class="errors">
+                  <g:renderErrors bean="${command}" as="list" />
+              </div>
+          </g:hasErrors>   
+          
           <label for="hotelNameDisplay">Hotel Name 
 <!--            <g:link controller="selectLocation" action="index" params="[editLocation='Y']" class="cta-blue">Change</g:link>-->
               <a href="/selectLocation/index?editLocation=Y" class="cta-blue">Change</a>
@@ -73,7 +78,12 @@
       </g:form>
     </div>
   
-    <g:include controller="pageInclude" action="footerinclude" />
+    <g:include controller="pageInclude" action="footerbar" />
+    
+  </div> <!-- end of #container -->
+
+  <g:include controller="pageInclude" action="footerinclude" />
 
 </body>
 </html>
+

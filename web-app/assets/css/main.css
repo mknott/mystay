@@ -1065,7 +1065,8 @@ footer {
     font-weight: bold;
 }
 
-.ui-body-c .ui-link {
+.modal.link {
     color: #ffffff;
     font-weight: bold;
 }
+

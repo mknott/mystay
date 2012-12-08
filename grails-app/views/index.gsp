@@ -5,20 +5,17 @@
 <html class="no-js" lang="en">
 <!--<![endif]-->
 
-  <head>
+<head>
   <meta charset="utf-8">
 
   <title>select your location</title>
 
-  <g:include controller="pageInclude" action="headinclude" />
+  <g:include controller="pageInclude" action="header" />
 
 </head>
 
 <body>
   <div id="homepage" data-template="homepage" data-role="page">
-    <header data-role="header">
-
-    </header>
     
     <div id="main" role="main" data-role="content">
       <section class="hero">
@@ -97,7 +94,8 @@
 
       <section class="content gradient">
           <p>
-          	Take full advantage of all the services during your stay right from your wireless device.
+          	This is the index version<br>
+                Take full advantage of all the services during your stay right from your wireless device.
 		<br>
 		<a href="#" class="getgeo">Get Location</a>
 		<br>
@@ -117,7 +115,11 @@
       </section>
     </div>
 
-    <g:include controller="pageInclude" action="footerinclude" />
+    <g:include controller="pageInclude" action="footerbar" />
+    
+  </div> <!-- end of #container -->
 
-  </body>
+  <g:include controller="pageInclude" action="footer" />
+
+</body>
 </html>

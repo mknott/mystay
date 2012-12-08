@@ -10,28 +10,16 @@
 
   <title>Tell us about your stay</title>
 
-  <g:include controller="pageInclude" action="headinclude" />
+  <g:include controller="pageInclude" action="headerinclude" />
 
 </head>
 
 <body>
-
   <div id="container" data-role="page" data-template="chat">
-
-	<!-- Header Include<?php include "../components/header-condensed.html" ?> -->
+    <g:include controller="pageInclude" action="headerbar" />
     
-    <g:include controller="pageInclude" action="headerinclude" />
     <div id="main" role="main" data-role="content">
-<!--
-    	<section id="breadcrumb" class="links">
-    		<ul>
-    			<li><a href="../">Home</a></li>
-    			<li>Level1</li><li>Level2</li>
-    		</ul>
-    	</section>
--->
     	<section class="content gradient clearfix">
-
             <h1 class="modal-title">Create a profile</h1>
             <p>
               <g:if test="${flash.message}">
@@ -97,7 +85,11 @@
         </section>
     </div>
 
-    <g:include controller="pageInclude" action="footerinclude" />
+    <g:include controller="pageInclude" action="footerbar" />
+    
+  </div> <!-- end of #container -->
+
+  <g:include controller="pageInclude" action="footerinclude" />
 
 </body>
 </html>

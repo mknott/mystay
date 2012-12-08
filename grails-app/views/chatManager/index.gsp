@@ -5,24 +5,20 @@
 <html class="no-js" lang="en">
 <!--<![endif]-->
 
-  <head>
+<head>
   <meta charset="utf-8">
 
   <title>Chat with us</title>
 
-  <g:include controller="pageInclude" action="headinclude" />
+  <g:include controller="pageInclude" action="headerinclude" />
 
 </head>
 
 <body>
-
-    <div id="unique_9467239359459" data-role="page" data-template="chat">
-
-    <!-- Header Include -->
-    <g:include controller="pageInclude" action="headerinclude" />
-
+  <div id="unique_9467239359459" data-role="page" data-template="chat">
+    <g:include controller="pageInclude" action="headerbar" />
+    
     <div id="main" role="main" data-role="content">
-
         <section class="content gradient clearfix">
         <h1 class="pagetitle">Chat With Us</h1>
               <p>
@@ -66,7 +62,11 @@
         </section>
       </div> <!-- /#main -->
 	
-    <g:include controller="pageInclude" action="footerinclude" />
+    <g:include controller="pageInclude" action="footerbar" />
+    
+  </div> <!-- end of #container -->
+
+  <g:include controller="pageInclude" action="footerinclude" />
 
 </body>
 </html>

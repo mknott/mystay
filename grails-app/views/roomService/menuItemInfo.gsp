@@ -36,8 +36,8 @@ Here are my special instructions:
      
   <dl>
       <a href="#" class="cta-blue modal-close">close</a>
-            </div>
-          </dd>
+<!--            </div>
+          </dd>-->
   </dl>
    
 </div>

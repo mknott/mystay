@@ -3,7 +3,7 @@
         <ul>
             <li>
               <g:if test="${cookie(name:'visitId')}">
-                <g:link controller="locationDetails" action="index" class="ui-link">Home</g:link>
+                <g:link controller="locationDetails" action="index" class="link">Home</g:link>
               </g:if>
             </li>
             <li>
@@ -20,5 +20,3 @@
         </ul>
     </section>
 </header>
-
-
